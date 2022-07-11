@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         "special-orange": "#F16414",
+        "special-blue": "#27354F",
       },
     },
   },
