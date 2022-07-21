@@ -1,4 +1,5 @@
 import { Header } from "~/components/Header";
+
 import { TeamForm } from "~/components/TeamForm";
 
 export default function Index() {
