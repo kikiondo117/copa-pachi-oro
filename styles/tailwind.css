@@ -1,3 +1,7 @@
+/* @import url(../public/fonts/big_noodle_titling.ttf); */
+/* @import url(../public/fonts/big_noodle_titling_oblique.ttf); */
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,4 +10,27 @@
   .custom-class {
     @apply ...;
   }
+}
+
+@font-face {
+  font-family: 'Big Noodle Titling';
+  src: url('/fonts/big_noodle_titling.ttf');
+}
+
+@font-face {
+  font-family: 'Big Noodle Titling Oblique';
+  src: url('/fonts/big_noodle_titling_oblique.ttf');
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/fonts/coolvetica\ rg.otf');
+}
+
+.btn-orange-default {
+  @apply rounded py-2 px-3 cursor-pointer bg-special-orange;
+}
+
+.btn-orange-default:hover {
+  @apply bg-organge-light;
 }

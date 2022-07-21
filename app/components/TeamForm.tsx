@@ -1,6 +1,6 @@
 export function TeamForm() {
   return (
-    <form className="flex flex-col bg-special-gray px-4 ">
+    <form className="flex flex-col bg-special-gray px-4 w-full font-coolveltica">
       <p className=" mt-6">Crea tu cuenta</p>
       <input className="mt-2" type="email" />
       <input className="mt-4" type="password" />

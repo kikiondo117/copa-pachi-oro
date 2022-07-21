@@ -1,6 +1,8 @@
-/*
-! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com
-*/
+/* @import url(../public/fonts/big_noodle_titling.ttf); */
+
+/* @import url(../public/fonts/big_noodle_titling_oblique.ttf); */
+
+/* ! tailwindcss v3.1.6 | MIT License | https://tailwindcss.com */
 
 /*
 1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -636,6 +638,14 @@ video {
   margin-bottom: 2.25rem;
 }
 
+.mr-4 {
+  margin-right: 1rem;
+}
+
+.mt-6 {
+  margin-top: 1.5rem;
+}
+
 .mt-2 {
   margin-top: 0.5rem;
 }
@@ -644,16 +654,16 @@ video {
   margin-top: 1rem;
 }
 
-.mt-6 {
-  margin-top: 1.5rem;
-}
-
 .flex {
   display: flex;
 }
 
 .grid {
   display: grid;
+}
+
+.h-20 {
+  height: 5rem;
 }
 
 .h-24 {
@@ -684,12 +694,20 @@ video {
   grid-template-columns: repeat(12, minmax(0, 1fr));
 }
 
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .flex-col {
   flex-direction: column;
 }
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-between {
@@ -706,12 +724,25 @@ video {
   background-color: rgb(232 232 232 / var(--tw-bg-opacity));
 }
 
+.bg-blue-gray-default {
+  --tw-bg-opacity: 1;
+  background-color: rgb(39 53 79 / var(--tw-bg-opacity));
+}
+
 .bg-hero-tracer {
   background-image: url('/assets/tracer.png');
 }
 
 .bg-form-top {
-  background-image: url('/assets/top.png');
+  background-image: url('/assets/registro-equipo.png');
+}
+
+.bg-cover {
+  background-size: cover;
+}
+
+.bg-local {
+  background-attachment: local;
 }
 
 .px-4 {
@@ -723,14 +754,44 @@ video {
   padding-top: 3.5rem;
 }
 
+.font-big-noodle-oblique {
+  font-family: Big Noodle Titling Oblique;
+}
+
+.font-coolveltica {
+  font-family: Coolvetica;
+}
+
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
 
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+
+.text-8xl {
+  font-size: 6rem;
+  line-height: 1;
+}
+
 .text-7xl {
   font-size: 4.5rem;
   line-height: 1;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.leading-snug {
+  line-height: 1.375;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
 }
 
 .text-white {
@@ -741,4 +802,38 @@ video {
 .text-special-orange {
   --tw-text-opacity: 1;
   color: rgb(241 100 20 / var(--tw-text-opacity));
+}
+
+@font-face {
+  font-family: 'Big Noodle Titling';
+
+  src: url('/fonts/big_noodle_titling.ttf');
+}
+
+@font-face {
+  font-family: 'Big Noodle Titling Oblique';
+
+  src: url('/fonts/big_noodle_titling_oblique.ttf');
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+
+  src: url('/fonts/coolvetica\ rg.otf');
+}
+
+.btn-orange-default {
+  cursor: pointer;
+  border-radius: 0.25rem;
+  --tw-bg-opacity: 1;
+  background-color: rgb(241 100 20 / var(--tw-bg-opacity));
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.btn-orange-default:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 119 49 / var(--tw-bg-opacity));
 }
