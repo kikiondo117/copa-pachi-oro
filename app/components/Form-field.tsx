@@ -5,6 +5,7 @@ interface FormFieldProps {
   type?: string;
   value: any;
   onChange?: (...args: any) => any;
+  required: boolean;
 }
 
 export function FormField({
@@ -13,10 +14,11 @@ export function FormField({
   type = "text",
   value,
   onChange = () => {},
+  required,
 }: FormFieldProps) {
   return (
     <>
-      <label htmlFor={htmlFor} className="text-blue-600 font-semibold">
+      <label htmlFor={htmlFor} className="text-black text-base">
         {label}
       </label>
       <input
@@ -24,8 +26,9 @@ export function FormField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className="w-full p-2 rounded-xl my-2"
+        className="w-full p-2 rounded-sm my-2 text-black text-base"
         value={value}
+        required
       />
     </>
   );
