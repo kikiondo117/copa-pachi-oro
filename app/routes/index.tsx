@@ -1,35 +1,46 @@
 // * Components
 import { Header } from "~/components/Header";
 import { TeamForm } from "~/components/TeamForm";
-// import TwitchLogoJuanYut from "~/../public/assets/JuanYut_Logo_Nombre.svg";
+// * Utils
+import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
+import MainMessage from "~/../public/assets/main-landing-message-text.png";
+import { Container } from "~/components/ui/Container";
 
 export default function Index() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="bg-hero-tracer bg-cover min-h-screen mx-auto flex items-center pt-14 ">
-        <div className="container m-auto grid grid-cols-12 gap-8 w-full">
-          <h2 className="col-start-1 col-end-7 flex items-center font-coolveltica text-white md:text-4xl text-8xl tracking-wider ">
-            La comunidad te necesita, únete ahora y compite
-          </h2>
-          <div className="col-start-8 col-end-12 w-full">
+      <main className="bg-hero-tracer bg-cover bg-blue-gray-dark min-h-screen mx-auto flex items-center pt-20">
+        <Container className="m-auto">
+          <div className="col-start-1 col-end-7  h-full">
+            <div className="flex flex-col h-full justify-between">
+              <img src={MainMessage} alt="" className=" h-52 w-96" />
+              <div>
+                <img src={TwitchLogoJuanYut} className=" h-10 w-44" alt="" />
+                <p>
+                  Mi pequeño aporte con mucho cariño y esfuerzo a la comunidad
+                  de Overwatch MX, JuanYut.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="col-start-9 col-end-13 w-full">
             <div className="bg-form-top bg-cover h-24 w-auto" />
             <TeamForm />
-            {/* <TwitchLogoJuanYut /> */}
           </div>
-        </div>
+        </Container>
       </main>
 
-      <main className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default">
+      <section className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default">
         <div className="container m-auto grid grid-cols-2">
           {/* <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
             title="YouTube video player"
-            frameborder="0"
+            frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen
+            allowFullScreen
           ></iframe> */}
           {/* <h2 className="col-start-1 col-end-7 text-white text-7xl ">
             La comunidad te necesita, únete ahora y compite
@@ -49,7 +60,7 @@ export default function Index() {
             </p>
           </div>
         </div>
-      </main>
+      </section>
     </div>
   );
 }

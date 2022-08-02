@@ -564,36 +564,6 @@ video {
   width: 100%;
 }
 
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
-}
-
 .fixed {
   position: fixed;
 }
@@ -622,12 +592,20 @@ video {
   grid-column-start: 8;
 }
 
+.col-start-9 {
+  grid-column-start: 9;
+}
+
 .col-end-7 {
   grid-column-end: 7;
 }
 
 .col-end-12 {
   grid-column-end: 12;
+}
+
+.col-end-13 {
+  grid-column-end: 13;
 }
 
 .m-auto {
@@ -682,12 +660,20 @@ video {
   display: none;
 }
 
-.h-20 {
-  height: 5rem;
+.h-14 {
+  height: 3.5rem;
 }
 
 .h-full {
   height: 100%;
+}
+
+.h-52 {
+  height: 13rem;
+}
+
+.h-10 {
+  height: 2.5rem;
 }
 
 .h-24 {
@@ -696,10 +682,6 @@ video {
 
 .h-screen {
   height: 100vh;
-}
-
-.h-14 {
-  height: 3.5rem;
 }
 
 .min-h-screen {
@@ -714,6 +696,14 @@ video {
   width: 100vw;
 }
 
+.w-laptop-full {
+  width: 80rem;
+}
+
+.w-laptop {
+  width: 71rem;
+}
+
 .w-96 {
   width: 24rem;
 }
@@ -722,6 +712,10 @@ video {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+}
+
+.w-44 {
+  width: 11rem;
 }
 
 .w-auto {
@@ -817,6 +811,11 @@ video {
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
 }
 
+.bg-blue-gray-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 38 / var(--tw-bg-opacity));
+}
+
 .bg-blue-gray-default {
   --tw-bg-opacity: 1;
   background-color: rgb(39 53 79 / var(--tw-bg-opacity));
@@ -828,7 +827,7 @@ video {
 }
 
 .bg-hero-tracer {
-  background-image: url('/assets/tracer.png');
+  background-image: url('/assets/img-tracer-graffiti.png');
 }
 
 .bg-form-top {
@@ -868,6 +867,10 @@ video {
 
 .pt-14 {
   padding-top: 3.5rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .text-center {
@@ -1018,9 +1021,33 @@ video {
   background-color: rgb(250 204 21 / var(--tw-bg-opacity));
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
+  .md\:w-tablet {
+    width: 45rem;
+  }
+
+  .md\:bg-amber-400 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(251 191 36 / var(--tw-bg-opacity));
+  }
+
   .md\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .sm\:w-mobile {
+    width: 19.5rem;
+  }
+
+  .sm\:overflow-hidden {
+    overflow: hidden;
+  }
+
+  .sm\:bg-lime-700 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(77 124 15 / var(--tw-bg-opacity));
   }
 }
