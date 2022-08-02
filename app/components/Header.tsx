@@ -6,7 +6,7 @@ export function Header() {
   const [showLogin, setShowLogin] = React.useState(false);
 
   return (
-    <header className="fixed w-screen flex items-center bg-special-blue h-20 text-white">
+    <header className="fixed w-screen flex items-center bg-special-blue h-14 text-white">
       <div className="container flex justify-between mx-auto">
         <a className="flex justify-start" href="/">
           <img src={Logo} className="mr-4" width="32px" alt="" />

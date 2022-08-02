@@ -1,22 +1,14 @@
-import type { LoaderFunction } from "@remix-run/node";
 // * Components
 import { Header } from "~/components/Header";
 import { TeamForm } from "~/components/TeamForm";
-// * Utils
-import { requireUserId } from "~/utils/auth.server";
 // import TwitchLogoJuanYut from "~/../public/assets/JuanYut_Logo_Nombre.svg";
-
-export const loader: LoaderFunction = async ({ request }) => {
-  await requireUserId(request);
-  return null;
-};
 
 export default function Index() {
   return (
     <div className="min-h-screen">
       <Header />
-      <main className="bg-hero-tracer bg-cover min-h-screen mx-auto flex items-center pt-14">
-        <div className="container m-auto grid grid-cols-12 w-full">
+      <main className="bg-hero-tracer bg-cover min-h-screen mx-auto flex items-center pt-14 ">
+        <div className="container m-auto grid grid-cols-12 gap-8 w-full">
           <h2 className="col-start-1 col-end-7 flex items-center font-coolveltica text-white md:text-4xl text-8xl tracking-wider ">
             La comunidad te necesita, únete ahora y compite
           </h2>
@@ -30,7 +22,7 @@ export default function Index() {
 
       <main className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default">
         <div className="container m-auto grid grid-cols-2">
-          <iframe
+          {/* <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -38,7 +30,7 @@ export default function Index() {
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowfullscreen
-          ></iframe>
+          ></iframe> */}
           {/* <h2 className="col-start-1 col-end-7 text-white text-7xl ">
             La comunidad te necesita, únete ahora y compite
           </h2> */}

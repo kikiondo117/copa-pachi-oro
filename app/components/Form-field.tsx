@@ -5,7 +5,7 @@ interface FormFieldProps {
   type?: string;
   value: any;
   onChange?: (...args: any) => any;
-  required: boolean;
+  required?: boolean;
 }
 
 export function FormField({

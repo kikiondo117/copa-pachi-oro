@@ -22,5 +22,4 @@ model User {
 type Profile{
   firstName String
   lastName String
-  role String
 }
