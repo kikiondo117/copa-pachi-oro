@@ -2,9 +2,36 @@
 module.exports = {
   content: ["./app/**/*.{ts,tsx,jsx,js}"],
   theme: {
+
+    screens:{
+      '2xl': {'max': '1535px'},
+      // => @media (max-width: 1535px) { ... }
+
+      'xl': {'max': '1279px'},
+      // => @media (max-width: 1279px) { ... }
+
+      'lg': {'max': '1280px'}, // 1136 WEB
+      // => @media (max-width: 1023px) { ... }
+
+      'md': {'max': '768px'}, // 720 TABLET
+      // => @media (max-width: 767px) { ... }
+
+      'sm': {'max': '360px'}, // 312 MOBILE
+      // => @media (max-width: 639px) { ... }
+    },
     extend: {
+
+      width:{
+        "laptop": "71rem",
+        "tablet": "45rem",
+        "mobile": "19.5rem",
+        "laptop-full": "80rem",
+        "tablet-full": "48rem",
+        "mobile-full": "22.5rem",
+      },
+
       backgroundImage: {
-        "hero-tracer": "url('/assets/tracer.png')",
+        "hero-tracer": "url('/assets/img-tracer-graffiti.png')",
         "form-top": "url('/assets/registro-equipo.png')",
       },
       colors: {

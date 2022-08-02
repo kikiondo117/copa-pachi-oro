@@ -116,29 +116,25 @@ export default function Login() {
             htmlFor="email"
             label="Email"
             value={formData.email}
-            onChange={(e) => handleInputChange(e, "email")}
-          />
+            onChange={(e) => handleInputChange(e, "email")} required={false}          />
           <FormField
             htmlFor="password"
             type="password"
             label="Password"
             value={formData.password}
-            onChange={(e) => handleInputChange(e, "password")}
-          />
+            onChange={(e) => handleInputChange(e, "password")} required={false}          />
           <FormField
             htmlFor="firstName"
             type="text"
             label="firstName"
             value={formData.firstName}
-            onChange={(e) => handleInputChange(e, "firstName")}
-          />
+            onChange={(e) => handleInputChange(e, "firstName")} required={false}          />
           <FormField
             htmlFor="lastName"
             type="text"
             label="lastName"
             value={formData.lastName}
-            onChange={(e) => handleInputChange(e, "lastName")}
-          />
+            onChange={(e) => handleInputChange(e, "lastName")} required={false}          />
           <div className="w-full text-center">
             <input
               type="submit"
