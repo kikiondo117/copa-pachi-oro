@@ -76,7 +76,7 @@ export default function Index() {
   const { user } = useLoaderData();
   console.log("*****loaderData", user);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <Header user={user} />
       <main className="bg-hero-tracer bg-cover bg-blue-gray-dark min-h-screen mx-auto flex items-center py-20">
         <Container className="m-auto">
@@ -104,7 +104,10 @@ export default function Index() {
         <img src="/assets/img/graffiti2.svg" alt="" />
       </div>
 
-      <section className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default">
+      <section
+        id="acerca"
+        className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default"
+      >
         <div className="container m-auto grid grid-cols-2">
           {/* <iframe
             width="560"
@@ -135,7 +138,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="h-screen bg-teams-bg bg-cover ">
+      <section id="equipos" className="h-screen bg-teams-bg bg-cover ">
         <h3 className=" font-coolveltica text-2xl">Equipos</h3>
       </section>
 

@@ -22,8 +22,12 @@ export function Header({ user }: HeaderProps) {
         </a>
 
         <ul className="flex items-center font-big-noodle-oblique text-base ">
-          <li className="mx-4">ACERCA DE</li>
-          <li className="mx-4">EQUIPOS</li>
+          <li className="mx-4">
+            <a href="#acerca">ACERCA DE</a>
+          </li>
+          <li className="mx-4">
+            <a href="#equipos">EQUIPOS</a>
+          </li>
           <li>
             <button
               className={`mx-4 rounded-md  ${
