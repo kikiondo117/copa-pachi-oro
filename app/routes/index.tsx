@@ -139,7 +139,9 @@ export default function Index() {
       </section>
 
       <section id="equipos" className="h-screen bg-teams-bg bg-cover ">
-        <h3 className=" font-coolveltica text-2xl">Equipos</h3>
+        <Container>
+          <h3 className="pt-16 font-coolveltica text-2xl">Equipos</h3>
+        </Container>
       </section>
 
       <Footer />
