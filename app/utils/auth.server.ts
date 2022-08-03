@@ -24,18 +24,20 @@ export async function register(user: RegisterForm) {
     )
   }
 
-  return createUserSession(newUser.id, '/')
+  return createUserSession(newUser.id, '/team')
 }
 
 export async function login({ email, password }: LoginForm) {
 
   const user = await prisma.user.findUnique({ where: { email } })
 
+  console.log('USER', user)
+
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return json({ error: `Incorrect login` }, { status: 400 })
   }
 
-  return createUserSession(user.id, '/')
+  return createUserSession(user.id, '/team')
 }
 
 // Function to handle sessions in Remix 
