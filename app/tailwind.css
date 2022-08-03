@@ -560,10 +560,6 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
-.container {
-  width: 100%;
-}
-
 .fixed {
   position: fixed;
 }
@@ -584,12 +580,12 @@ video {
   right: 2rem;
 }
 
-.right-0 {
-  right: 0px;
+.z-20 {
+  z-index: 20;
 }
 
-.top-\[39rem\] {
-  top: 39rem;
+.z-10 {
+  z-index: 10;
 }
 
 .col-start-1 {
@@ -612,8 +608,8 @@ video {
   grid-column-end: 13;
 }
 
-.col-end-12 {
-  grid-column-end: 12;
+.col-end-3 {
+  grid-column-end: 3;
 }
 
 .m-auto {
@@ -672,6 +668,10 @@ video {
   margin-bottom: 2rem;
 }
 
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
 .mb-3 {
   margin-bottom: 0.75rem;
 }
@@ -712,16 +712,16 @@ video {
   height: 100%;
 }
 
-.h-52 {
-  height: 13rem;
-}
-
 .h-10 {
   height: 2.5rem;
 }
 
 .h-24 {
   height: 6rem;
+}
+
+.h-\[30rem\] {
+  height: 30rem;
 }
 
 .h-screen {
@@ -766,16 +766,8 @@ video {
   width: 80rem;
 }
 
-.max-w-sm {
-  max-width: 24rem;
-}
-
 .cursor-pointer {
   cursor: pointer;
-}
-
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .grid-cols-12 {
@@ -812,10 +804,6 @@ video {
 
 .self-center {
   align-self: center;
-}
-
-.scroll-smooth {
-  scroll-behavior: smooth;
 }
 
 .rounded-sm {
@@ -862,6 +850,11 @@ video {
   background-color: rgb(241 100 20 / var(--tw-bg-opacity));
 }
 
+.bg-blue-gray-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 38 / var(--tw-bg-opacity));
+}
+
 .bg-yellow-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(253 224 71 / var(--tw-bg-opacity));
@@ -870,16 +863,6 @@ video {
 .bg-gray-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity));
-}
-
-.bg-blue-gray-dark {
-  --tw-bg-opacity: 1;
-  background-color: rgb(15 23 38 / var(--tw-bg-opacity));
-}
-
-.bg-blue-gray-default {
-  --tw-bg-opacity: 1;
-  background-color: rgb(39 53 79 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -895,12 +878,24 @@ video {
   background-image: url('/assets/registro-equipo.png');
 }
 
+.bg-pachi-retas-sm {
+  background-image: url('/assets/pachi-retas-sm-bg.svg');
+}
+
 .bg-teams-bg {
   background-image: url('/assets/bg/teams.svg');
 }
 
 .bg-cover {
   background-size: cover;
+}
+
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+.bg-center {
+  background-position: center;
 }
 
 .p-2 {
@@ -930,21 +925,9 @@ video {
   padding-bottom: 0.5rem;
 }
 
-.py-20 {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
-}
-
-.pt-14 {
-  padding-top: 3.5rem;
-}
-
-.pt-5 {
-  padding-top: 1.25rem;
-}
-
-.pt-12 {
-  padding-top: 3rem;
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .pt-16 {
@@ -972,11 +955,6 @@ video {
   line-height: 1.5rem;
 }
 
-.text-4xl {
-  font-size: 2.25rem;
-  line-height: 2.5rem;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -984,11 +962,6 @@ video {
 
 .text-5xl {
   font-size: 3rem;
-  line-height: 1;
-}
-
-.text-7xl {
-  font-size: 4.5rem;
   line-height: 1;
 }
 
@@ -1015,14 +988,14 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-special-orange {
-  --tw-text-opacity: 1;
-  color: rgb(241 100 20 / var(--tw-text-opacity));
-}
-
 .text-special-blue-light {
   --tw-text-opacity: 1;
   color: rgb(0 125 209 / var(--tw-text-opacity));
+}
+
+.text-special-orange {
+  --tw-text-opacity: 1;
+  color: rgb(241 100 20 / var(--tw-text-opacity));
 }
 
 .text-blue-600 {
@@ -1093,6 +1066,39 @@ video {
 .hover\:-translate-y-1:hover {
   --tw-translate-y: -0.25rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
+@-webkit-keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-25%);
+    -webkit-animation-timing-function: cubic-bezier(0.8,0,1,1);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+  }
+
+  50% {
+    transform: none;
+    -webkit-animation-timing-function: cubic-bezier(0,0,0.2,1);
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+  }
+}
+
+.hover\:animate-bounce:hover {
+  -webkit-animation: bounce 1s infinite;
+          animation: bounce 1s infinite;
 }
 
 .hover\:bg-yellow-400:hover {

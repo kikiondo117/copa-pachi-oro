@@ -9,12 +9,9 @@ import { Container } from "~/components/ui/Container";
 import { TeamSent } from "../components/TeamSended";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
-import MainMessage from "~/../public/assets/main-landing-message-text.png";
-import {
-  validateEmail,
-  validatePassword,
-  validateName,
-} from "../utils/validators.server";
+import MainMessage from "~/../public/assets/main-landing-message.svg";
+import { validateEmail, validatePassword } from "../utils/validators.server";
+import { validateName } from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -78,14 +75,23 @@ export default function Index() {
   return (
     <div className="min-h-screen ">
       <Header user={user} />
-      <main className="bg-hero-tracer bg-cover bg-blue-gray-dark min-h-screen mx-auto flex items-center py-20">
+      <div className="absolute z-10">
+        <img src="/assets/img_graffiti_effect_1.svg" alt="" />
+      </div>
+      <main className="bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
         <Container className="m-auto">
           <div className="col-start-1 col-end-7  h-full">
             <div className="flex flex-col h-full justify-between ">
-              <img src={MainMessage} alt="" className="my-auto h-52 w-96" />
+              <img src={MainMessage} alt="" className="my-auto h-59 w-full" />
               <div>
-                <img src={TwitchLogoJuanYut} className=" h-10 w-44" alt="" />
-                <p className=" text-white">
+                <a href="https://www.twitch.tv/juanyut" target="_blank">
+                  <img
+                    src={TwitchLogoJuanYut}
+                    className=" h-10 w-44 hover:animate-bounce"
+                    alt=""
+                  />
+                </a>
+                <p className=" text-white font-coolveltica">
                   Mi pequeño aporte con mucho cariño y esfuerzo a la comunidad
                   de Overwatch MX, JuanYut.
                 </p>
@@ -100,42 +106,37 @@ export default function Index() {
         </Container>
       </main>
 
-      <div className="absolute right-0 top-[39rem]">
-        <img src="/assets/img/graffiti2.svg" alt="" />
-      </div>
-
-      <section
-        id="acerca"
-        className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default"
-      >
-        <div className="container m-auto grid grid-cols-2">
-          {/* <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe> */}
-          {/* <h2 className="col-start-1 col-end-7 text-white text-7xl ">
-            La comunidad te necesita, únete ahora y compite
-          </h2> */}
-          <div className="col-start-8 col-end-12 max-w-sm">
-            <h4 className="text-orange-default font-coolveltica text-white">
-              ¿Qué es?
+      <section className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center">
+        <Container className="mx-auto">
+          <div className="col-start-1 col-end-3">
+            <h4 className="font-coolveltica text-white text-2xl mb-4">
+              Acerca de
             </h4>
-            <p>
+            <div className="">
+              <iframe
+                width="560"
+                height="320"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </div>
+          </div>
+          <div className="col-start-8 col-end-13 flex flex-col justify-center">
+            <h4 className="text-special-orange font-coolveltica">¿Qué es?</h4>
+            <p className=" w-full font-coolveltica text-white text-base">
               Es un torneo rápido, el cual reúne a jugadores apasionados de
               Overwatch. La finalidad de{" "}
-              <span className="text-orange-default">Copa Pachi Oro</span> es
+              <span className="text-special-orange">Copa Pachi Oro</span> es
               incentivar el juego competitivo, motivar a que los jugadores sean
               mejores, aportar un granito de arena a la comunidad de OWMX,
               generar entretenimiento, diversión, y conocer nuevos héroes de la
               comunidad.
             </p>
           </div>
-        </div>
+        </Container>
       </section>
 
       <section id="equipos" className="h-screen bg-teams-bg bg-cover ">

@@ -71,7 +71,7 @@ export const action: ActionFunction = async ({ request }) => {
       firstName = firstName as string;
       lastName = lastName as string;
       console.log("*********Registrando");
-      return await register({ email, password, firstName, lastName });
+      return await register({ email, password });
     }
     default:
       return json({ error: `Invalid Form Data` }, { status: 400 });

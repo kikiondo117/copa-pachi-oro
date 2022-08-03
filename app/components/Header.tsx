@@ -12,13 +12,11 @@ export function Header({ user }: HeaderProps) {
   const [showLogin, setShowLogin] = React.useState(false);
 
   return (
-    <header className="fixed w-full flex items-center bg-special-blue h-14 text-white">
+    <header className="fixed w-full flex items-center bg-special-blue h-14 text-white z-20">
       <div className="w-laptop flex justify-between mx-auto">
         <a className="flex justify-start" href="/">
           <img src={Logo} className="mr-4" width="32px" alt="" />
-          <span className="text-4xl my-2 text-special-orange font-big-noodle-oblique">
-            COPA PACHI ORO
-          </span>
+          {/* <img src={PachiRetas} alt="" /> */}
         </a>
 
         <ul className="flex items-center font-big-noodle-oblique text-base ">

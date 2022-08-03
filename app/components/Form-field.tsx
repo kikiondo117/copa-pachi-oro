@@ -33,7 +33,7 @@ export function FormField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className="w-full p-2 rounded-sm my-2 text-black text-base"
+        className="w-full p-2 rounded-sm my-2 text-black text-base font-big-noodle-oblique"
         value={value}
         placeholder={placeholder}
         required
