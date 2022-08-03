@@ -78,13 +78,18 @@ export default function Index() {
       <div className="absolute z-10">
         <img src="/assets/img_graffiti_effect_1.svg" alt="" />
       </div>
-      <main className="bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
+
+      <main className="pt-14 bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
         <Container className="m-auto">
           <div className="col-start-1 col-end-7  h-full">
             <div className="flex flex-col h-full justify-between ">
               <img src={MainMessage} alt="" className="my-auto h-59 w-full" />
               <div>
-                <a href="https://www.twitch.tv/juanyut" target="_blank">
+                <a
+                  href="https://www.twitch.tv/juanyut"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   <img
                     src={TwitchLogoJuanYut}
                     className=" h-10 w-44 hover:animate-bounce"
@@ -105,6 +110,10 @@ export default function Index() {
           </div>
         </Container>
       </main>
+
+      <div className="absolute right-0 top-[35rem]">
+        <img src="/assets/img/graffiti2.svg" alt="" />
+      </div>
 
       <section className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center">
         <Container className="mx-auto">
