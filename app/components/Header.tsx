@@ -12,12 +12,10 @@ export function Header() {
       <div className="w-laptop flex justify-between mx-auto">
         <a className="flex justify-start" href="/">
           <img src={Logo} className="mr-4" width="32px" alt="" />
-          <span className="text-4xl my-2 text-special-orange font-big-noodle-oblique">
-            COPA PACHI ORO
-          </span>
+          <img src={PachiRetas} alt="" />
         </a>
 
-        <ul className="flex items-center font-big-noodle-oblique text-3xl">
+        <ul className="flex items-center font-big-noodle-oblique text-2xl">
           <li className="mx-4">ACERCA DE</li>
           <li className="mx-4">EQUIPOS</li>
           <li>

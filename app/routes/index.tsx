@@ -20,10 +20,14 @@ export default function Index() {
       <main className="bg-hero-tracer bg-cover bg-blue-gray-dark min-h-screen mx-auto flex items-center pt-20">
         <Container className="m-auto">
           <div className="col-start-1 col-end-7  h-full">
-            <div className="flex flex-col h-full justify-between">
+            <div className="flex flex-col h-full justify-end bg-red-700">
               <img src={MainMessage} alt="" className=" h-52 w-96" />
               <div>
-                <img src={TwitchLogoJuanYut} className=" h-10 w-44" alt="" />
+                <img
+                  src={TwitchLogoJuanYut}
+                  className=" h-10 w-44 hover:bg-violet-600 hover:animate-bounce"
+                  alt=""
+                />
                 <p>
                   Mi pequeño aporte con mucho cariño y esfuerzo a la comunidad
                   de Overwatch MX, JuanYut.
@@ -40,7 +44,7 @@ export default function Index() {
 
       <section className="min-h-screen mx-auto flex items-center pt-14 bg-blue-gray-default">
         <div className="container m-auto grid grid-cols-2">
-          {/* <iframe
+          <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/dQw4w9WgXcQ"
@@ -48,10 +52,7 @@ export default function Index() {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-          ></iframe> */}
-          {/* <h2 className="col-start-1 col-end-7 text-white text-7xl ">
-            La comunidad te necesita, únete ahora y compite
-          </h2> */}
+          ></iframe>
           <div className="col-start-8 col-end-12 max-w-sm">
             <h4 className="text-orange-default font-coolveltica text-white">
               ¿Qué es?
