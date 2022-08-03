@@ -111,7 +111,7 @@ export default function Index() {
         </Container>
       </main>
 
-      <div className="absolute right-0 top-[35rem]">
+      <div className="absolute right-0 top-2/3">
         <img src="/assets/img/graffiti2.svg" alt="" />
       </div>
 
