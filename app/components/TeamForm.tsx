@@ -1,17 +1,8 @@
-import type { ActionFunction } from "@remix-run/node";
-
 import * as React from "react";
+import { Form } from "@remix-run/react";
+
 import { FormField } from "./Form-field";
 import { Button } from "./ui/Button";
-
-export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const email = form.get("email");
-  const password = form.get("password");
-  const confirm_password = form.get("confirm_password");
-  let firstName = form.get("firstName");
-  let lastName = form.get("lastName");
-};
 
 export function TeamForm() {
   const [form, setFormData] = React.useState({
@@ -31,10 +22,11 @@ export function TeamForm() {
   };
 
   return (
-    <form
-      method="POST"
+    <Form
+      method="post"
       className="flex flex-col justify-between bg-special-gray px-4 w-full font-coolveltica h-[32rem]"
     >
+      <input type="hidden" name="action" value={"register"} />
       <div>
         <p className="mt-6">Crea tu cuenta</p>
         <FormField
@@ -58,7 +50,7 @@ export function TeamForm() {
           required
         />
         <FormField
-          htmlFor="confirm password"
+          htmlFor="confirm_password"
           type="password"
           label="confirm password"
           value={form.confirm_password}
@@ -85,6 +77,6 @@ export function TeamForm() {
       {/* <input className="mt-4" type="img" /> */}
 
       <Button.Primary>Registrar equipo</Button.Primary>
-    </form>
+    </Form>
   );
 }

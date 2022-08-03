@@ -42,6 +42,7 @@ export function LoginForm() {
 
   return (
     <Form method="post">
+      <input type="hidden" name="action" value={"login"} />
       <FormField
         htmlFor="email"
         value={form.email}

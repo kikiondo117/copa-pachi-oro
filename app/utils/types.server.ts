@@ -1,8 +1,8 @@
 export type RegisterForm = {
   email: string
   password: string
-  firstName: string
-  lastName: string
+  confirm_password: string
+  team: string
 }
 
 export type LoginForm = {

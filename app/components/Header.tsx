@@ -1,13 +1,11 @@
 import * as React from "react";
+import type { UserInterface } from "../types/user";
+
 import { LoginForm } from "./LoginForm";
 import Logo from "~/../public/assets/Pachimari_Gold_Logo.svg";
 
 interface HeaderProps {
-  user?: {
-    email: string;
-    id: string;
-    profile: { firstName: string; lastName: string };
-  };
+  user?: UserInterface;
 }
 
 export function Header({ user }: HeaderProps) {
@@ -22,8 +20,12 @@ export function Header({ user }: HeaderProps) {
         </a>
 
         <ul className="flex items-center font-big-noodle-oblique text-base ">
-          <li className="mx-4">ACERCA DE</li>
-          <li className="mx-4">EQUIPOS</li>
+          <li className="mx-4">
+            <a href="#acerca">ACERCA DE</a>
+          </li>
+          <li className="mx-4">
+            <a href="#equipos">EQUIPOS</a>
+          </li>
           <li>
             <button
               className={`mx-4 rounded-md  ${

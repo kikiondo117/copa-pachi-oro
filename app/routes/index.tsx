@@ -4,13 +4,15 @@ import { useLoaderData } from "@remix-run/react";
 // * Components
 import { Header } from "~/components/Header";
 import { TeamForm } from "~/components/TeamForm";
+import { Footer } from "~/components/Footer.";
+import { Container } from "~/components/ui/Container";
+import { TeamSent } from "../components/TeamSended";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
 import MainMessage from "~/../public/assets/main-landing-message.svg";
-import { Container } from "~/components/ui/Container";
 import { validateEmail, validatePassword } from "../utils/validators.server";
-import { login, getUser } from "~/utils/auth.server";
-import { TeamSended } from "~/components/TeamSended";
+import { validateName } from "../utils/validators.server";
+import { login, getUser, register } from "~/utils/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
@@ -21,28 +23,57 @@ export const action: ActionFunction = async ({ request }) => {
   const form = await request.formData();
   const email = form.get("email");
   const password = form.get("password");
+  let confirm_password = form.get("confirm_password");
+  let team = form.get("team");
+  const action = form.get("action");
+  console.log("*******ACTION", action, team, confirm_password);
 
   if (typeof email !== "string" || typeof password !== "string") {
+    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
+  }
+
+  if (
+    action === "register" &&
+    (typeof team !== "string" || typeof confirm_password !== "string")
+  ) {
     return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
   }
 
   const errors = {
     email: validateEmail(email),
     password: validatePassword(password),
+    ...(action === "register"
+      ? {
+          confirm_password: validatePassword(
+            (confirm_password as string) || ""
+          ),
+          team: validateName((team as string) || ""),
+        }
+      : {}),
   };
 
   if (Object.values(errors).some(Boolean)) {
     return json({ errors, fields: { email, password } }, { status: 400 });
   }
 
-  return await login({ email, password });
+  switch (action) {
+    case "login": {
+      return await login({ email, password });
+    }
+
+    case "register": {
+      confirm_password = confirm_password as string;
+      team = team as string;
+      return await register({ email, password, confirm_password, team });
+    }
+  }
 };
 
 export default function Index() {
   const { user } = useLoaderData();
   console.log("*****loaderData", user);
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen ">
       <Header user={user} />
       <div className="absolute z-10">
         <img src="/assets/img_graffiti_effect_1.svg" alt="" />
@@ -69,8 +100,8 @@ export default function Index() {
           </div>
           <div className="col-start-9 col-end-13 w-full">
             <div className="bg-form-top bg-cover h-24 w-auto" />
-            {/* TODO Destion required */}
-            {user ? <TeamSended /> : <TeamForm />}
+            {/* TODO Observation flow required */}
+            {user ? <TeamSent /> : <TeamForm />}
           </div>
         </Container>
       </main>
@@ -107,6 +138,14 @@ export default function Index() {
           </div>
         </Container>
       </section>
+
+      <section id="equipos" className="h-screen bg-teams-bg bg-cover ">
+        <Container>
+          <h3 className="pt-16 font-coolveltica text-2xl">Equipos</h3>
+        </Container>
+      </section>
+
+      <Footer />
     </div>
   );
 }

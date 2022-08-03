@@ -33,6 +33,7 @@ module.exports = {
         "form-top": "url('/assets/registro-equipo.png')",
         "pachi-retas-big": "url('/assets/pachi-retas-big-bg.svg')",
         "pachi-retas-sm": "url('/assets/pachi-retas-sm-bg.svg')",
+        "teams-bg": "url('/assets/bg/teams.svg')",
       },
       colors: {
         "special-orange": "#F16414",

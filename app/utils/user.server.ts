@@ -8,10 +8,8 @@ export const createUser = async (user: RegisterForm) => {
     data: {
       email: user.email,
       password: passwordHash,
-
-      profile: {
-        firstName: user.firstName,
-        lastName: user.lastName,
+      team: {
+        name: user.team,
       },
     },
   })
