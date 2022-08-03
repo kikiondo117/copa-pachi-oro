@@ -584,6 +584,14 @@ video {
   right: 2rem;
 }
 
+.right-0 {
+  right: 0px;
+}
+
+.top-\[39rem\] {
+  top: 39rem;
+}
+
 .col-start-1 {
   grid-column-start: 1;
 }
@@ -612,14 +620,14 @@ video {
   margin: auto;
 }
 
-.my-2 {
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
+}
+
+.my-2 {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .mx-4 {
@@ -627,14 +635,17 @@ video {
   margin-right: 1rem;
 }
 
-.my-9 {
-  margin-top: 2.25rem;
-  margin-bottom: 2.25rem;
-}
-
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
+}
+
+.ml-4 {
+  margin-left: 1rem;
+}
+
+.ml-7 {
+  margin-left: 1.75rem;
 }
 
 .mr-4 {
@@ -657,28 +668,12 @@ video {
   margin-top: 0.5rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.mb-8 {
+  margin-bottom: 2rem;
 }
 
 .mb-3 {
   margin-bottom: 0.75rem;
-}
-
-.mt-14 {
-  margin-top: 3.5rem;
-}
-
-.mt-auto {
-  margin-top: auto;
-}
-
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
-.mb-8 {
-  margin-bottom: 2rem;
 }
 
 .flex {
@@ -693,8 +688,24 @@ video {
   display: none;
 }
 
+.h-28 {
+  height: 7rem;
+}
+
+.h-16 {
+  height: 4rem;
+}
+
 .h-14 {
   height: 3.5rem;
+}
+
+.h-\[32rem\] {
+  height: 32rem;
+}
+
+.h-\[39rem\] {
+  height: 39rem;
 }
 
 .h-full {
@@ -717,10 +728,6 @@ video {
   height: 100vh;
 }
 
-.h-\[39rem\] {
-  height: 39rem;
-}
-
 .min-h-screen {
   min-height: 100vh;
 }
@@ -731,6 +738,10 @@ video {
 
 .w-laptop {
   width: 71rem;
+}
+
+.w-56 {
+  width: 14rem;
 }
 
 .w-96 {
@@ -791,10 +802,6 @@ video {
   justify-content: space-between;
 }
 
-.justify-around {
-  justify-content: space-around;
-}
-
 .gap-8 {
   gap: 2rem;
 }
@@ -803,20 +810,16 @@ video {
   row-gap: 1rem;
 }
 
-.self-start {
-  align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
-}
-
 .self-center {
   align-self: center;
 }
 
 .rounded-sm {
   border-radius: 0.125rem;
+}
+
+.rounded-md {
+  border-radius: 0.375rem;
 }
 
 .rounded-lg {
@@ -835,13 +838,14 @@ video {
   border-radius: 1rem;
 }
 
-.rounded-md {
-  border-radius: 0.375rem;
-}
-
 .bg-special-blue {
   --tw-bg-opacity: 1;
   background-color: rgb(39 53 79 / var(--tw-bg-opacity));
+}
+
+.bg-special-blue-light {
+  --tw-bg-opacity: 1;
+  background-color: rgb(0 125 209 / var(--tw-bg-opacity));
 }
 
 .bg-special-gray {
@@ -879,22 +883,16 @@ video {
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
 }
 
-.bg-special-blue-light {
-  --tw-bg-opacity: 1;
-  background-color: rgb(0 125 209 / var(--tw-bg-opacity));
-}
-
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
 .bg-hero-tracer {
   background-image: url('/assets/img-tracer-graffiti.png');
 }
 
 .bg-form-top {
   background-image: url('/assets/registro-equipo.png');
+}
+
+.bg-teams-bg {
+  background-image: url('/assets/bg/teams.svg');
 }
 
 .bg-cover {
@@ -911,10 +909,6 @@ video {
 
 .p-6 {
   padding: 1.5rem;
-}
-
-.p-20 {
-  padding: 5rem;
 }
 
 .px-4 {
@@ -935,10 +929,6 @@ video {
 .py-20 {
   padding-top: 5rem;
   padding-bottom: 5rem;
-}
-
-.pt-20 {
-  padding-top: 5rem;
 }
 
 .pt-14 {
@@ -971,9 +961,9 @@ video {
   line-height: 2.5rem;
 }
 
-.text-3xl {
-  font-size: 1.875rem;
-  line-height: 2.25rem;
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 
 .text-5xl {
@@ -986,11 +976,6 @@ video {
   line-height: 1;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
-}
-
 .font-semibold {
   font-weight: 600;
 }
@@ -999,19 +984,29 @@ video {
   font-weight: 800;
 }
 
-.text-black {
-  --tw-text-opacity: 1;
-  color: rgb(0 0 0 / var(--tw-text-opacity));
-}
-
 .text-white {
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
 }
 
+.text-gray-500 {
+  --tw-text-opacity: 1;
+  color: rgb(107 114 128 / var(--tw-text-opacity));
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity));
+}
+
 .text-special-orange {
   --tw-text-opacity: 1;
   color: rgb(241 100 20 / var(--tw-text-opacity));
+}
+
+.text-special-blue-light {
+  --tw-text-opacity: 1;
+  color: rgb(0 125 209 / var(--tw-text-opacity));
 }
 
 .text-blue-600 {
@@ -1027,11 +1022,6 @@ video {
 .text-slate-300 {
   --tw-text-opacity: 1;
   color: rgb(203 213 225 / var(--tw-text-opacity));
-}
-
-.text-special-blue-light {
-  --tw-text-opacity: 1;
-  color: rgb(0 125 209 / var(--tw-text-opacity));
 }
 
 .transition {

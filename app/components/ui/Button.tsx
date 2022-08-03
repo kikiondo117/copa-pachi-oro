@@ -2,7 +2,8 @@ export function Primary({ children, className }: any) {
   return (
     <button
       className={` bg-special-blue-light 
-                  text-white w-fit mx-auto p-4 
+                  text-white w-fit mx-auto p-2
+                  font-big-noodle-oblique 
                   rounded-md mb-3 cursor-pointer ${className ? className : ""}`}
     >
       {children}

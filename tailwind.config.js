@@ -31,6 +31,7 @@ module.exports = {
       backgroundImage: {
         "hero-tracer": "url('/assets/img-tracer-graffiti.png')",
         "form-top": "url('/assets/registro-equipo.png')",
+        "teams-bg": "url('/assets/bg/teams.svg')",
       },
       colors: {
         "special-orange": "#F16414",

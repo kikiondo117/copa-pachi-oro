@@ -1,13 +1,11 @@
 import * as React from "react";
+import type { UserInterface } from "../types/user";
+
 import { LoginForm } from "./LoginForm";
 import Logo from "~/../public/assets/Pachimari_Gold_Logo.svg";
 
 interface HeaderProps {
-  user?: {
-    email: string;
-    id: string;
-    profile: { firstName: string; lastName: string };
-  };
+  user?: UserInterface;
 }
 
 export function Header({ user }: HeaderProps) {
