@@ -724,6 +724,7 @@ video {
   height: 39rem;
 }
 
+<<<<<<< HEAD
 .h-full {
   height: 100%;
 }
@@ -750,6 +751,12 @@ video {
 
 .h-9 {
   height: 2.25rem;
+=======
+.h-fit {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+>>>>>>> 4fd786f2c428e138af0c308bd94dbb7ef081484d
 }
 
 .min-h-screen {

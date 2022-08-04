@@ -10,7 +10,7 @@ export function Container({ children, className }: ContainerProps) {
         className ? className : ""
       }`}
     >
-      <div className=" h-full mx-auto px-0 grid grid-cols-12 gap-4 w-laptop md:w-tablet sm:w-mobile">
+      <div className=" h-full mx-auto px-0 grid grid-cols-custom gap-4 w-laptop md:w-tablet sm:w-mobile">
         {children}
       </div>
     </div>
