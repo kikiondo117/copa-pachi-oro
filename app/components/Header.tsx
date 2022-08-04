@@ -2,7 +2,7 @@ import * as React from "react";
 import type { UserInterface } from "../types/user";
 
 import { LoginForm } from "./LoginForm";
-import Logo from "~/../public/assets/Pachimari_Gold_Logo.svg";
+import Logo from "~/../public/assets/logo-pachi-retas.svg";
 
 interface HeaderProps {
   user?: UserInterface;
@@ -14,10 +14,12 @@ export function Header({ user }: HeaderProps) {
   return (
     <header className="fixed w-full flex items-center bg-special-blue h-14 text-white z-20">
       <div className="w-laptop flex justify-between mx-auto">
-        <a className="flex justify-start" href="/">
-          <img src={Logo} className="mr-4" width="32px" alt="" />
-          {/* <img src={PachiRetas} alt="" /> */}
-        </a>
+        <div className=" h-9 w-auto">
+          <img src={Logo} className="h-full w-auto" alt="" />
+
+          {/* <a className="" href="/">
+          </a> */}
+        </div>
 
         <ul className="flex items-center font-big-noodle-oblique text-base ">
           <li className="mx-4">
