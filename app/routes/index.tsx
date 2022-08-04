@@ -7,6 +7,8 @@ import { TeamForm } from "~/components/TeamForm";
 import { Footer } from "~/components/Footer.";
 import { Container } from "~/components/ui/Container";
 import { TeamSent } from "../components/TeamSended";
+import { CardTeam } from "~/components/ui/CardTeam";
+
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
 import MainMessage from "~/../public/assets/main-landing-message.svg";
@@ -80,8 +82,8 @@ export default function Index() {
       </div>
 
       <main className="pt-14 bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
-        <Container className="m-auto">
-          <div className="col-start-1 col-end-7  h-full">
+        <Container className="m-auto py-6">
+          <div className="col-start-1 col-end-7 h-full">
             <div className="flex flex-col h-full justify-between ">
               <img src={MainMessage} alt="" className="my-auto h-59 w-full" />
               <div>
@@ -115,16 +117,19 @@ export default function Index() {
         <img src="/assets/img/graffiti2.svg" alt="" />
       </div>
 
-      <section className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center">
-        <Container className="mx-auto">
-          <div className="col-start-1 col-end-3">
+      <section
+        id="acerca"
+        className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center"
+      >
+        <Container className="mx-auto h-full">
+          <div className="col-start-1 col-end-7 my-auto">
             <h4 className="font-coolveltica text-white text-2xl mb-4">
               Acerca de
             </h4>
-            <div className="">
+            <div className=" h-72">
               <iframe
-                width="560"
-                height="320"
+                height="100%"
+                width="100%"
                 src="https://www.youtube.com/embed/dQw4w9WgXcQ"
                 title="YouTube video player"
                 frameBorder="0"
@@ -134,11 +139,13 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-8 col-end-13 flex flex-col justify-center">
-            <h4 className="text-special-orange font-coolveltica">¿Qué es?</h4>
-            <p className=" w-full font-coolveltica text-white text-base">
+            <h4 className="text-special-orange font-coolveltica text-2xl">
+              ¿Qué es?
+            </h4>
+            <p className=" w-full font-coolveltica text-white text-lg">
               Es un torneo rápido, el cual reúne a jugadores apasionados de
               Overwatch. La finalidad de{" "}
-              <span className="text-special-orange">Copa Pachi Oro</span> es
+              <span className="text-special-orange">Pachi Retas</span> es
               incentivar el juego competitivo, motivar a que los jugadores sean
               mejores, aportar un granito de arena a la comunidad de OWMX,
               generar entretenimiento, diversión, y conocer nuevos héroes de la
@@ -148,9 +155,13 @@ export default function Index() {
         </Container>
       </section>
 
-      <section id="equipos" className="h-screen bg-teams-bg bg-cover ">
+      <section
+        id="equipos"
+        className="h-screen bg-teams-bg bg-cover mx-auto bg-center "
+      >
         <Container>
           <h3 className="pt-16 font-coolveltica text-2xl">Equipos</h3>
+          <CardTeam></CardTeam>
         </Container>
       </section>
 
