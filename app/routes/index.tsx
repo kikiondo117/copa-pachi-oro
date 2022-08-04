@@ -79,7 +79,11 @@ export default function Index() {
         <img src="/assets/img_graffiti_effect_1.svg" alt="" />
       </div>
 
-      <main className="pt-14 bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
+      <main
+        className="pt-14 bg-hero-tracer bg-cover bg-fixed 
+      bg-blue-gray-dark min-h-screen 
+        mx-auto flex items-center"
+      >
         <Container className="m-auto">
           <div className="col-start-1 col-end-7  h-full">
             <div className="flex flex-col h-full justify-between ">

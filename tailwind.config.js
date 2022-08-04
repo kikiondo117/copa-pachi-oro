@@ -19,6 +19,11 @@ module.exports = {
       // => @media (max-width: 639px) { ... }
     },
     extend: {
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        custom: "repeat(12, 80px)",
+      },
+
       width: {
         laptop: "71rem",
         tablet: "45rem",
