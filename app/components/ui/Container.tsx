@@ -6,11 +6,22 @@ interface ContainerProps {
 export function Container({ children, className }: ContainerProps) {
   return (
     <div
-      className={` w-laptop-full max-w-laptop-full  md:bg-amber-400 md:max-w-tablet-full sm:bg-lime-700 sm:max-w-mobile-full sm:overflow-hidden  ${
-        className ? className : ""
-      }`}
+      className={` 
+      w-full 
+      max-w-laptop-full 
+      md:max-tablet-full 
+      sm:max-w-mobile 
+    ${className ? className : ""}`}
     >
-      <div className=" h-full mx-auto px-0 grid grid-cols-custom gap-4 w-laptop md:w-tablet sm:w-mobile">
+      <div
+        className="
+        
+      w-laptop h-full mx-auto px-0 grid
+      grid-cols-custom-laptop
+      md:grid-cols-custom-laptop md:w-tablet
+      sm:grid-cols-custom-mobile gap-4 sm:w-mobile
+      "
+      >
         {children}
       </div>
     </div>

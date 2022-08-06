@@ -19,7 +19,7 @@ export function Footer() {
             {/* hover:bg-violet-700 */}
           </li>
           <li className="ml-7 ">
-            <img src="social/in.svg" alt="Instagram" />
+            <img src="/assets/social/in.svg" alt="Instagram" />
             {/* hover:bg-red-300 */}
           </li>
           <li className="ml-7 ">
