@@ -69,12 +69,23 @@ export function TeamForm() {
           placeholder="Nombre del equipo"
           required
         />
+        <div className="flex justify-between">
+          <select className="w-full" name="region" id="region">
+            <option value="NA">NA</option>
+            <option value="SA">SA</option>
+            <option value="EU">EU</option>
+          </select>
+          <select className="w-full" name="plataforma" id="plataforma">
+            <option value="PC">PC</option>
+            <option value="XBOX">Xbox</option>
+            <option value="PLAYSTIATION">Play Station</option>
+            <option value="SWITCH">Switch</option>
+            <option value="MIXTO">mixto</option>
+          </select>
+        </div>
+
+        {/* <input className="mt-4" type="media" /> */}
       </div>
-      {/* <div className="flex justify-between mt-4">
-        <select className="w-full" name="region" id="region"></select>
-        <select className="w-full" name="genero" id="genero"></select>
-      </div> */}
-      {/* <input className="mt-4" type="img" /> */}
 
       <Button.Primary>Registrar equipo</Button.Primary>
     </Form>

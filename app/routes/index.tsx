@@ -27,6 +27,8 @@ export const action: ActionFunction = async ({ request }) => {
   const password = form.get("password");
   let confirm_password = form.get("confirm_password");
   let team = form.get("team");
+  let region = form.get("region");
+  let plataforma = form.get("plataforma");
   const action = form.get("action");
   console.log("*******ACTION", action, team, confirm_password);
 
@@ -36,7 +38,10 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (
     action === "register" &&
-    (typeof team !== "string" || typeof confirm_password !== "string")
+    (typeof team !== "string" ||
+      typeof confirm_password !== "string" ||
+      typeof region !== "string" ||
+      typeof plataforma !== "string")
   ) {
     return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
   }
@@ -66,7 +71,16 @@ export const action: ActionFunction = async ({ request }) => {
     case "register": {
       confirm_password = confirm_password as string;
       team = team as string;
-      return await register({ email, password, confirm_password, team });
+      region = region as string;
+      plataforma = plataforma as string;
+      return await register({
+        email,
+        password,
+        confirm_password,
+        team,
+        region,
+        plataforma,
+      });
     }
   }
 };

@@ -1,0 +1,23 @@
+import { Form } from "@remix-run/react";
+import { Button } from "./ui/Button";
+
+export function AddPlayer() {
+  return (
+    <div>
+      <h2>Registrar Jugador</h2>
+      <Form className="flex flex-col" method="post">
+        <input type="media" />
+        <input type="text" placeholder="Nombre" />
+        <input type="text" placeholder="Rango en SR (Ej: 3100)" />
+        <input type="text" />
+        <span>Marcar jugador como capitán</span>
+        <input type="checkbox" />
+        <p>
+          Solo puede haber un capitán por equipo, seleccionar este campo
+          cambiará de capitán si ya tienes uno.
+        </p>
+        <Button.Primary>GUARDAR JUGADOR </Button.Primary>
+      </Form>
+    </div>
+  );
+}
