@@ -7,9 +7,9 @@ export function AddPlayer() {
       <h2>Registrar Jugador</h2>
       <Form className="flex flex-col" method="post">
         <input type="media" />
-        <input type="text" placeholder="Nombre" />
-        <input type="text" placeholder="Rango en SR (Ej: 3100)" />
-        <input type="text" />
+        <input name="name" type="text" placeholder="Nombre" />
+        <input name="rango" type="text" placeholder="Rango en SR (Ej: 3100)" />
+        <input name="rol" type="text" />
         <span>Marcar jugador como capitán</span>
         <input type="checkbox" />
         <p>

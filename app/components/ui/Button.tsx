@@ -1,6 +1,7 @@
-export function Primary({ children, className }: any) {
+export function Primary({ children, className, onClick }: any) {
   return (
     <button
+      onClick={onClick}
       className={` bg-special-blue-light 
                   text-white w-fit mx-auto p-2
                   font-big-noodle-oblique 

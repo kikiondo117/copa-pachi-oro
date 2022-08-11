@@ -1,9 +1,11 @@
 import * as React from "react";
-import type { LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useActionData } from "@remix-run/react";
 import { json } from "@remix-run/node";
-// * Utils
+// * Utils and Types
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { User } from "~/types/types.user";
 import { getUser } from "~/utils/auth.server";
+import { addTeamMember } from "../utils/user.server";
 // * Components
 import { Header } from "~/components/Header";
 import { TeamMember } from "~/components/TeamMember";
@@ -14,12 +16,44 @@ import { AddPlayer } from "~/components/AddPlayer";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
-  return json({ user });
+  return json(user);
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const user = await getUser(request);
+  const form = await request.formData();
+  const name = form.get("name");
+  const rango = form.get("rango");
+  const rol = "test";
+  const img = "test";
+  const capitan = false;
+
+  console.log("test", name, rango, capitan, img);
+
+  if (
+    typeof name !== "string" ||
+    typeof rango !== "string" ||
+    typeof capitan !== "boolean" ||
+    typeof img !== "string"
+  ) {
+    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
+  }
+
+  if (user)
+    return await addTeamMember(user?.email, { name, rango, rol, capitan, img });
+
+  return null;
 };
 
 export default function Team() {
   const [isModal, setIsModal] = React.useState(false);
-  const { user } = useLoaderData();
+  const response = useActionData();
+  const user = useLoaderData<User>();
+  console.log("USER", user);
+
+  React.useEffect(() => {
+    setIsModal(false);
+  }, [response]);
 
   return (
     <div>
@@ -34,13 +68,20 @@ export default function Team() {
             <p className=" text-2xl">Jugadores principales</p>
             <div>
               <ul>
+                {/* TODO logic to show the card */}
+                {user?.members.map((member, index) => {
+                  return (
+                    <li key={member.name}>
+                      <TeamMember
+                        member={member}
+                        onClick={() => setIsModal(true)}
+                      />
+                    </li>
+                  );
+                })}
                 <li>
                   <TeamMember onClick={() => setIsModal(true)} />
                 </li>
-                <li>Jugador 2</li>
-                <li>Jugador 3</li>
-                <li>Jugador 4</li>
-                <li>Jugador 5</li>
               </ul>
             </div>
           </div>
@@ -49,7 +90,7 @@ export default function Team() {
             <p className=" text-2xl">Jugadores suplentes (hasta 4)</p>
             <ul>
               <li>
-                Jugador 1<button onClick={() => handleOnClick()}>Enviar</button>
+                <TeamMember onClick={() => setIsModal(true)} />
               </li>
             </ul>
           </div>

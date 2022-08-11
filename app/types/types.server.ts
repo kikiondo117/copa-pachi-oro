@@ -1,3 +1,5 @@
+import type { TeamMember } from './types.user';
+
 export type RegisterForm = {
   email: string
   password: string
@@ -9,13 +11,6 @@ export type RegisterForm = {
   members: TeamMember[]
 }
 
-export type TeamMember = {
-  img: string
-  name: string
-  rango: string
-  rol: string
-  capitan: string
-}
 
 export type LoginForm = {
   email: string

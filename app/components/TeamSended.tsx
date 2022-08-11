@@ -1,10 +1,10 @@
 import * as React from "react";
-import type { UserInterface } from "../types/user";
+import type { User } from "../types/types.user";
 
 import { Button } from "./ui/Button";
 
 interface TeamSentProps {
-  user?: UserInterface;
+  user?: User;
 }
 
 export function TeamSent(props: TeamSentProps) {
