@@ -15,7 +15,7 @@ export function Header({ user }: HeaderProps) {
     <header className="fixed w-full flex items-center bg-special-blue h-14 text-white z-20">
       <div className="w-laptop flex justify-between mx-auto">
         <div className=" h-9 w-auto">
-          <img src={Logo} className="h-full w-auto" alt="" />
+          <img src={Logo} className="h-full w-auto" alt="Copa Pachichi Oro" />
 
           {/* <a className="" href="/">
           </a> */}
