@@ -20,5 +20,17 @@ model User {
 }
 
 type Team {
-  name String
+  name       String
+  region     String
+  plataforma String
+  img        String
+  members    Member[]
+}
+
+type Member {
+  img       String
+  name      String
+  rango     String
+  rol       String
+  capitan   String
 }

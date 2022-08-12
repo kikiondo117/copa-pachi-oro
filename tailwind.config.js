@@ -21,7 +21,13 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         // Simple 16 column grid
-        custom: "repeat(12, 80px)",
+        "custom-laptop": "repeat(12, 80px)",
+      },
+
+      maxWidth: {
+        "laptop-full": "80rem",
+        "tablet-full": "48rem",
+        "mobile-full": "28rem",
       },
 
       width: {
