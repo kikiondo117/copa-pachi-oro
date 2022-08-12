@@ -1,4 +1,5 @@
-import type { RegisterForm, TeamMember } from '../types/types.server'
+import type { RegisterForm } from '../types/types.server'
+import type { TeamMember } from '../types/types.user'
 import bcrypt from 'bcryptjs'
 import { prisma } from './prisma.server'
 
@@ -14,28 +15,55 @@ export const createUser = async (user: RegisterForm) => {
         region: user.region,
         plataforma: user.plataforma,
         img: 'img-url',
-        members: []
+
       },
+      members: user.members,
+      subs: user.subs
     },
   })
   return { id: newUser.id, email: user.email }
 }
 
 
-export const updateUser = async (email: string, member: any) => {
+export const addTeamMember = async (email: string, member: TeamMember) => {
 
-  // Al inicio no hay team members
-  // const updateUser = await prisma.user.update({
-  //   where: {
-  //     email: email
-  //   },
-  //   data: {
-  //     team: {
-  //       members: []
-  //     }
-  //   }
-  // })
-  // 
+  const user = await prisma.user.findUnique({
+    where: { email }
+  })
 
-  return { saludo: 'hola' }
+  if (user) {
+    const players = [...user.members, member]
+    const updateUser = await prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        members: players
+      }
+    })
+    return updateUser
+  }
+
+  return 'nani'
+}
+
+export const addSub = async (email: string, member: TeamMember) => {
+
+  const user = await prisma.user.findUnique({
+    where: { email }
+  })
+
+  if (user) {
+    const subs = [...user.subs, member]
+    const updateUser = await prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        subs: subs
+      }
+    })
+    return updateUser
+  }
+  return 'nani'
 }

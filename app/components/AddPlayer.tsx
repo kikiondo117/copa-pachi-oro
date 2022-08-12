@@ -1,15 +1,20 @@
 import { Form } from "@remix-run/react";
 import { Button } from "./ui/Button";
 
-export function AddPlayer() {
+export function AddPlayer({ isSub }: { isSub: boolean }) {
   return (
     <div>
       <h2>Registrar Jugador</h2>
       <Form className="flex flex-col" method="post">
+        <input
+          type="hidden"
+          name="action"
+          value={`${isSub ? "addSub" : "addPlayer"}`}
+        />
         <input type="media" />
-        <input type="text" placeholder="Nombre" />
-        <input type="text" placeholder="Rango en SR (Ej: 3100)" />
-        <input type="text" />
+        <input name="name" type="text" placeholder="Nombre" />
+        <input name="rango" type="text" placeholder="Rango en SR (Ej: 3100)" />
+        <input name="rol" type="text" />
         <span>Marcar jugador como capitán</span>
         <input type="checkbox" />
         <p>

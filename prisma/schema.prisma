@@ -17,6 +17,8 @@ model User {
   email     String   @unique
   password  String
   team      Team
+  members   Member[]
+  subs      Member[] 
 }
 
 type Team {
@@ -24,7 +26,6 @@ type Team {
   region     String
   plataforma String
   img        String
-  members    Member[]
 }
 
 type Member {
@@ -32,5 +33,5 @@ type Member {
   name      String
   rango     String
   rol       String
-  capitan   String
+  capitan   Boolean
 }

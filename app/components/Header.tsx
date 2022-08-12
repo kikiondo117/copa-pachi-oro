@@ -1,11 +1,11 @@
 import * as React from "react";
-import type { UserInterface } from "../types/user";
+import type { User } from "../types/types.user";
 // * Components
 import { LoginForm } from "./LoginForm";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
 
 interface HeaderProps {
-  user?: UserInterface;
+  user?: User;
 }
 
 export function Header({ user }: HeaderProps) {

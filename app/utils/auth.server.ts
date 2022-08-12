@@ -1,4 +1,4 @@
-import type { RegisterForm, LoginForm } from './types.server';
+import type { RegisterForm, LoginForm } from '../types/types.server';
 import { prisma } from './prisma.server';
 import { redirect, createCookieSessionStorage, json } from '@remix-run/node';
 import { createUser } from './user.server';
@@ -109,7 +109,7 @@ export async function getUser(request: Request) {
   try {
     const user = await prisma.user.findUnique({
       where: { id: userId },
-      select: { id: true, email: true, team: true },
+      select: { id: true, email: true, team: true, members: true, subs: true },
     })
     return user
 

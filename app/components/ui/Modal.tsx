@@ -19,7 +19,7 @@ export function Modal({ children, className, onClose }: ModalProps) {
 
       <div className="relative w-[35rem] h-[32rem] z-20 m-auto mt-24">
         <div
-          className={`h-full  bg-special-gray rounded  ${
+          className={`h-full  bg-special-gray rounded-lg  ${
             className ? className : ""
           }`}
         >
