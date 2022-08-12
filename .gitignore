@@ -1,7 +1,7 @@
 node_modules
 tailwind.css
 
-/app/tailwind.css
+app/tailwind.css
 /.cache
 /build
 /public/build

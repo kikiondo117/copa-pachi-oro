@@ -1,4 +1,5 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { TeamMember } from "../types/types.user";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Components
@@ -29,8 +30,9 @@ export const action: ActionFunction = async ({ request }) => {
   let team = form.get("team");
   let region = form.get("region");
   let plataforma = form.get("plataforma");
+  let subs: TeamMember[] = [];
+  let members: TeamMember[] = [];
   const action = form.get("action");
-  console.log("*******ACTION", action, team, confirm_password);
 
   if (typeof email !== "string" || typeof password !== "string") {
     return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
@@ -80,6 +82,8 @@ export const action: ActionFunction = async ({ request }) => {
         team,
         region,
         plataforma,
+        members,
+        subs,
       });
     }
   }

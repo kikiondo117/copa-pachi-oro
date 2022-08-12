@@ -18,6 +18,7 @@ model User {
   password  String
   team      Team
   members   Member[]
+  subs      Member[] 
 }
 
 type Team {

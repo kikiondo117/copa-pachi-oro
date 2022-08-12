@@ -17,7 +17,8 @@ export const createUser = async (user: RegisterForm) => {
         img: 'img-url',
 
       },
-      members: []
+      members: user.members,
+      subs: user.subs
     },
   })
   return { id: newUser.id, email: user.email }
@@ -31,9 +32,7 @@ export const addTeamMember = async (email: string, member: TeamMember) => {
   })
 
   if (user) {
-
     const players = [...user.members, member]
-
     const updateUser = await prisma.user.update({
       where: {
         email: email
@@ -42,14 +41,29 @@ export const addTeamMember = async (email: string, member: TeamMember) => {
         members: players
       }
     })
-
     return updateUser
   }
 
+  return 'nani'
+}
 
+export const addSub = async (email: string, member: TeamMember) => {
 
+  const user = await prisma.user.findUnique({
+    where: { email }
+  })
 
-
-
+  if (user) {
+    const subs = [...user.subs, member]
+    const updateUser = await prisma.user.update({
+      where: {
+        email: email
+      },
+      data: {
+        subs: subs
+      }
+    })
+    return updateUser
+  }
   return 'nani'
 }

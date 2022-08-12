@@ -9,6 +9,7 @@ export type RegisterForm = {
   plataforma: string,
   img?: string,
   members: TeamMember[]
+  subs: TeamMember[]
 }
 
 

@@ -20,4 +20,5 @@ export type User = {
   password: string
   team: Team
   members: TeamMember[]
+  subs: TeamMember[]
 }
