@@ -1,6 +1,19 @@
-export function Primary({ children, className, onClick }: any) {
+interface PrimaryInterface {
+  children: any;
+  className?: string;
+  onClick?: () => null;
+  disabled?: boolean;
+}
+
+export function Primary({
+  children,
+  className,
+  onClick,
+  ...props
+}: PrimaryInterface) {
   return (
     <button
+      {...props}
       onClick={onClick}
       className={` bg-special-blue-light 
                   text-white w-fit mx-auto p-2

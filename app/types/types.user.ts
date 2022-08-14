@@ -1,5 +1,5 @@
 
-export type TeamMember = {
+export type TeamMemberInterface = {
   img: string
   name: string
   rango: string
