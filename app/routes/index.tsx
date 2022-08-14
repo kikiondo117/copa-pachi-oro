@@ -1,15 +1,16 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { TeamMember } from "../types/types.user";
+import type { TeamMemberInterface } from "../types/types.user";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Components
-import { Header } from "~/components/Header";
-import { TeamForm } from "~/components/TeamForm";
-import { Footer } from "~/components/Footer.";
-import { Container } from "~/components/ui/Container";
-import { TeamSent } from "../components/TeamSended";
-import { CardTeam } from "~/components/ui/CardTeam";
-
+import {
+  Header,
+  TeamForm,
+  Footer,
+  Container,
+  TeamSent,
+  CardTeam,
+} from "~/components";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
 import MainMessage from "~/../public/assets/main-landing-message.svg";
@@ -30,8 +31,8 @@ export const action: ActionFunction = async ({ request }) => {
   let team = form.get("team");
   let region = form.get("region");
   let plataforma = form.get("plataforma");
-  let subs: TeamMember[] = [];
-  let members: TeamMember[] = [];
+  let subs: TeamMemberInterface[] = [];
+  let members: TeamMemberInterface[] = [];
   const action = form.get("action");
 
   if (typeof email !== "string" || typeof password !== "string") {

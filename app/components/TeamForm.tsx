@@ -1,8 +1,7 @@
 import * as React from "react";
 import { Form } from "@remix-run/react";
 
-import { FormField } from "./Form-field";
-import { Button } from "./ui/Button";
+import { FormField, Button } from "~/components";
 
 export function TeamForm() {
   const [form, setFormData] = React.useState({
@@ -98,6 +97,9 @@ export function TeamForm() {
           </select>
         </div>
 
+        <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
+          <img src="/assets/img/imageInput.svg" alt="" />
+        </div>
         {/* <input className="mt-4" type="media" /> */}
       </div>
 

@@ -1,7 +1,8 @@
 import * as React from "react";
-import type { User } from "../types/types.user";
+import type { User } from "~/types/types.user";
+
 // * Components
-import { LoginForm } from "./LoginForm";
+import { LoginForm } from "~/components";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
 
 interface HeaderProps {

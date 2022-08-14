@@ -1,5 +1,5 @@
 import type { RegisterForm } from '../types/types.server'
-import type { TeamMember } from '../types/types.user'
+import type { TeamMemberInterface } from '../types/types.user'
 import bcrypt from 'bcryptjs'
 import { prisma } from './prisma.server'
 
@@ -25,7 +25,7 @@ export const createUser = async (user: RegisterForm) => {
 }
 
 
-export const addTeamMember = async (email: string, member: TeamMember) => {
+export const addTeamMember = async (email: string, member: TeamMemberInterface) => {
 
   const user = await prisma.user.findUnique({
     where: { email }
@@ -47,7 +47,7 @@ export const addTeamMember = async (email: string, member: TeamMember) => {
   return 'nani'
 }
 
-export const addSub = async (email: string, member: TeamMember) => {
+export const addSub = async (email: string, member: TeamMemberInterface) => {
 
   const user = await prisma.user.findUnique({
     where: { email }

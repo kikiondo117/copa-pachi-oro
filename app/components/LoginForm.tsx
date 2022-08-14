@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Form, useActionData } from "@remix-run/react";
 // * Components
-import { FormField } from "./Form-field";
+import { FormField } from "~/components";
 
 // export const action: ActionFunction = async ({ request }) => {
 //   const form = await request.formData();

@@ -3,16 +3,18 @@ import { useLoaderData, useActionData } from "@remix-run/react";
 import { json } from "@remix-run/node";
 // * Utils and Types
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { User } from "~/types/types.user";
+import type { User, TeamMemberInterface } from "~/types/types.user";
 import { getUser } from "~/utils/auth.server";
 import { addTeamMember, addSub } from "../utils/user.server";
 // * Components
-import { Header } from "~/components/Header";
-import { TeamMember } from "~/components/TeamMember";
-import { Container } from "~/components/ui/Container";
-import { CardTeam } from "../components/ui/CardTeam";
-import { Modal } from "~/components/ui/Modal";
-import { AddPlayer } from "~/components/AddPlayer";
+import {
+  Modal,
+  AddPlayer,
+  Container,
+  CardTeam,
+  TeamMember,
+  Header,
+} from "~/components";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
@@ -66,6 +68,8 @@ export default function Team() {
   const [isSub, setIsSub] = React.useState(false);
   const [members, setMembers] = React.useState(() => new Array(5).fill(null));
   const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
+  const [playerSelected, setPlayerSelected] =
+    React.useState<null | TeamMemberInterface>(null);
 
   const response = useActionData();
   const user = useLoaderData<User>();
@@ -96,9 +100,6 @@ export default function Team() {
     }
   }, [user]);
 
-  console.log("MEMBERS", members);
-  console.log("Subs", subs);
-
   return (
     <div>
       <Header user={user} />
@@ -121,6 +122,7 @@ export default function Team() {
                           onClick={() => {
                             setIsModal({ status: true });
                             setIsSub(false);
+                            setPlayerSelected(member);
                           }}
                         />
                       </li>
@@ -142,6 +144,7 @@ export default function Team() {
                         onClick={() => {
                           setIsModal({ status: true });
                           setIsSub(true);
+                          setPlayerSelected(sub);
                         }}
                       />
                     </li>
@@ -158,10 +161,13 @@ export default function Team() {
           className="grid grid-cols-6"
         >
           <div className=" col-start-2 col-end-6">
-            <AddPlayer isSub={isSub} />
+            <AddPlayer isSub={isSub} playerSelected={playerSelected} />
           </div>
         </Modal>
       )}
     </div>
   );
 }
+// {...(playerSelected
+//   ? { playerSelected: playerSelected }
+//   : { playerSelected: null })}
