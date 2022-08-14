@@ -71,6 +71,10 @@ module.exports = {
         "big-noodle-oblique": ["Big Noodle Titling Oblique"],
         coolveltica: ["Coolvetica"],
       },
+
+      fontSize:{
+        "team-name": "1.375rem"
+      }
       // letterSpacing: {
       //   "five-percent" : "letter-spacing: 5%",
       // }

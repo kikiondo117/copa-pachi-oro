@@ -31,7 +31,7 @@ export function Header({ user }: HeaderProps) {
           <li>
             <button
               className={`mx-4 rounded-md  ${
-                user ? "bg-special-blue-light" : "btn-orange-default"
+                user ? "bg-special-blue-light mx-2" : "btn-orange-default"
               }`}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);

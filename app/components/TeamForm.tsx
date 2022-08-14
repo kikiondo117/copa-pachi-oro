@@ -28,7 +28,7 @@ export function TeamForm() {
     >
       <input type="hidden" name="action" value={"register"} />
       <div>
-        <p className="mt-6">Crea tu cuenta</p>
+        <p className="mt-6 text-xs">Crea tu cuenta</p>
         <FormField
           htmlFor="email"
           type="email"
@@ -59,7 +59,7 @@ export function TeamForm() {
           placeholder="Repetir Contraseña"
           required
         />
-        <p className="mt-2">Datos del equipo</p>
+        <p className="mt-2 text-xs">Datos del equipo</p>
         <FormField
           htmlFor="team"
           label="Nombre del equipo"
@@ -70,16 +70,30 @@ export function TeamForm() {
           required
         />
         <div className="flex justify-between">
-          <select className="w-full" name="region" id="region">
-            <option value="NA">NA</option>
-            <option value="SA">SA</option>
-            <option value="EU">EU</option>
+          <select
+            className=" w-full h-9 mr-1 mt-1 pl-4 rounded font-big-noodle-oblique "
+            name="region"
+            id="region"
+          >
+            <option value="" disabled selected hidden>
+              Región
+            </option>
+            <option value="NA">Región: NA</option>
+            <option value="SA">Región: SA</option>
+            <option value="EU">Región: EU</option>
           </select>
-          <select className="w-full" name="plataforma" id="plataforma">
+          <select
+            className="w-full ml-1 mt-1 pl-4 rounded font-big-noodle-oblique"
+            name="plataforma"
+            id="plataforma"
+          >
+            <option value="" disabled selected hidden>
+              Plataforma
+            </option>
             <option value="PC">PC</option>
             <option value="XBOX">Xbox</option>
-            <option value="PLAYSTIATION">Play Station</option>
-            <option value="SWITCH">Switch</option>
+            <option value="PLAYSTIATION">Plataforma: PlayStation</option>
+            <option value="SWITCH">Plataforma: Switch</option>
             <option value="MIXTO">mixto</option>
           </select>
         </div>
@@ -87,7 +101,7 @@ export function TeamForm() {
         {/* <input className="mt-4" type="media" /> */}
       </div>
 
-      <Button.Primary>Registrar equipo</Button.Primary>
+      <Button.Primary className=" mb-4">Registrar equipo</Button.Primary>
     </Form>
   );
 }
