@@ -1,14 +1,19 @@
+import * as React from "react";
+import { User } from "~/types/types.user";
+
 type CardTeamProps = {
   className?: string;
+  onClick?: () => void;
+  team: User;
 };
 
 export function CardTeam(props: CardTeamProps) {
   return (
     <div
-      className={`bg-blue-gray-default flex flex-row w-full h-[3.75rem] 
+      onClick={props.onClick}
+      className={`bg-blue-gray-default flex flex-row w-full h-[3.75rem]
       ${props.className ? props.className : ""} `}
     >
-      {/* AÑADIR CLASSNAME - ELIMINAR COL-SPAN-4 */}
       <div className="">
         <img
           src="/assets/team-example-image.svg"

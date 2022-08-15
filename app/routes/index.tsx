@@ -1,5 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { TeamMemberInterface } from "../types/types.user";
+import * as React from "react";
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Components
@@ -10,6 +11,10 @@ import {
   Container,
   TeamSent,
   CardTeam,
+  CardPlayer,
+  CardEmptyPlayer,
+  CardAddPlayer,
+  Modal,
 } from "~/components";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
@@ -94,7 +99,14 @@ const array = new Array(24).fill(null);
 
 export default function Index() {
   const { user } = useLoaderData();
+  const [showModal, setShowModal] = React.useState({ status: false, data: {} });
+
   console.log("*****loaderData", user);
+
+  // const getTeamInfo = () => {
+
+  // };
+
   return (
     <div className="min-h-screen ">
       <Header user={user} />
@@ -182,18 +194,30 @@ export default function Index() {
 
       <section
         id="equipos"
-        className="h-screen bg-teams-bg bg-cover mx-auto  flex flex-col items-center justify-center"
+        className="h-screen bg-teams-bg bg-cover mx-auto  flex flex-col items-center justify-center relative"
       >
-        <div className="w-full flex-row items-start mb-4">
+        <div className="w-full flex-row items-start mb-4 ">
           <h3 className=" pl-[4.5rem] font-coolveltica text-2xl leading-7 tracking-wider">
             Equipos
           </h3>
         </div>
-        <Container className="max-h-[27.5rem] overflow-auto">
+        <Container className="max-h-[27.5rem] overflow-auto ">
+          {showModal.status && (
+            <Modal
+              onClose={() =>
+                setShowModal((prevState) => ({ ...prevState, status: false }))
+              }
+            >
+              Hola
+            </Modal>
+          )}
           {/* AÑADIR CLASSNAME - ELIMINAR COL-SPAN-4 */}
-          {array.map(() => (
-            <CardTeam className="col-span-4"></CardTeam>
-          ))}
+          {/* {array.map((team) => (
+            <CardTeam
+              onClick={() => setShowModal(() => ({ status: true, data: team }))}
+              className="col-span-4"
+            ></CardTeam>
+          ))} */}
         </Container>
       </section>
 

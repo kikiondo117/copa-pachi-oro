@@ -77,9 +77,9 @@ export function TeamForm() {
             <option value="" disabled selected hidden>
               Región
             </option>
-            <option value="NA">Región: NA</option>
-            <option value="SA">Región: SA</option>
-            <option value="EU">Región: EU</option>
+            <option value="NA">NA</option>
+            <option value="SA">SA</option>
+            <option value="EU">EU</option>
           </select>
           <select
             className="w-full ml-1 mt-1 pl-4 rounded font-big-noodle-oblique"
@@ -91,8 +91,8 @@ export function TeamForm() {
             </option>
             <option value="PC">PC</option>
             <option value="XBOX">Xbox</option>
-            <option value="PLAYSTIATION">Plataforma: PlayStation</option>
-            <option value="SWITCH">Plataforma: Switch</option>
+            <option value="PLAYSTIATION">PlayStation</option>
+            <option value="SWITCH">Switch</option>
             <option value="MIXTO">mixto</option>
           </select>
         </div>

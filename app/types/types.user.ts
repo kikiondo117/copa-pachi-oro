@@ -19,6 +19,6 @@ export type User = {
   email: string
   password: string
   team: Team
-  members: TeamMember[]
-  subs: TeamMember[]
+  members: TeamMemberInterface[]
+  subs: TeamMemberInterface[]
 }
