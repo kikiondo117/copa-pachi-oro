@@ -4,7 +4,7 @@ export function Footer() {
       <div className="mx-auto w-laptop flex justify-between items-center text-white ">
         <div className="flex h-16 items-center ">
           <img src="/assets/juanyut.svg" alt="" />
-          <p className=" ml-4 w-56 text-gray-500">
+          <p className=" ml-4 w-56 text-gray-500 font-coolveltica text-[1.375rem]">
             pachiretas.com © 2021, 2022 JuanYut
           </p>
         </div>

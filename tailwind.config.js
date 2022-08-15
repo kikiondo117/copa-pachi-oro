@@ -45,6 +45,7 @@ module.exports = {
         "pachi-retas-big": "url('/assets/pachi-retas-big-bg.svg')",
         "pachi-retas-sm": "url('/assets/pachi-retas-sm-bg.svg')",
         "teams-bg": "url('/assets/bg/teams.svg')",
+        "hero-rein": "url('/assets/bg/hero-reinhardt-bg.png')"
       },
       colors: {
         "special-orange": "#F16414",
@@ -71,6 +72,10 @@ module.exports = {
         "big-noodle-oblique": ["Big Noodle Titling Oblique"],
         coolveltica: ["Coolvetica"],
       },
+
+      fontSize:{
+        "team-name": "1.375rem"
+      }
       // letterSpacing: {
       //   "five-percent" : "letter-spacing: 5%",
       // }

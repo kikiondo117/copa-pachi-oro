@@ -1,3 +1,5 @@
+import * as React from "react";
+
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { TeamMemberInterface } from "../types/types.user";
 import { json, redirect } from "@remix-run/node";
@@ -9,7 +11,7 @@ import {
   Footer,
   Container,
   TeamSent,
-  CardTeam,
+  Modal,
 } from "~/components";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
@@ -102,7 +104,10 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Index() {
   const { user } = useLoaderData();
+  const [showModal, setShowModal] = React.useState({ status: false, data: {} });
+
   console.log("*****loaderData", user);
+
   return (
     <div className="min-h-screen ">
       <Header user={user} />
@@ -113,8 +118,12 @@ export default function Index() {
       <main className="pt-14 bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
         <Container className="m-auto py-6">
           <div className="col-start-1 col-end-7 h-full">
-            <div className="flex flex-col h-full justify-between ">
-              <img src={MainMessage} alt="" className="my-auto h-59 w-full" />
+            <div className="flex flex-col h-full justify-between items-start">
+              <img
+                src={MainMessage}
+                alt=""
+                className="my-auto mx-0 h-[13.5rem]"
+              />
               <div>
                 <a
                   href="https://www.twitch.tv/juanyut"
@@ -123,11 +132,11 @@ export default function Index() {
                 >
                   <img
                     src={TwitchLogoJuanYut}
-                    className=" h-10 w-44 hover:animate-bounce"
+                    className=" h-10 w-[13.313rem] mb-2 hover:animate-bounce"
                     alt=""
                   />
                 </a>
-                <p className=" text-white font-coolveltica">
+                <p className=" text-white font-coolveltica text-xs">
                   Mi pequeño aporte con mucho cariño y esfuerzo a la comunidad
                   de Overwatch MX, JuanYut.
                 </p>
@@ -148,9 +157,9 @@ export default function Index() {
 
       <section
         id="acerca"
-        className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center"
+        className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center  flex items-center"
       >
-        <Container className="mx-auto h-full">
+        <Container className="mx-auto">
           <div className="col-start-1 col-end-7 my-auto">
             <h4 className="font-coolveltica text-white text-2xl mb-4">
               Acerca de
@@ -168,10 +177,10 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-8 col-end-13 flex flex-col justify-center">
-            <h4 className="text-special-orange font-coolveltica text-2xl">
-              ¿Qué es?
+            <h4 className="text-special-orange font-coolveltica text-[1.625rem]">
+              ✌ ¿Qué es?
             </h4>
-            <p className=" w-full font-coolveltica text-white text-lg">
+            <p className=" w-full font-coolveltica font-normal text-white text-md tracking-wider leading-5">
               Es un torneo rápido, el cual reúne a jugadores apasionados de
               Overwatch. La finalidad de{" "}
               <span className="text-special-orange">Pachi Retas</span> es
@@ -186,11 +195,30 @@ export default function Index() {
 
       <section
         id="equipos"
-        className="h-screen bg-teams-bg bg-cover mx-auto bg-center "
+        className="h-screen bg-teams-bg bg-cover mx-auto  flex flex-col items-center justify-center relative"
       >
-        <Container>
-          <h3 className="pt-16 font-coolveltica text-2xl">Equipos</h3>
-          <CardTeam></CardTeam>
+        <div className="w-full flex-row items-start mb-4 ">
+          <h3 className=" pl-[4.5rem] font-coolveltica text-2xl leading-7 tracking-wider">
+            Equipos
+          </h3>
+        </div>
+        <Container className="max-h-[27.5rem] overflow-auto ">
+          {showModal.status && (
+            <Modal
+              onClose={() =>
+                setShowModal((prevState) => ({ ...prevState, status: false }))
+              }
+            >
+              Hola
+            </Modal>
+          )}
+          {/* AÑADIR CLASSNAME - ELIMINAR COL-SPAN-4 */}
+          {/* {array.map((team) => (
+            <CardTeam
+              onClick={() => setShowModal(() => ({ status: true, data: team }))}
+              className="col-span-4"
+            ></CardTeam>
+          ))} */}
         </Container>
       </section>
 

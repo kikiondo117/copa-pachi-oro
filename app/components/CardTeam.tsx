@@ -1,6 +1,19 @@
-export function CardTeam() {
+import * as React from "react";
+import type { TeamInterface } from "~/types/types.user";
+
+type CardTeamProps = {
+  className?: string;
+  onClick?: () => void;
+  team: TeamInterface;
+};
+
+export function CardTeam(props: CardTeamProps) {
   return (
-    <div className="bg-blue-gray-default flex flex-row col-start-2 col-end-6 w-full h-16 mt-4">
+    <div
+      onClick={props.onClick}
+      className={`bg-blue-gray-default flex flex-row w-full h-[3.75rem]
+      ${props.className ? props.className : ""} `}
+    >
       <div className="">
         <img
           src="/assets/team-example-image.svg"
@@ -8,9 +21,9 @@ export function CardTeam() {
           className="h-full mr-4"
         />
       </div>
-      <div className="">
-        <p className="text-white font-coolveltica font text-2xl">
-          Los Come Pollas 3K{" "}
+      <div className="flex flex-col justify-center">
+        <p className="text-white font-coolveltica font text-team-name">
+          {props.team.name}
         </p>
       </div>
     </div>

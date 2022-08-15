@@ -6,7 +6,7 @@ interface FormFieldProps {
   value: any;
   onChange?: (...args: any) => any;
   required?: boolean;
-  withLabel?: boolean;
+  // withLabel?: boolean;
   placeholder?: string;
 }
 
@@ -17,23 +17,23 @@ export function FormField({
   value,
   onChange = () => {},
   required,
-  withLabel = true,
+  // withLabel = true,
   placeholder = "",
 }: FormFieldProps) {
   return (
     <>
-      {withLabel ? (
+      {/* {withLabel ? (
         <label htmlFor={htmlFor} className="text-black text-base">
           {label}
         </label>
-      ) : null}
+      ) : null} */}
 
       <input
         onChange={onChange}
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className="w-full p-2 rounded-sm my-2 text-black text-base font-big-noodle-oblique"
+        className="w-full p-2 pl-4 rounded my-2 text-black text-base font-big-noodle-oblique"
         value={value}
         placeholder={placeholder}
         required

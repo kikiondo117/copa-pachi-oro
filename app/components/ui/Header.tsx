@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { User } from "~/types/types.user";
+
 // * Components
 import { LoginForm } from "~/components";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
@@ -15,36 +16,23 @@ export function Header({ user }: HeaderProps) {
     <header className="fixed w-full flex items-center bg-special-blue h-14 text-white z-20">
       <div className="w-laptop flex justify-between mx-auto">
         <div className=" h-9 w-auto">
-          <a href={`${user ? "/team" : "/"}`}>
-            <img src={Logo} className="h-full w-auto" alt="" />
-          </a>
+          <img src={Logo} className="h-full w-auto" alt="Copa Pachichi Oro" />
+
+          {/* <a className="" href="/">
+          </a> */}
         </div>
 
         <ul className="flex items-center font-big-noodle-oblique text-base ">
-          {!user ? (
-            <>
-              <li className="mx-4">
-                <a href="#acerca">ACERCA DE</a>
-              </li>
-              <li className="mx-4">
-                <a href="#equipos">EQUIPOS</a>
-              </li>
-            </>
-          ) : (
-            <>
-              <li className="mx-4">
-                <a href="torneo">TORNEO</a>
-              </li>
-              <li className="mx-4">
-                <a href="team">EQUIPO</a>
-              </li>
-            </>
-          )}
-
+          <li className="mx-4">
+            <a href="#acerca">ACERCA DE</a>
+          </li>
+          <li className="mx-4">
+            <a href="#equipos">EQUIPOS</a>
+          </li>
           <li>
             <button
               className={`mx-4 rounded-md  ${
-                user ? "bg-special-blue-light" : "btn-orange-default"
+                user ? "bg-special-blue-light mx-2" : "btn-orange-default"
               }`}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);

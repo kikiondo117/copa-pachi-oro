@@ -1,32 +1,22 @@
-import type { TeamMember as TeamMemberInterface } from "~/types/types.user";
+import type { TeamMemberInterface } from "~/types/types.user";
+import { CardAddPlayer, CardPlayer } from "~/components/";
 
 interface TeamMemberProps {
   onClick: () => void;
-  label?: string;
+  label: string;
   member?: TeamMemberInterface;
 }
 
 export function TeamMember(props: TeamMemberProps) {
   if (!props.member) {
     return (
-      <button
-        className=" w-full border border-dashed border-black"
+      <CardAddPlayer
+        label={props.label}
         onClick={props.onClick}
-        aria-label="Add Player"
-      >
-        {props.label ? props.label : "Agregar Jugador"}
-      </button>
+        className=" mb-4"
+      ></CardAddPlayer>
     );
   }
 
-  return (
-    <button
-      className=" w-full border border-dashed border-black"
-      onClick={props.onClick}
-      aria-label="Player"
-    >
-      <p>Name:{props.member.name}</p>
-      <p>Rango:{props.member.rango}</p>
-    </button>
-  );
+  return <CardPlayer className="mb-4" player={props.member} />;
 }

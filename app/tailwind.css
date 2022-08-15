@@ -579,6 +579,14 @@ video {
   left: 0px;
 }
 
+.-top-3 {
+  top: -0.75rem;
+}
+
+.right-20 {
+  right: 5rem;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -599,8 +607,8 @@ video {
   z-index: 20;
 }
 
-.col-start-2 {
-  grid-column-start: 2;
+.col-span-4 {
+  grid-column: span 4 / span 4;
 }
 
 .col-start-1 {
@@ -623,8 +631,8 @@ video {
   grid-column-start: 7;
 }
 
-.col-end-6 {
-  grid-column-end: 6;
+.col-start-2 {
+  grid-column-start: 2;
 }
 
 .col-end-7 {
@@ -635,12 +643,25 @@ video {
   grid-column-end: 13;
 }
 
+.col-end-11 {
+  grid-column-end: 11;
+}
+
 .col-end-12 {
   grid-column-end: 12;
 }
 
+.col-end-6 {
+  grid-column-end: 6;
+}
+
 .m-auto {
   margin: auto;
+}
+
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
 }
 
 .my-auto {
@@ -663,12 +684,29 @@ video {
   margin-right: 1rem;
 }
 
-.mt-4 {
-  margin-top: 1rem;
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .mr-4 {
   margin-right: 1rem;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+}
+
+.mr-1 {
+  margin-right: 0.25rem;
+}
+
+.ml-2 {
+  margin-left: 0.5rem;
+}
+
+.mt-4 {
+  margin-top: 1rem;
 }
 
 .mt-6 {
@@ -679,12 +717,28 @@ video {
   margin-top: 0.5rem;
 }
 
-.mb-8 {
-  margin-bottom: 2rem;
+.mt-1 {
+  margin-top: 0.25rem;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .mb-4 {
   margin-bottom: 1rem;
+}
+
+.mb-8 {
+  margin-bottom: 2rem;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+
+.mr-\[18px\] {
+  margin-right: 18px;
 }
 
 .mb-3 {
@@ -707,8 +761,8 @@ video {
   margin-top: 6rem;
 }
 
-.mt-14 {
-  margin-top: 3.5rem;
+.inline {
+  display: inline;
 }
 
 .flex {
@@ -723,16 +777,24 @@ video {
   display: none;
 }
 
-.h-16 {
-  height: 4rem;
+.h-\[3\.75rem\] {
+  height: 3.75rem;
 }
 
 .h-full {
   height: 100%;
 }
 
+.h-\[24px\] {
+  height: 24px;
+}
+
 .h-\[32rem\] {
   height: 32rem;
+}
+
+.h-9 {
+  height: 2.25rem;
 }
 
 .h-\[6\.25rem\] {
@@ -741,6 +803,10 @@ video {
 
 .h-\[39rem\] {
   height: 39rem;
+}
+
+.h-\[13\.5rem\] {
+  height: 13.5rem;
 }
 
 .h-10 {
@@ -767,12 +833,16 @@ video {
   height: 7rem;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-14 {
   height: 3.5rem;
 }
 
-.h-9 {
-  height: 2.25rem;
+.max-h-\[27\.5rem\] {
+  max-height: 27.5rem;
 }
 
 .min-h-screen {
@@ -781,6 +851,18 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.w-2 {
+  width: 0.5rem;
+}
+
+.w-auto {
+  width: auto;
+}
+
+.w-24 {
+  width: 6rem;
 }
 
 .w-fit {
@@ -793,12 +875,8 @@ video {
   width: 6.25rem;
 }
 
-.w-44 {
-  width: 11rem;
-}
-
-.w-auto {
-  width: auto;
+.w-\[13\.313rem\] {
+  width: 13.313rem;
 }
 
 .w-laptop {
@@ -845,8 +923,16 @@ video {
   flex-direction: column;
 }
 
+.items-start {
+  align-items: flex-start;
+}
+
 .items-center {
   align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .justify-center {
@@ -865,12 +951,12 @@ video {
   align-self: center;
 }
 
-.rounded {
-  border-radius: 0.25rem;
+.overflow-auto {
+  overflow: auto;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
+.rounded {
+  border-radius: 0.25rem;
 }
 
 .rounded-md {
@@ -881,17 +967,27 @@ video {
   border-radius: 0.5rem;
 }
 
-.border {
-  border-width: 1px;
+.border-2 {
+  border-width: 2px;
 }
 
 .border-dashed {
   border-style: dashed;
 }
 
-.border-black {
+.border-gray-three {
   --tw-border-opacity: 1;
-  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+  border-color: rgb(150 152 153 / var(--tw-border-opacity));
+}
+
+.bg-gray-two {
+  --tw-bg-opacity: 1;
+  background-color: rgb(194 194 194 / var(--tw-bg-opacity));
+}
+
+.bg-white {
+  --tw-bg-opacity: 1;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
 .bg-blue-gray-default {
@@ -954,6 +1050,10 @@ video {
   background-image: url('/assets/bg/teams.svg');
 }
 
+.bg-hero-rein {
+  background-image: url('/assets/bg/hero-reinhardt-bg.png');
+}
+
 .bg-cover {
   background-size: cover;
 }
@@ -994,12 +1094,16 @@ video {
   padding-bottom: 6rem;
 }
 
+.pl-4 {
+  padding-left: 1rem;
+}
+
 .pt-14 {
   padding-top: 3.5rem;
 }
 
-.pt-16 {
-  padding-top: 4rem;
+.pl-\[4\.5rem\] {
+  padding-left: 4.5rem;
 }
 
 .pt-28 {
@@ -1022,9 +1126,14 @@ video {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
-.text-2xl {
-  font-size: 1.5rem;
-  line-height: 2rem;
+.text-lg {
+  font-size: 1.125rem;
+  line-height: 1.75rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .text-base {
@@ -1032,9 +1141,56 @@ video {
   line-height: 1.5rem;
 }
 
-.text-lg {
-  font-size: 1.125rem;
+.text-team-name {
+  font-size: 1.375rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-\[1\.625rem\] {
+  font-size: 1.625rem;
+}
+
+.text-\[22px\] {
+  font-size: 22px;
+}
+
+.text-\[1\.375rem\] {
+  font-size: 1.375rem;
+}
+
+.font-normal {
+  font-weight: 400;
+}
+
+.leading-5 {
+  line-height: 1.25rem;
+}
+
+.leading-7 {
   line-height: 1.75rem;
+}
+
+.tracking-wider {
+  letter-spacing: 0.05em;
+}
+
+.text-gray-three {
+  --tw-text-opacity: 1;
+  color: rgb(150 152 153 / var(--tw-text-opacity));
+}
+
+.text-special-orange {
+  --tw-text-opacity: 1;
+  color: rgb(241 100 20 / var(--tw-text-opacity));
+}
+
+.text-blue-gray-default {
+  --tw-text-opacity: 1;
+  color: rgb(39 53 79 / var(--tw-text-opacity));
 }
 
 .text-white {
@@ -1045,11 +1201,6 @@ video {
 .text-special-blue-light {
   --tw-text-opacity: 1;
   color: rgb(0 125 209 / var(--tw-text-opacity));
-}
-
-.text-special-orange {
-  --tw-text-opacity: 1;
-  color: rgb(241 100 20 / var(--tw-text-opacity));
 }
 
 .text-black {
@@ -1074,6 +1225,14 @@ video {
   transition-property: opacity;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+.delay-150 {
+  transition-delay: 150ms;
+}
+
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @font-face {
@@ -1110,6 +1269,30 @@ video {
   background-color: rgb(243 119 49 / var(--tw-bg-opacity));
 }
 
+/* .TeamFromSelections:invalid {
+  @apply text-red-600
+} */
+
+.scrollbar::-webkit-scrollbar {
+  width: 20px;
+  height: 20px;
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #f7f4ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: #e0cbcb;
+  border-radius: 100vh;
+  border: 3px solid #f6f7ed;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #c0a0b9;
+}
+
 @-webkit-keyframes bounce {
   0%, 100% {
     transform: translateY(-25%);
@@ -1141,6 +1324,11 @@ video {
 .hover\:animate-bounce:hover {
   -webkit-animation: bounce 1s infinite;
           animation: bounce 1s infinite;
+}
+
+.hover\:bg-blue-gray-dark:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(15 23 38 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-slate-700:hover {
