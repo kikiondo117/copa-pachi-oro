@@ -41,22 +41,29 @@ export function LoginForm() {
   };
 
   return (
-    <Form method="post">
+    <Form className=" flex flex-col justify-center" method="post">
+      <img
+        src="/assets/ArrowLogin.svg"
+        className=" absolute -top-3 right-20"
+        alt=""
+      />
       <input type="hidden" name="action" value={"login"} />
       <FormField
         htmlFor="email"
         value={form.email}
-        label="Correo electronico"
+        // label="Correo electronico"
         onChange={(e) => handleInputChange(e, "email")}
         required
+        placeholder="Correo electrónico"
       />
       <FormField
         htmlFor="password"
         value={form.password}
-        label="Contraseña"
+        // label="Contraseña"
         type="password"
         onChange={(e) => handleInputChange(e, "password")}
         required
+        placeholder="Constraseña"
       />
       <button
         type="submit"

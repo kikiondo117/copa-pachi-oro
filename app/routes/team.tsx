@@ -12,6 +12,7 @@ import {
   AddPlayer,
   Container,
   CardTeam,
+  CardAddPlayer,
   TeamMember,
   Header,
 } from "~/components";
@@ -104,13 +105,15 @@ export default function Team() {
     <div>
       <Header user={user} />
 
-      <main className=" pt-28">
+      <main className=" h-screen pt-28 bg-hero-rein bg-cover">
         <Container className="mx-auto">
-          <div className=" col-start-3 col-end-12">
+          <div className=" col-start-3 col-end-11">
             <CardTeam />
           </div>
-          <div className="col-start-3 col-end-7">
-            <p className=" text-2xl">Jugadores principales</p>
+          <div className="col-start-3 col-end-7 font-coolveltica">
+            <p className=" text-[22px] mb-4 text-blue-gray-default">
+              Jugadores principales
+            </p>
             <div>
               <ul>
                 {members.length &&
@@ -118,6 +121,7 @@ export default function Team() {
                     return (
                       <li key={index}>
                         <TeamMember
+                          label="Obligatorio"
                           member={member ? member : null}
                           onClick={() => {
                             setIsModal({ status: true });
@@ -132,14 +136,17 @@ export default function Team() {
             </div>
           </div>
 
-          <div className="col-start-7 col-end-12">
-            <p className=" text-2xl">Jugadores suplentes (hasta 4)</p>
+          <div className="col-start-7 col-end-11 font-coolveltica ">
+            <p className=" text-2xl mb-4 text-blue-gray-default">
+              Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
+            </p>
             <ul>
               {subs.length &&
                 subs.map((sub, index) => {
                   return (
                     <li key={index}>
                       <TeamMember
+                        label="Opcional"
                         member={sub ? sub : null}
                         onClick={() => {
                           setIsModal({ status: true });
@@ -151,6 +158,15 @@ export default function Team() {
                   );
                 })}
             </ul>
+          </div>
+          <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
+            <img
+              src="/assets/icons/disclaimer.svg"
+              alt=""
+              className="inline mr-[18px]"
+            />
+            Completa la información de todos los jugadores principales para que
+            tu equipo sea aprobado.
           </div>
         </Container>
       </main>

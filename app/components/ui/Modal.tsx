@@ -13,7 +13,7 @@ export function Modal({
 }: ModalProps) {
   return (
     <div
-      className="absolute w-screen h-screen inset-0 z-20 "
+      className="absolute w-screen h-screen inset-0 z-20"
       aria-labelledby="modal-title"
       role="dialog"
       aria-modal="true"
