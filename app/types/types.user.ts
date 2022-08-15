@@ -22,4 +22,5 @@ export type UserInterface = {
   members: TeamMemberInterface[]
   subs: TeamMemberInterface[]
   admin: boolean
+  isApproved: boolean
 }

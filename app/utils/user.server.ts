@@ -26,7 +26,6 @@ export const createUser = async (user: RegisterForm) => {
   return { id: newUser.id, email: user.email }
 }
 
-
 export const addTeamMember = async (email: string, member: TeamMemberInterface) => {
 
   const user = await prisma.user.findUnique({
@@ -82,6 +81,14 @@ export const getTeams = async () => {
 export const getTeam = async (id: string) => {
   const team = await prisma.user.findUnique({
     where: { id: id }
+  })
+
+  return team
+}
+
+export const approveTeam = async (id: string) => {
+  const team = await prisma.user.update({
+    where: { id: id }, data: { isApproved: true }
   })
 
   return team
