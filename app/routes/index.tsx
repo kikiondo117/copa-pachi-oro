@@ -1,7 +1,8 @@
+import * as React from "react";
+
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { TeamMemberInterface } from "../types/types.user";
-import * as React from "react";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Components
 import {
@@ -10,11 +11,6 @@ import {
   Footer,
   Container,
   TeamSent,
-  CardTeam,
-  CardPlayer,
-  CardEmptyPlayer,
-  CardAddPlayer,
-  CardTournament,
   Modal,
 } from "~/components";
 // * Utils
@@ -26,6 +22,14 @@ import { login, getUser, register } from "~/utils/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
+  if (user && user.admin) {
+    return redirect("/admin");
+  }
+
+  if (user) {
+    return redirect("/team");
+  }
+
   return json({ user });
 };
 
@@ -37,6 +41,7 @@ export const action: ActionFunction = async ({ request }) => {
   let team = form.get("team");
   let region = form.get("region");
   let plataforma = form.get("plataforma");
+  let isApproved = false;
   let subs: TeamMemberInterface[] = [];
   let members: TeamMemberInterface[] = [];
   const action = form.get("action");
@@ -91,22 +96,17 @@ export const action: ActionFunction = async ({ request }) => {
         plataforma,
         members,
         subs,
+        isApproved,
       });
     }
   }
 };
-
-const array = new Array(24).fill(null);
 
 export default function Index() {
   const { user } = useLoaderData();
   const [showModal, setShowModal] = React.useState({ status: false, data: {} });
 
   console.log("*****loaderData", user);
-
-  // const getTeamInfo = () => {
-
-  // };
 
   return (
     <div className="min-h-screen ">
@@ -203,7 +203,6 @@ export default function Index() {
           </h3>
         </div>
         <Container className="max-h-[27.5rem] overflow-auto ">
-          <CardTournament className="col-span-4"></CardTournament>
           {showModal.status && (
             <Modal
               onClose={() =>

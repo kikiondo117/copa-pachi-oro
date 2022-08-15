@@ -1,9 +1,9 @@
 import * as React from "react";
 import { useLoaderData, useActionData } from "@remix-run/react";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 // * Utils and Types
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { User, TeamMemberInterface } from "~/types/types.user";
+import type { UserInterface, TeamMemberInterface } from "~/types/types.user";
 import { getUser } from "~/utils/auth.server";
 import { addTeamMember, addSub } from "../utils/user.server";
 // * Components
@@ -12,14 +12,21 @@ import {
   AddPlayer,
   Container,
   CardTeam,
-  CardAddPlayer,
   TeamMember,
   Header,
 } from "~/components";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
-  return json(user);
+  if (!user) {
+    return redirect("/");
+  }
+
+  if (user.admin) {
+    return redirect("/admin");
+  }
+
+  return user;
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -73,31 +80,33 @@ export default function Team() {
     React.useState<null | TeamMemberInterface>(null);
 
   const response = useActionData();
-  const user = useLoaderData<User>();
+  const user = useLoaderData<UserInterface>();
 
   React.useEffect(() => {
     setIsModal({ status: false });
   }, [response]);
 
   React.useEffect(() => {
-    if (user && user.members.length) {
-      const membersFormat = members.map((value, index) => {
-        if (user.members[index] !== undefined) {
-          return user.members[index];
-        }
-        return null;
-      });
-      setMembers(membersFormat);
+    if (user && user.members) {
+      setMembers((prevState) =>
+        prevState.map((value, index) => {
+          if (user.members[index] !== undefined) {
+            return user.members[index];
+          }
+          return null;
+        })
+      );
     }
 
-    if (user && user.subs.length) {
-      const subsFormat = subs.map((value, index) => {
-        if (user.subs[index] !== undefined) {
-          return user.subs[index];
-        }
-        return null;
-      });
-      setSubs(subsFormat);
+    if (user && user.subs) {
+      setSubs((prevState) =>
+        prevState.map((value, index) => {
+          if (user.subs[index] !== undefined) {
+            return user.subs[index];
+          }
+          return null;
+        })
+      );
     }
   }, [user]);
 
@@ -107,23 +116,7 @@ export default function Team() {
 
       <main className=" h-screen pt-28 bg-hero-rein bg-cover">
         <Container className="mx-auto">
-          <div className=" col-start-3 col-end-11">
-            <CardTeam
-              team={{
-                id: "",
-                email: "",
-                password: "",
-                team: {
-                  name: "",
-                  region: "",
-                  plataforma: "",
-                  img: "",
-                },
-                members: [],
-                subs: [],
-              }}
-            />
-          </div>
+          <div className=" col-start-3 col-end-11">{/* <CardTeam /> */}</div>
           <div className="col-start-3 col-end-7 font-coolveltica">
             <p className=" text-[22px] mb-4 text-blue-gray-default">
               Jugadores principales

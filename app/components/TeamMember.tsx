@@ -8,8 +8,6 @@ interface TeamMemberProps {
 }
 
 export function TeamMember(props: TeamMemberProps) {
-  console.log("MEMEBR", props.member);
-
   if (!props.member) {
     return (
       <CardAddPlayer

@@ -1,13 +1,13 @@
 export { Modal } from "./ui/Modal";
-
-export { Button } from "./ui/Button";
-export { CardTeam } from "./CardTeam";
-export { AddPlayer } from "./AddPlayer";
 export { Container } from "./ui/Container";
-export { TeamMember } from "./TeamMember";
-export { TeamForm } from "./TeamForm";
+export { Button } from "./ui/Button";
 export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
+
+export { CardTeam } from "./CardTeam";
+export { AddPlayer } from "./PlayerForm";
+export { TeamMember } from "./TeamMember";
+export { TeamForm } from "./TeamForm";
 export { TeamSent } from "./TeamSent";
 export { LoginForm } from "./LoginForm";
 export { FormField } from "./form/FormField";

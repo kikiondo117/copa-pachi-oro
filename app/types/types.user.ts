@@ -7,18 +7,20 @@ export type TeamMemberInterface = {
   capitan: boolean
 }
 
-export type Team = {
+export type TeamInterface = {
   name: string
   region: string
   plataforma: string
   img: string
 }
 
-export type User = {
+export type UserInterface = {
   id: string
   email: string
   password: string
-  team: Team
+  team: TeamInterface
   members: TeamMemberInterface[]
   subs: TeamMemberInterface[]
+  admin: boolean
+  isApproved: boolean
 }

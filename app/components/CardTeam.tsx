@@ -1,10 +1,10 @@
 import * as React from "react";
-import { User } from "~/types/types.user";
+import type { TeamInterface } from "~/types/types.user";
 
 type CardTeamProps = {
   className?: string;
   onClick?: () => void;
-  team: User;
+  team: TeamInterface;
 };
 
 export function CardTeam(props: CardTeamProps) {
@@ -23,7 +23,7 @@ export function CardTeam(props: CardTeamProps) {
       </div>
       <div className="flex flex-col justify-center">
         <p className="text-white font-coolveltica font text-team-name">
-          Los Come Pollas 3K{" "}
+          {props.team.name}
         </p>
       </div>
     </div>
