@@ -1,6 +1,6 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { TeamMemberInterface } from "../types/types.user";
-import { json } from "@remix-run/node";
+import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Components
 import {
@@ -20,6 +20,14 @@ import { login, getUser, register } from "~/utils/auth.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
+  if (user && user.admin) {
+    return redirect("/admin");
+  }
+
+  if (user) {
+    return redirect("/team");
+  }
+
   return json({ user });
 };
 
@@ -31,6 +39,7 @@ export const action: ActionFunction = async ({ request }) => {
   let team = form.get("team");
   let region = form.get("region");
   let plataforma = form.get("plataforma");
+  let isApproved = false;
   let subs: TeamMemberInterface[] = [];
   let members: TeamMemberInterface[] = [];
   const action = form.get("action");
@@ -85,6 +94,7 @@ export const action: ActionFunction = async ({ request }) => {
         plataforma,
         members,
         subs,
+        isApproved,
       });
     }
   }

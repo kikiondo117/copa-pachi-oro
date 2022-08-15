@@ -707,6 +707,10 @@ video {
   margin-top: 6rem;
 }
 
+.mt-14 {
+  margin-top: 3.5rem;
+}
+
 .flex {
   display: flex;
 }
@@ -759,10 +763,6 @@ video {
   height: 100vh;
 }
 
-.h-\[36\.8rem\] {
-  height: 36.8rem;
-}
-
 .h-28 {
   height: 7rem;
 }
@@ -799,10 +799,6 @@ video {
 
 .w-auto {
   width: auto;
-}
-
-.w-\[52\.5rem\] {
-  width: 52.5rem;
 }
 
 .w-laptop {
@@ -991,6 +987,11 @@ video {
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
+}
+
+.py-24 {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
 }
 
 .pt-14 {

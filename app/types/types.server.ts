@@ -10,6 +10,7 @@ export type RegisterForm = {
   img?: string,
   members: TeamMember[]
   subs: TeamMember[]
+  isApproved: boolean
 }
 
 

@@ -19,6 +19,8 @@ model User {
   team      Team
   members   Member[]
   subs      Member[] 
+  isApproved Boolean
+  admin     Boolean
 }
 
 type Team {
