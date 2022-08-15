@@ -14,5 +14,7 @@ export { FormField } from "./form/FormField";
 export { CardPlayer } from "./CardPlayer";
 export { CardEmptyPlayer } from "./CardEmptyPlayer";
 export { CardAddPlayer } from "./CardAddPlayer";
+export { CardTournament } from "./CardTournament";
+
 
 

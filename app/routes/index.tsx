@@ -14,6 +14,7 @@ import {
   CardPlayer,
   CardEmptyPlayer,
   CardAddPlayer,
+  CardTournament,
   Modal,
 } from "~/components";
 // * Utils
@@ -202,6 +203,7 @@ export default function Index() {
           </h3>
         </div>
         <Container className="max-h-[27.5rem] overflow-auto ">
+          <CardTournament className="col-span-4"></CardTournament>
           {showModal.status && (
             <Modal
               onClose={() =>
