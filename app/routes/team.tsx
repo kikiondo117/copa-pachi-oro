@@ -132,6 +132,7 @@ export default function Team() {
           <div className=" col-start-3 col-end-11">
             <CardTeam team={user.team} />
           </div>
+
           <div className="col-start-3 col-end-7 font-coolveltica">
             <p className=" mb-4 text-[22px] text-blue-gray-default">
               Jugadores principales
