@@ -11,13 +11,22 @@ import {
   Modal,
   PlayerForm,
   Container,
-  CardTeam,
   TeamMember,
   Header,
+  CardTeam,
 } from "~/components";
+
+interface LoaderInterface {
+  user: UserInterface;
+  capitan: boolean;
+}
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
+  const member = user?.members.find((member) => member.capitan);
+  const sub = user?.subs.find((sub) => sub.capitan);
+  let capitan = false;
+
   if (!user) {
     return redirect("/");
   }
@@ -26,7 +35,11 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/admin");
   }
 
-  return user;
+  if (member !== undefined || sub !== undefined) {
+    capitan = true;
+  }
+
+  return { user, capitan };
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -37,7 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
   const action = form.get("action");
   const rol = "test";
   const img = "test";
-  const capitan = false;
+  const capitan = form.get("capitan") === "on" ? true : false;
 
   if (
     typeof name !== "string" ||
@@ -80,7 +93,7 @@ export default function Team() {
     React.useState<null | TeamMemberInterface>(null);
 
   const response = useActionData();
-  const user = useLoaderData<UserInterface>();
+  const { user, capitan } = useLoaderData<LoaderInterface>();
 
   React.useEffect(() => {
     setIsModal({ status: false });
@@ -116,7 +129,9 @@ export default function Team() {
 
       <main className=" h-screen bg-hero-rein bg-cover pt-28">
         <Container className="mx-auto">
-          <div className=" col-start-3 col-end-11">{/* <CardTeam /> */}</div>
+          <div className=" col-start-3 col-end-11">
+            <CardTeam team={user.team} />
+          </div>
           <div className="col-start-3 col-end-7 font-coolveltica">
             <p className=" mb-4 text-[22px] text-blue-gray-default">
               Jugadores principales
@@ -172,36 +187,10 @@ export default function Team() {
               alt=""
               className="mr-[18px] inline"
             />
-            Completa la información de todos los jugadores principales para que
-            tu equipo sea aprobado.
+            {user.members.length === 5
+              ? "Información de todos los jugadores principales completada, esperando aprobación del equipo."
+              : "Completa la información de todos los jugadores principales para que tu equipo sea aprobado."}
           </div>
-          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
-            <img
-              src="/assets/icons/disclaimer.svg"
-              alt=""
-              className="inline mr-[18px]"
-            />
-            Información de todos los jugadores principales completada, esperando aprobación del equipo.
-          </div> */}
-
-          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
-            <img
-              src="/assets/icons/disclaimer.svg"
-              alt=""
-              className="inline mr-[18px]"
-            />
-            Información de todos los jugadores principales completada, esperando
-            aprobación del equipo.
-          </div> */}
-
-          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
-            <img
-              src="/assets/icons/disclaimer.svg"
-              alt=""
-              className="inline mr-[18px]"
-            />
-            Equipo aprobado con éxito.
-          </div> */}
         </Container>
       </main>
 
@@ -211,13 +200,14 @@ export default function Team() {
           className="grid grid-cols-6"
         >
           <div className=" col-start-2 col-end-6">
-            <PlayerForm isSub={isSub} playerSelected={playerSelected} />
+            <PlayerForm
+              showCapitan={!capitan}
+              isSub={isSub}
+              playerSelected={playerSelected}
+            />
           </div>
         </Modal>
       )}
     </div>
   );
 }
-// {...(playerSelected
-//   ? { playerSelected: playerSelected }
-//   : { playerSelected: null })}

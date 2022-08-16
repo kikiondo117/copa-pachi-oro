@@ -1369,21 +1369,21 @@ video {
 }
 
 @font-face {
-  font-family: 'Big Noodle Titling';
+  font-family: "Big Noodle Titling";
 
-  src: url('/fonts/big_noodle_titling.ttf');
+  src: url("/fonts/big_noodle_titling.ttf");
 }
 
 @font-face {
-  font-family: 'Big Noodle Titling Oblique';
+  font-family: "Big Noodle Titling Oblique";
 
-  src: url('/fonts/big_noodle_titling_oblique.ttf');
+  src: url("/fonts/big_noodle_titling_oblique.ttf");
 }
 
 @font-face {
-  font-family: 'Coolvetica';
+  font-family: "Coolvetica";
 
-  src: url('/fonts/coolvetica\ rg.otf');
+  src: url("/fonts/coolvetica\ rg.otf");
 }
 
 .btn-orange-default {
