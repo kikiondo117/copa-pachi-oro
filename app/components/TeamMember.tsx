@@ -4,7 +4,7 @@ import { CardAddPlayer, CardPlayer } from "~/components/";
 interface TeamMemberProps {
   onClick: () => void;
   label: string;
-  member?: TeamMemberInterface;
+  member?: TeamMemberInterface | null;
 }
 
 export function TeamMember(props: TeamMemberProps) {

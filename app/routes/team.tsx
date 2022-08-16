@@ -14,6 +14,7 @@ import {
   TeamMember,
   Header,
   CardTeam,
+  TeamPlayers,
 } from "~/components";
 
 interface LoaderInterface {
@@ -87,8 +88,6 @@ export const action: ActionFunction = async ({ request }) => {
 export default function Team() {
   const [isModal, setIsModal] = React.useState({ status: false });
   const [isSub, setIsSub] = React.useState(false);
-  const [members, setMembers] = React.useState(() => new Array(5).fill(null));
-  const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
   const [playerSelected, setPlayerSelected] =
     React.useState<null | TeamMemberInterface>(null);
 
@@ -98,30 +97,6 @@ export default function Team() {
   React.useEffect(() => {
     setIsModal({ status: false });
   }, [response]);
-
-  React.useEffect(() => {
-    if (user && user.members) {
-      setMembers((prevState) =>
-        prevState.map((value, index) => {
-          if (user.members[index] !== undefined) {
-            return user.members[index];
-          }
-          return null;
-        })
-      );
-    }
-
-    if (user && user.subs) {
-      setSubs((prevState) =>
-        prevState.map((value, index) => {
-          if (user.subs[index] !== undefined) {
-            return user.subs[index];
-          }
-          return null;
-        })
-      );
-    }
-  }, [user]);
 
   return (
     <div>
@@ -133,55 +108,13 @@ export default function Team() {
             <CardTeam team={user.team} />
           </div>
 
-          <div className="col-start-3 col-end-7 font-coolveltica">
-            <p className=" mb-4 text-[22px] text-blue-gray-default">
-              Jugadores principales
-            </p>
-            <div>
-              <ul>
-                {members.length &&
-                  members.map((member, index) => {
-                    return (
-                      <li key={index}>
-                        <TeamMember
-                          label="Obligatorio"
-                          member={member ? member : null}
-                          onClick={() => {
-                            setIsModal({ status: true });
-                            setIsSub(false);
-                            setPlayerSelected(member);
-                          }}
-                        />
-                      </li>
-                    );
-                  })}
-              </ul>
-            </div>
-          </div>
+          <TeamPlayers
+            classNameMembers="col-start-3 col-end-7 col-span-4"
+            classNameSubs="col-span-4"
+            members={user.members}
+            subs={user.subs}
+          />
 
-          <div className="col-start-7 col-end-11 font-coolveltica ">
-            <p className=" mb-4 text-2xl text-blue-gray-default">
-              Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
-            </p>
-            <ul>
-              {subs.length &&
-                subs.map((sub, index) => {
-                  return (
-                    <li key={index}>
-                      <TeamMember
-                        label="Opcional"
-                        member={sub ? sub : null}
-                        onClick={() => {
-                          setIsModal({ status: true });
-                          setIsSub(true);
-                          setPlayerSelected(sub);
-                        }}
-                      />
-                    </li>
-                  );
-                })}
-            </ul>
-          </div>
           <div className=" col-start-3 col-end-12 flex flex-row items-center font-coolveltica text-blue-gray-default">
             <img
               src="/assets/icons/disclaimer.svg"
