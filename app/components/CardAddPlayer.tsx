@@ -8,14 +8,16 @@ type CardAddPlayerProps = {
 
 export function CardAddPlayer(props: CardAddPlayerProps) {
   return (
-    <div
+    <button
       onClick={props.onClick}
       aria-label="Add Player"
-      className={` flex flex-col items-center justify-center w-full h-[3.75rem] bg-gray-two border-dashed border-2 border-gray-three font-coolveltica text-gray-three
-      ${props.className ? props.className : ""} `}
+      className={`
+      flex h-[3.75rem] w-full flex-col items-center justify-center 
+      border-2 border-dashed border-gray-three bg-gray-two font-coolveltica text-gray-three
+        ${props.className ? props.className : ""} `}
     >
       <p className=" text-lg">Agregar jugador</p>
       <p className=" text-xs">{props.label}</p>
-    </div>
+    </button>
   );
 }

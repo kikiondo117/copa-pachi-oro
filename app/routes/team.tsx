@@ -9,7 +9,7 @@ import { addTeamMember, addSub } from "../utils/user.server";
 // * Components
 import {
   Modal,
-  AddPlayer,
+  PlayerForm,
   Container,
   CardTeam,
   TeamMember,
@@ -114,11 +114,11 @@ export default function Team() {
     <div>
       <Header user={user} />
 
-      <main className=" h-screen pt-28 bg-hero-rein bg-cover">
+      <main className=" h-screen bg-hero-rein bg-cover pt-28">
         <Container className="mx-auto">
           <div className=" col-start-3 col-end-11">{/* <CardTeam /> */}</div>
           <div className="col-start-3 col-end-7 font-coolveltica">
-            <p className=" text-[22px] mb-4 text-blue-gray-default">
+            <p className=" mb-4 text-[22px] text-blue-gray-default">
               Jugadores principales
             </p>
             <div>
@@ -144,7 +144,7 @@ export default function Team() {
           </div>
 
           <div className="col-start-7 col-end-11 font-coolveltica ">
-            <p className=" text-2xl mb-4 text-blue-gray-default">
+            <p className=" mb-4 text-2xl text-blue-gray-default">
               Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
             </p>
             <ul>
@@ -166,11 +166,11 @@ export default function Team() {
                 })}
             </ul>
           </div>
-          <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
+          <div className=" col-start-3 col-end-12 flex flex-row items-center font-coolveltica text-blue-gray-default">
             <img
               src="/assets/icons/disclaimer.svg"
               alt=""
-              className="inline mr-[18px]"
+              className="mr-[18px] inline"
             />
             Completa la información de todos los jugadores principales para que
             tu equipo sea aprobado.
@@ -211,7 +211,7 @@ export default function Team() {
           className="grid grid-cols-6"
         >
           <div className=" col-start-2 col-end-6">
-            <AddPlayer isSub={isSub} playerSelected={playerSelected} />
+            <PlayerForm isSub={isSub} playerSelected={playerSelected} />
           </div>
         </Modal>
       )}

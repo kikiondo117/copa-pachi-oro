@@ -78,6 +78,20 @@ export const getTeams = async () => {
   return []
 }
 
+export const getTeamsApproved = async () => {
+  const teams = await prisma.user.findMany({
+    where: {
+      isApproved: true
+    }
+  })
+
+  if (teams) {
+    return teams
+  }
+
+  return []
+}
+
 export const getTeam = async (id: string) => {
   const team = await prisma.user.findUnique({
     where: { id: id }

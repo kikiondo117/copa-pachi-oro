@@ -1,5 +1,3 @@
-import * as React from "react";
-
 type CardEmptyPlayerProps = {
   className?: string;
 };
@@ -7,18 +5,18 @@ type CardEmptyPlayerProps = {
 export function CardEmptyPlayer(props: CardEmptyPlayerProps) {
   return (
     <div
-      className={` flex flex-row w-full h-[3.75rem] transition ease-in-out delay-150 bg-white hover:bg-blue-gray-dark
+      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out hover:bg-blue-gray-dark
       ${props.className ? props.className : ""} `}
     >
       <div className="">
         <img
           src="/assets/img/EmptyPlayerImg.svg"
           alt=""
-          className="h-full mr-4"
+          className="mr-4 h-full"
         />
       </div>
       <div className=" w-full"></div>
-      <div className="bg-blue-gray-default  w-2"></div>
+      <div className="w-2  bg-blue-gray-default"></div>
     </div>
   );
 }

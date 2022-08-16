@@ -1,23 +1,17 @@
 // app/components/form-field.tsx
 interface FormFieldProps {
   htmlFor: string;
-  label: string;
   type?: string;
   value: any;
   onChange?: (...args: any) => any;
-  required?: boolean;
-  // withLabel?: boolean;
   placeholder?: string;
 }
 
 export function FormField({
   htmlFor,
-  label,
   type = "text",
   value,
   onChange = () => {},
-  required,
-  // withLabel = true,
   placeholder = "",
 }: FormFieldProps) {
   return (

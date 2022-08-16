@@ -1,15 +1,14 @@
-import type { TeamMemberInterface } from "../types/types.user";
+import type { TeamMemberInterface } from "~/types/types.user";
 import * as React from "react";
 import { Form, useTransition } from "@remix-run/react";
-import { Button } from "./ui/Button";
-import { Switch } from "./ui/Switch";
+import { Button, Switch } from "~/components";
 
 type AddPlayerProps = {
   isSub: boolean;
   playerSelected?: TeamMemberInterface | null;
 };
 
-export function AddPlayer(props: AddPlayerProps) {
+export function PlayerForm(props: AddPlayerProps) {
   const transition = useTransition();
   const isCreating = Boolean(transition.submission);
   const [dataForm, setDataForm] = React.useState(() => {

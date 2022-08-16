@@ -12,17 +12,33 @@ import {
   Container,
   TeamSent,
   Modal,
-  CardTournament,
+  CardTeam,
 } from "~/components";
+
+// * Types
+import type { UserInterface } from "../types/types.user";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
 import MainMessage from "~/../public/assets/main-landing-message.svg";
 import { validateEmail, validatePassword } from "../utils/validators.server";
 import { validateName } from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
+import { getTeamsApproved } from "../utils/user.server";
+
+interface IndexInterface {
+  user: UserInterface;
+  teams: UserInterface[];
+}
+
+interface ModalInterface {
+  status: boolean;
+  data: UserInterface | null;
+}
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
+  const teams = await getTeamsApproved();
+
   if (user && user.admin) {
     return redirect("/admin");
   }
@@ -31,7 +47,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/team");
   }
 
-  return json({ user });
+  return json({ user, teams });
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -104,10 +120,11 @@ export const action: ActionFunction = async ({ request }) => {
 };
 
 export default function Index() {
-  const { user } = useLoaderData();
-  const [showModal, setShowModal] = React.useState({ status: false, data: {} });
-
-  console.log("*****loaderData", user);
+  const { user, teams } = useLoaderData<IndexInterface>();
+  const [showModal, setShowModal] = React.useState<ModalInterface>({
+    status: false,
+    data: null,
+  });
 
   return (
     <div className="min-h-screen ">
@@ -116,10 +133,10 @@ export default function Index() {
         <img src="/assets/img_graffiti_effect_1.svg" alt="" />
       </div>
 
-      <main className="pt-14 bg-hero-tracer bg-cover bg-fixed bg-blue-gray-dark min-h-screen mx-auto flex items-center">
+      <main className="mx-auto flex min-h-screen items-center bg-blue-gray-dark bg-hero-tracer bg-cover bg-fixed pt-14">
         <Container className="m-auto py-6">
           <div className="col-start-1 col-end-7 h-full">
-            <div className="flex flex-col h-full justify-between items-start">
+            <div className="flex h-full flex-col items-start justify-between">
               <img
                 src={MainMessage}
                 alt=""
@@ -133,11 +150,11 @@ export default function Index() {
                 >
                   <img
                     src={TwitchLogoJuanYut}
-                    className=" h-10 w-[13.313rem] mb-2 hover:animate-bounce"
+                    className=" mb-2 h-10 w-[13.313rem] hover:animate-bounce"
                     alt=""
                   />
                 </a>
-                <p className=" text-white font-coolveltica text-xs">
+                <p className=" font-coolveltica text-xs text-white">
                   Mi pequeño aporte con mucho cariño y esfuerzo a la comunidad
                   de Overwatch MX, JuanYut.
                 </p>
@@ -145,8 +162,7 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-9 col-end-13 w-full">
-            <div className="bg-form-top bg-cover h-24 w-auto" />
-            {/* TODO Observation flow required */}
+            <div className="h-24 w-auto bg-form-top bg-cover" />
             {user ? <TeamSent /> : <TeamForm />}
           </div>
         </Container>
@@ -158,11 +174,11 @@ export default function Index() {
 
       <section
         id="acerca"
-        className=" h-[30rem] mx-auto bg-special-blue bg-pachi-retas-sm bg-cover bg-center  flex items-center"
+        className=" mx-auto flex h-[30rem] items-center bg-special-blue bg-pachi-retas-sm  bg-cover bg-center"
       >
         <Container className="mx-auto">
           <div className="col-start-1 col-end-7 my-auto">
-            <h4 className="font-coolveltica text-white text-2xl mb-4">
+            <h4 className="mb-4 font-coolveltica text-2xl text-white">
               Acerca de
             </h4>
             <div className=" h-72">
@@ -178,10 +194,10 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-8 col-end-13 flex flex-col justify-center">
-            <h4 className="text-special-orange font-coolveltica text-[1.625rem]">
+            <h4 className="font-coolveltica text-[1.625rem] text-special-orange">
               ✌ ¿Qué es?
             </h4>
-            <p className=" w-full font-coolveltica font-normal text-white text-md tracking-wider leading-5">
+            <p className=" text-md w-full font-coolveltica font-normal leading-5 tracking-wider text-white">
               Es un torneo rápido, el cual reúne a jugadores apasionados de
               Overwatch. La finalidad de{" "}
               <span className="text-special-orange">Pachi Retas</span> es
@@ -196,15 +212,25 @@ export default function Index() {
 
       <section
         id="equipos"
-        className="h-screen bg-teams-bg bg-cover mx-auto  flex flex-col items-center justify-center relative"
+        className="relative mx-auto flex h-screen  flex-col items-center justify-center bg-teams-bg bg-cover"
       >
-        <div className="w-full flex-row items-start mb-4 ">
-          <h3 className=" pl-[4.5rem] font-coolveltica text-2xl leading-7 tracking-wider">
+        <div className="h-screen">
+          <h3 className="mt-28 h-fit font-coolveltica text-2xl leading-7 tracking-wider">
             Equipos
           </h3>
-        </div>
-        <Container className="max-h-[27.5rem] overflow-auto ">
-          <CardTournament></CardTournament>
+
+          <Container className="mt-4">
+            {teams.map((data) => (
+              <CardTeam
+                key={data.id}
+                onClick={() =>
+                  setShowModal(() => ({ status: true, data: data }))
+                }
+                team={data.team}
+                className="col-span-4"
+              />
+            ))}
+          </Container>
 
           {showModal.status && (
             <Modal
@@ -212,17 +238,10 @@ export default function Index() {
                 setShowModal((prevState) => ({ ...prevState, status: false }))
               }
             >
-              Hola
+              {showModal.data?.members.length ? "hola" : "no members"}
             </Modal>
           )}
-          {/* AÑADIR CLASSNAME - ELIMINAR COL-SPAN-4 */}
-          {/* {array.map((team) => (
-            <CardTeam
-              onClick={() => setShowModal(() => ({ status: true, data: team }))}
-              className="col-span-4"
-            ></CardTeam>
-          ))} */}
-        </Container>
+        </div>
       </section>
 
       <Footer />

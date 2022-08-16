@@ -55,7 +55,7 @@ export default function AdminTeam() {
       <Header user={user} />
 
       <Container className="py-24">
-        <section className=" col-span-4 flex flex-col">
+        <section className="  col-span-4 flex flex-col">
           <h2>Datos del equipo {team.team.name}</h2>
           <p>
             MARCAR EQUIPO COMO APROBADO: {team.isApproved ? "true" : "false"}
