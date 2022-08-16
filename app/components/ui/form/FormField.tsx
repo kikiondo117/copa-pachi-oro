@@ -5,6 +5,7 @@ interface FormFieldProps {
   value: any;
   onChange?: (...args: any) => any;
   placeholder?: string;
+  className?: string;
 }
 
 export function FormField({
@@ -13,6 +14,7 @@ export function FormField({
   value,
   onChange = () => {},
   placeholder = "",
+  className,
 }: FormFieldProps) {
   return (
     <>
@@ -27,7 +29,9 @@ export function FormField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className="w-full p-2 pl-4 rounded my-2 text-black text-base font-big-noodle-oblique"
+        className={`my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black ${
+          className ? className : ""
+        }`}
         value={value}
         placeholder={placeholder}
         required

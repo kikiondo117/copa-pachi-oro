@@ -1015,6 +1015,10 @@ video {
   width: 52.5rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .max-w-laptop-full {
   max-width: 80rem;
 }
@@ -1349,6 +1353,11 @@ video {
 
 .text-\[1\.375rem\] {
   font-size: 1.375rem;
+}
+
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 
 .font-normal {
