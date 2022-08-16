@@ -45,7 +45,8 @@ module.exports = {
         "pachi-retas-big": "url('/assets/pachi-retas-big-bg.svg')",
         "pachi-retas-sm": "url('/assets/pachi-retas-sm-bg.svg')",
         "teams-bg": "url('/assets/bg/teams.svg')",
-        "hero-rein": "url('/assets/bg/hero-reinhardt-bg.png')"
+        "hero-rein": "url('/assets/bg/hero-reinhardt-bg.png')",
+        "gray-1" : "url('/assets/bg/Img_Background_Grey_1.svg')",
       },
       colors: {
         "special-orange": "#F16414",

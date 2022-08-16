@@ -647,8 +647,13 @@ video {
   grid-column: span 4 / span 4;
 }
 
+<<<<<<< HEAD
+.col-span-1 {
+  grid-column: span 1 / span 1;
+=======
 .col-span-12 {
   grid-column: span 12 / span 12;
+>>>>>>> abca7eed3d7eb656804ebdf29f15a1ad3e96c37f
 }
 
 .col-span-2 {
@@ -705,6 +710,10 @@ video {
 
 .m-auto {
   margin: auto;
+}
+
+.m-0 {
+  margin: 0px;
 }
 
 .mx-0 {
@@ -827,6 +836,14 @@ video {
   margin-top: 6rem;
 }
 
+.ml-6 {
+  margin-left: 1.5rem;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
 .inline {
   display: inline;
 }
@@ -933,12 +950,17 @@ video {
   height: 3.5rem;
 }
 
+<<<<<<< HEAD
 .h-\[52\.5\] {
   height: 52.5;
 }
 
 .h-\[36\.8rem\] {
   height: 36.8rem;
+=======
+.h-6 {
+  height: 1.5rem;
+>>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .min-h-screen {
@@ -1007,6 +1029,7 @@ video {
   width: 5rem;
 }
 
+<<<<<<< HEAD
 .w-\[36\.8\] {
   width: 36.8;
 }
@@ -1017,6 +1040,18 @@ video {
 
 .w-80 {
   width: 20rem;
+=======
+.w-\[7\.6rem\] {
+  width: 7.6rem;
+}
+
+.w-\[23rem\] {
+  width: 23rem;
+}
+
+.min-w-\[23rem\] {
+  min-width: 23rem;
+>>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .max-w-laptop-full {
@@ -1068,8 +1103,13 @@ video {
   grid-template-columns: repeat(12, 80px);
 }
 
+<<<<<<< HEAD
 .grid-cols-8 {
   grid-template-columns: repeat(8, minmax(0, 1fr));
+=======
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+>>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .flex-row {
@@ -1078,6 +1118,14 @@ video {
 
 .flex-col {
   flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.content-start {
+  align-content: flex-start;
 }
 
 .items-start {
@@ -1090,6 +1138,10 @@ video {
 
 .items-center {
   align-items: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .justify-end {
@@ -1114,6 +1166,14 @@ video {
 
 .self-center {
   align-self: center;
+}
+
+.overflow-scroll {
+  overflow: scroll;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .rounded-full {
@@ -1210,6 +1270,14 @@ video {
   background-color: rgb(239 68 68 / var(--tw-bg-opacity));
 }
 
+<<<<<<< HEAD
+=======
+.bg-yellow-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
+>>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }
@@ -1232,6 +1300,10 @@ video {
 
 .bg-hero-rein {
   background-image: url('/assets/bg/hero-reinhardt-bg.png');
+}
+
+.bg-gray-1 {
+  background-image: url('/assets/bg/Img_Background_Grey_1.svg');
 }
 
 .bg-cover {
@@ -1297,6 +1369,10 @@ video {
 
 .pl-4 {
   padding-left: 1rem;
+}
+
+.pt-20 {
+  padding-top: 5rem;
 }
 
 .text-center {
