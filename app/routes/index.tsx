@@ -12,6 +12,7 @@ import {
   Container,
   TeamSent,
   Modal,
+  CardTournament,
 } from "~/components";
 // * Utils
 import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
@@ -203,6 +204,8 @@ export default function Index() {
           </h3>
         </div>
         <Container className="max-h-[27.5rem] overflow-auto ">
+          <CardTournament></CardTournament>
+
           {showModal.status && (
             <Modal
               onClose={() =>

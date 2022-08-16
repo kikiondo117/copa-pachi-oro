@@ -3,6 +3,8 @@ export { Container } from "./ui/Container";
 export { Button } from "./ui/Button";
 export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
+export { Switch } from "./ui/Switch";
+
 
 export { CardTeam } from "./CardTeam";
 export { AddPlayer } from "./PlayerForm";

@@ -70,7 +70,7 @@ export function TeamForm() {
         />
         <div className="flex justify-between">
           <select
-            className=" w-full h-9 mr-1 mt-1 pl-4 rounded font-big-noodle-oblique "
+            className=" w-full h-9 mr-1 mt-1 pl-4 rounded font-big-noodle-oblique"
             name="region"
             id="region"
           >
