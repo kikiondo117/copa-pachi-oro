@@ -116,9 +116,7 @@ export default function Team() {
 
       <main className=" h-screen bg-hero-rein bg-cover pt-28">
         <Container className="mx-auto">
-          <div className=" col-start-3 col-end-11">
-            <CardTeam team={user.team} />
-          </div>
+          <div className=" col-start-3 col-end-11">{/* <CardTeam /> */}</div>
           <div className="col-start-3 col-end-7 font-coolveltica">
             <p className=" mb-4 text-[22px] text-blue-gray-default">
               Jugadores principales
@@ -177,6 +175,33 @@ export default function Team() {
             Completa la información de todos los jugadores principales para que
             tu equipo sea aprobado.
           </div>
+          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
+            <img
+              src="/assets/icons/disclaimer.svg"
+              alt=""
+              className="inline mr-[18px]"
+            />
+            Información de todos los jugadores principales completada, esperando aprobación del equipo.
+          </div> */}
+
+          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
+            <img
+              src="/assets/icons/disclaimer.svg"
+              alt=""
+              className="inline mr-[18px]"
+            />
+            Información de todos los jugadores principales completada, esperando
+            aprobación del equipo.
+          </div> */}
+
+          {/* <div className=" col-start-3 col-end-12 font-coolveltica flex flex-row items-center text-blue-gray-default">
+            <img
+              src="/assets/icons/disclaimer.svg"
+              alt=""
+              className="inline mr-[18px]"
+            />
+            Equipo aprobado con éxito.
+          </div> */}
         </Container>
       </main>
 

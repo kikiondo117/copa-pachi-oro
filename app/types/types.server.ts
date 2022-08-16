@@ -1,4 +1,4 @@
-import type { TeamMember } from './types.user';
+import type { TeamMemberInterface } from './types.user';
 
 export type RegisterForm = {
   email: string
@@ -8,8 +8,8 @@ export type RegisterForm = {
   region: string,
   plataforma: string,
   img?: string,
-  members: TeamMember[]
-  subs: TeamMember[]
+  members: TeamMemberInterface[]
+  subs: TeamMemberInterface[]
   isApproved: boolean
 }
 

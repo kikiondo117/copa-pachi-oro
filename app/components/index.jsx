@@ -3,6 +3,7 @@ export { Container } from "./ui/Container";
 export { Button } from "./ui/Button";
 export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
+export { Switch } from "./ui/Switch";
 export { FormField } from "./ui/form/FormField";
 // * FORMS
 export { LoginForm } from "./forms/LoginForm";
