@@ -631,8 +631,13 @@ video {
   grid-column: span 4 / span 4;
 }
 
+<<<<<<< HEAD
 .col-span-1 {
   grid-column: span 1 / span 1;
+=======
+.col-span-12 {
+  grid-column: span 12 / span 12;
+>>>>>>> abca7eed3d7eb656804ebdf29f15a1ad3e96c37f
 }
 
 .col-start-1 {
@@ -1443,21 +1448,21 @@ video {
 }
 
 @font-face {
-  font-family: 'Big Noodle Titling';
+  font-family: "Big Noodle Titling";
 
-  src: url('/fonts/big_noodle_titling.ttf');
+  src: url("/fonts/big_noodle_titling.ttf");
 }
 
 @font-face {
-  font-family: 'Big Noodle Titling Oblique';
+  font-family: "Big Noodle Titling Oblique";
 
-  src: url('/fonts/big_noodle_titling_oblique.ttf');
+  src: url("/fonts/big_noodle_titling_oblique.ttf");
 }
 
 @font-face {
-  font-family: 'Coolvetica';
+  font-family: "Coolvetica";
 
-  src: url('/fonts/coolvetica\ rg.otf');
+  src: url("/fonts/coolvetica\ rg.otf");
 }
 
 .btn-orange-default {

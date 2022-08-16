@@ -1,11 +1,14 @@
 import type { TeamMemberInterface } from "~/types/types.user";
 import * as React from "react";
 import { Form, useTransition } from "@remix-run/react";
-import { Button, Switch } from "~/components";
+// * Components
+import Toggle from "react-toggle";
+import { Button } from "~/components";
 
 type AddPlayerProps = {
   isSub: boolean;
   playerSelected?: TeamMemberInterface | null;
+  showCapitan: boolean;
 };
 
 export function PlayerForm(props: AddPlayerProps) {
@@ -40,7 +43,7 @@ export function PlayerForm(props: AddPlayerProps) {
 
   return (
     <div className=" my-6">
-      <h2 className="text-blue-gray-default text-[1.3rem] font-coolveltica">
+      <h2 className="font-coolveltica text-[1.3rem] text-blue-gray-default">
         Registrar Jugador
       </h2>
       <Form className="flex flex-col" method="post">
@@ -52,9 +55,8 @@ export function PlayerForm(props: AddPlayerProps) {
           name="action"
           value={`${props.isSub ? "addSub" : "addPlayer"}`}
         />
-        {/* <input type="media" /> */}
         <input
-          className="w-full p-2 pl-4 rounded my-2 text-black text-base font-big-noodle-oblique"
+          className="my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black"
           name="name"
           type="text"
           placeholder="Nombre"
@@ -62,23 +64,16 @@ export function PlayerForm(props: AddPlayerProps) {
           onChange={(e) => inputChange(e)}
         />
         <input
-          className="w-full p-2 pl-4 rounded my-2 text-black text-base font-big-noodle-oblique"
+          className="my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black"
           name="rango"
-          type="text"
+          type="number"
           placeholder="Rango en SR (Ej: 3100)"
           value={dataForm.rango}
           onChange={(e) => inputChange(e)}
         />
-        {/* <input
-          className="w-full p-2 pl-4 rounded my-2 text-black text-base font-big-noodle-oblique"
-          name="rol"
-          type="text"
-          placeholder="rol"
-          value={dataForm.rol}
-          onChange={(e) => inputChange(e)}
-        /> */}
+
         <select
-          className=" w-full h-10 my-2 px-4 rounded font-big-noodle-oblique"
+          className=" my-2 h-10 w-full rounded px-4 font-big-noodle-oblique"
           name="rol"
           id="rol"
         >
@@ -89,28 +84,39 @@ export function PlayerForm(props: AddPlayerProps) {
           <option value="Damage">Daño</option>
           <option value="Support">Soporte</option>
         </select>
-        <div className="flex flex-row">
-          <span className="font-coolveltica text-md text-blue-gray-default">
-            Marcar jugador como capitán
-            {/* <Switch></Switch> */}
-          </span>
-          {/* <input
-            name="capitan"
-            type="checkbox"
-            checked={dataForm.capitan}
-            onChange={(e) => inputChange(e)}
-          /> */}
-        </div>
-        <p className="font-coolveltica text-xs text-gray-two tracking-wider">
-          Solo puede haber un capitán por equipo, seleccionar este campo
-          cambiará de capitán si ya tienes uno.
-        </p>
+
+        {props.showCapitan && (
+          <>
+            <div className="mt-2 flex flex-row">
+              <span className="text-md font-coolveltica text-blue-gray-default">
+                Marcar jugador como capitán
+              </span>
+
+              <Toggle
+                name="capitan"
+                className="custom-classname ml-4"
+                icons={false}
+                checked={dataForm.capitan}
+                onChange={() =>
+                  setDataForm((prevState) => ({
+                    ...prevState,
+                    capitan: !prevState.capitan,
+                  }))
+                }
+              />
+            </div>
+            <p className="font-coolveltica text-xs tracking-wider text-gray-two">
+              Solo puede haber un capitán por equipo, seleccionar este campo
+              cambiará de capitán si ya tienes uno.
+            </p>
+          </>
+        )}
 
         {isCreating ? (
           <div>Loading...</div>
         ) : (
           <Button.Primary
-            className=" w-[1] mt-16 "
+            className=" mt-16 w-[1] "
             {...(props.playerSelected
               ? { disabled: true }
               : { disabled: false })}
