@@ -13,8 +13,8 @@ export function Header({ user }: HeaderProps) {
   const [showLogin, setShowLogin] = React.useState(false);
 
   return (
-    <header className="fixed w-full flex items-center bg-special-blue h-14 text-white z-20">
-      <div className="w-laptop flex justify-between mx-auto">
+    <header className="fixed z-20 flex h-14 w-full items-center bg-special-blue text-white">
+      <div className="mx-auto flex w-laptop justify-between">
         <a href="/" className=" h-9 w-auto">
           <img src={Logo} className="h-full w-auto" alt="Copa Pachichi Oro" />
         </a>
@@ -37,7 +37,7 @@ export function Header({ user }: HeaderProps) {
                 <a href="/torneos">TORNEOS</a>
               </li>
               <li className="mx-4">
-                <a href="/equipos">EQUIPOS</a>
+                <a href="/team">EQUIPOS</a>
               </li>
             </>
           ) : null}
@@ -56,7 +56,7 @@ export function Header({ user }: HeaderProps) {
           <li>
             <button
               className={`mx-4 rounded-md  ${
-                user ? "bg-special-blue-light mx-2" : "btn-orange-default"
+                user ? "mx-2 bg-special-blue-light px-2" : "btn-orange-default"
               }`}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);
@@ -65,7 +65,7 @@ export function Header({ user }: HeaderProps) {
               {user ? user.email : " INICIAR SESIÓN"}
             </button>
             {showLogin && (
-              <div className="absolute rounded-lg bg-special-gray w-96 p-4 right-7 mt-5">
+              <div className="absolute right-7 mt-5 w-96 rounded-lg bg-special-gray p-4">
                 <LoginForm />
               </div>
             )}

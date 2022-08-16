@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Form } from "@remix-run/react";
+import { Form, useTransition } from "@remix-run/react";
 
 import { FormField, Button } from "~/components";
 
@@ -12,6 +12,7 @@ export function TeamForm() {
     region: "",
     genero: "",
   });
+  const transition = useTransition();
 
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -23,7 +24,7 @@ export function TeamForm() {
   return (
     <Form
       method="post"
-      className="flex flex-col justify-between bg-special-gray px-4 w-full font-coolveltica h-[32rem]"
+      className="flex h-[32rem] w-full flex-col justify-between bg-special-gray px-4 font-coolveltica"
     >
       <input type="hidden" name="action" value={"register"} />
       <div>
@@ -31,46 +32,34 @@ export function TeamForm() {
         <FormField
           htmlFor="email"
           type="email"
-          label="email"
           value={form.email}
           onChange={(e) => handleInputChange(e, "email")}
-          withLabel={false}
           placeholder="Correo Electrónico"
-          required
         />
         <FormField
           htmlFor="password"
           type="password"
-          label="password"
           value={form.password}
           onChange={(e) => handleInputChange(e, "password")}
-          withLabel={false}
           placeholder="Contraseña"
-          required
         />
         <FormField
+          value={form.confirm_password}
           htmlFor="confirm_password"
           type="password"
-          label="confirm password"
-          value={form.confirm_password}
           onChange={(e) => handleInputChange(e, "confirm_password")}
-          withLabel={false}
           placeholder="Repetir Contraseña"
-          required
         />
         <p className="mt-2 text-xs">Datos del equipo</p>
         <FormField
           htmlFor="team"
-          label="Nombre del equipo"
           value={form.team}
           onChange={(e) => handleInputChange(e, "team")}
-          withLabel={false}
           placeholder="Nombre del equipo"
-          required
         />
         <div className="flex justify-between">
           <select
-            className=" w-full h-9 mr-1 mt-1 pl-4 rounded font-big-noodle-oblique "
+            className=" mr-1 mt-1 h-9 w-full rounded pl-4 font-big-noodle-oblique "
             name="region"
             id="region"
           >
@@ -82,7 +71,7 @@ export function TeamForm() {
             <option value="EU">EU</option>
           </select>
           <select
-            className="w-full ml-1 mt-1 pl-4 rounded font-big-noodle-oblique"
+            className="ml-1 mt-1 w-full rounded pl-4 font-big-noodle-oblique"
             name="plataforma"
             id="plataforma"
           >
@@ -100,10 +89,14 @@ export function TeamForm() {
         <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
-        {/* <input className="mt-4" type="media" /> */}
       </div>
 
-      <Button.Primary className=" mb-4">Registrar equipo</Button.Primary>
+      <Button.Primary
+        className="mb-4"
+        {...(transition.submission ? { disabled: true } : { disabled: false })}
+      >
+        {transition.submission ? "Guardando" : "Registrar equipo"}
+      </Button.Primary>
     </Form>
   );
 }

@@ -1,32 +1,10 @@
 import * as React from "react";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, useTransition } from "@remix-run/react";
 // * Components
 import { FormField } from "~/components";
 
-// export const action: ActionFunction = async ({ request }) => {
-//   const form = await request.formData();
-//   const email = form.get("email");
-//   const password = form.get("password");
-
-//   if (typeof email !== "string" || typeof password !== "string") {
-//     return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-//   }
-
-//   const errors = {
-//     email: validateEmail(email),
-//     password: validatePassword(password),
-//   };
-
-//   if (Object.values(errors).some(Boolean)) {
-//     return json({ errors, fields: { email, password } }, { status: 400 });
-//   }
-
-//   return await login({ email, password });
-// };
-
 export function LoginForm() {
-  const actionData = useActionData();
-  console.log("*****actionData", actionData);
+  const transition = useTransition();
 
   const [form, setForm] = React.useState<{ email: string; password: string }>({
     email: "",
@@ -51,23 +29,23 @@ export function LoginForm() {
       <FormField
         htmlFor="email"
         value={form.email}
-        // label="Correo electronico"
         onChange={(e) => handleInputChange(e, "email")}
-        required
         placeholder="Correo electrónico"
       />
       <FormField
         htmlFor="password"
         value={form.password}
-        // label="Contraseña"
         type="password"
         onChange={(e) => handleInputChange(e, "password")}
-        required
         placeholder="Constraseña"
       />
       <button
         type="submit"
-        className="self-center mt-4 w-fit bg-special-orange p-2 text-base rounded"
+        className={`
+          self-center mt-4 w-fit bg-special-orange p-2 text-base rounded
+          ${transition.submission ? "bg-grey-500" : ""} 
+          `}
+        {...(transition.submission ? { disabled: true } : { disabled: false })}
       >
         Iniciar Sesión
       </button>
