@@ -116,7 +116,9 @@ export default function Team() {
 
       <main className=" h-screen bg-hero-rein bg-cover pt-28">
         <Container className="mx-auto">
-          <div className=" col-start-3 col-end-11">{/* <CardTeam /> */}</div>
+          <div className=" col-start-3 col-end-11">
+            <CardTeam team={user.team} />
+          </div>
           <div className="col-start-3 col-end-7 font-coolveltica">
             <p className=" mb-4 text-[22px] text-blue-gray-default">
               Jugadores principales
