@@ -8,6 +8,7 @@ interface TeamPLayersInterface {
   classNameMembers?: string;
   classNameSubs?: string;
   className?: string;
+  onClick: (isSub: boolean, player: TeamMemberInterface) => void;
 }
 
 export function TeamPlayers(props: TeamPLayersInterface) {
@@ -52,9 +53,7 @@ export function TeamPlayers(props: TeamPLayersInterface) {
                   <TeamMember
                     label="Obligatorio"
                     member={member ? member : null}
-                    onClick={() => {
-                      // setIsSub(false);
-                    }}
+                    onClick={() => props.onClick(false, member)}
                   />
                 </li>
               );
@@ -78,7 +77,7 @@ export function TeamPlayers(props: TeamPLayersInterface) {
                 <TeamMember
                   label="Opcional"
                   member={sub ? sub : null}
-                  onClick={() => null}
+                  onClick={() => props.onClick(true, sub)}
                 />
               </li>
             );

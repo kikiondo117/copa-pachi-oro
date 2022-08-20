@@ -11,7 +11,6 @@ import {
   Modal,
   PlayerForm,
   Container,
-  TeamMember,
   Header,
   CardTeam,
   TeamPlayers,
@@ -20,6 +19,75 @@ import {
 interface LoaderInterface {
   user: UserInterface;
   capitan: boolean;
+}
+
+export default function Team() {
+  const [isModal, setIsModal] = React.useState({ status: false });
+  const [isSub, setIsSub] = React.useState(false);
+  const [playerSelected, setPlayerSelected] =
+    React.useState<null | TeamMemberInterface>(null);
+
+  const response = useActionData();
+  const { user, capitan } = useLoaderData<LoaderInterface>();
+
+  React.useEffect(() => {
+    setIsModal({ status: false });
+  }, [response]);
+
+  const handleClick = (isSub: boolean, player: TeamMemberInterface) => {
+    console.log("isSub", isSub);
+    setIsSub(!!isSub);
+    setPlayerSelected(player);
+    setIsModal({ status: true });
+  };
+
+  return (
+    <div>
+      <Header user={user} />
+
+      <main className=" h-screen bg-hero-rein bg-cover pt-28">
+        <Container className="mx-auto">
+          <div className=" col-start-3 col-end-11">
+            <CardTeam team={user.team} />
+          </div>
+
+          <TeamPlayers
+            classNameMembers="col-start-3 col-end-7 col-span-4 cursor-pointer"
+            classNameSubs="col-span-4 cursor-pointer"
+            members={user.members}
+            subs={user.subs}
+            onClick={handleClick}
+          />
+
+          <div className=" col-start-3 col-end-12 flex flex-row items-center font-coolveltica text-blue-gray-default">
+            <img
+              src="/assets/icons/disclaimer.svg"
+              alt=""
+              className="mr-[18px] inline"
+            />
+            {user.members.length === 5
+              ? "Información de todos los jugadores principales completada, esperando aprobación del equipo."
+              : "Completa la información de todos los jugadores principales para que tu equipo sea aprobado."}
+          </div>
+        </Container>
+      </main>
+
+      {isModal.status && (
+        <Modal
+          onClose={() => setIsModal({ status: false })}
+          className="grid grid-cols-6"
+        >
+          <div className=" col-start-2 col-end-6">
+            <PlayerForm
+              showCapitan={!capitan}
+              isSub={isSub}
+              playerSelected={playerSelected}
+            />
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
 }
 
 export const loader: LoaderFunction = async ({ request }) => {
@@ -64,14 +132,38 @@ export const action: ActionFunction = async ({ request }) => {
 
   if (user) {
     if (action === "addPlayer") {
-      return await addTeamMember(user?.email, {
+      return await addTeamMember(user.email, {
         name,
         rango,
         rol,
         capitan,
         img,
       });
-    } else {
+    }
+
+    if (action === "addSub") {
+      return await addSub(user.email, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
+
+    if (action === "updatePlayer") {
+      console.log("hola soy player");
+      return await addTeamMember(user?.id, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
+
+    if (action === "updateSub") {
+      console.log("hola soy sub");
       return await addSub(user.email, {
         name,
         rango,
@@ -84,64 +176,3 @@ export const action: ActionFunction = async ({ request }) => {
 
   return json({ error: `Invalid User`, form: action }, { status: 400 });
 };
-
-export default function Team() {
-  const [isModal, setIsModal] = React.useState({ status: false });
-  const [isSub, setIsSub] = React.useState(false);
-  const [playerSelected, setPlayerSelected] =
-    React.useState<null | TeamMemberInterface>(null);
-
-  const response = useActionData();
-  const { user, capitan } = useLoaderData<LoaderInterface>();
-
-  React.useEffect(() => {
-    setIsModal({ status: false });
-  }, [response]);
-
-  return (
-    <div>
-      <Header user={user} />
-
-      <main className=" h-screen bg-hero-rein bg-cover pt-28">
-        <Container className="mx-auto">
-          <div className=" col-start-3 col-end-11">
-            <CardTeam team={user.team} />
-          </div>
-
-          <TeamPlayers
-            classNameMembers="col-start-3 col-end-7 col-span-4"
-            classNameSubs="col-span-4"
-            members={user.members}
-            subs={user.subs}
-          />
-
-          <div className=" col-start-3 col-end-12 flex flex-row items-center font-coolveltica text-blue-gray-default">
-            <img
-              src="/assets/icons/disclaimer.svg"
-              alt=""
-              className="mr-[18px] inline"
-            />
-            {user.members.length === 5
-              ? "Información de todos los jugadores principales completada, esperando aprobación del equipo."
-              : "Completa la información de todos los jugadores principales para que tu equipo sea aprobado."}
-          </div>
-        </Container>
-      </main>
-
-      {isModal.status && (
-        <Modal
-          onClose={() => setIsModal({ status: false })}
-          className="grid grid-cols-6"
-        >
-          <div className=" col-start-2 col-end-6">
-            <PlayerForm
-              showCapitan={!capitan}
-              isSub={isSub}
-              playerSelected={playerSelected}
-            />
-          </div>
-        </Modal>
-      )}
-    </div>
-  );
-}

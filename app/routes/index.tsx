@@ -144,7 +144,7 @@ export default function Index() {
                   setShowModal(() => ({ status: true, data: data }))
                 }
                 team={data.team}
-                className="col-span-4"
+                className="col-span-4 cursor-pointer"
               />
             ))}
           </Container>

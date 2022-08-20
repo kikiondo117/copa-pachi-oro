@@ -591,6 +591,14 @@ video {
   left: 0px;
 }
 
+.top-1\/2 {
+  top: 50%;
+}
+
+.left-1\/2 {
+  left: 50%;
+}
+
 .right-0 {
   right: 0px;
 }
@@ -619,12 +627,12 @@ video {
   top: 0.25rem;
 }
 
-.top-1\/2 {
-  top: 50%;
+.z-50 {
+  z-index: 50;
 }
 
-.left-1\/2 {
-  left: 50%;
+.z-40 {
+  z-index: 40;
 }
 
 .z-10 {
@@ -635,29 +643,8 @@ video {
   z-index: 20;
 }
 
-.z-50 {
-  z-index: 50;
-}
-
-.z-40 {
-  z-index: 40;
-}
-
 .col-span-4 {
   grid-column: span 4 / span 4;
-}
-
-<<<<<<< HEAD
-.col-span-1 {
-  grid-column: span 1 / span 1;
-=======
-.col-span-12 {
-  grid-column: span 12 / span 12;
->>>>>>> abca7eed3d7eb656804ebdf29f15a1ad3e96c37f
-}
-
-.col-span-2 {
-  grid-column: span 2 / span 2;
 }
 
 .col-start-1 {
@@ -674,10 +661,6 @@ video {
 
 .col-start-3 {
   grid-column-start: 3;
-}
-
-.col-start-7 {
-  grid-column-start: 7;
 }
 
 .col-start-2 {
@@ -702,10 +685,6 @@ video {
 
 .col-end-6 {
   grid-column-end: 6;
-}
-
-.col-end-8 {
-  grid-column-end: 8;
 }
 
 .m-auto {
@@ -804,6 +783,10 @@ video {
   margin-top: 0.5rem;
 }
 
+.ml-4 {
+  margin-left: 1rem;
+}
+
 .mt-16 {
   margin-top: 4rem;
 }
@@ -820,10 +803,6 @@ video {
   margin-bottom: 0.75rem;
 }
 
-.ml-4 {
-  margin-left: 1rem;
-}
-
 .ml-7 {
   margin-left: 1.75rem;
 }
@@ -838,10 +817,6 @@ video {
 
 .ml-6 {
   margin-left: 1.5rem;
-}
-
-.ml-auto {
-  margin-left: auto;
 }
 
 .inline {
@@ -900,6 +875,10 @@ video {
   height: 39rem;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .h-\[13\.5rem\] {
   height: 13.5rem;
 }
@@ -916,14 +895,14 @@ video {
   height: 18rem;
 }
 
-.h-screen {
-  height: 100vh;
-}
-
 .h-fit {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+}
+
+.h-\[36\.8rem\] {
+  height: 36.8rem;
 }
 
 .h-\[6\.25rem\] {
@@ -950,17 +929,8 @@ video {
   height: 3.5rem;
 }
 
-<<<<<<< HEAD
-.h-\[52\.5\] {
-  height: 52.5;
-}
-
-.h-\[36\.8rem\] {
-  height: 36.8rem;
-=======
 .h-6 {
   height: 1.5rem;
->>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .min-h-screen {
@@ -997,6 +967,10 @@ video {
   width: 13.313rem;
 }
 
+.w-\[52\.5rem\] {
+  width: 52.5rem;
+}
+
 .w-\[6\.25rem\] {
   width: 6.25rem;
 }
@@ -1029,29 +1003,16 @@ video {
   width: 5rem;
 }
 
-<<<<<<< HEAD
-.w-\[36\.8\] {
-  width: 36.8;
-}
-
-.w-\[52\.5rem\] {
-  width: 52.5rem;
-}
-
 .w-80 {
   width: 20rem;
-=======
+}
+
 .w-\[7\.6rem\] {
   width: 7.6rem;
 }
 
-.w-\[23rem\] {
-  width: 23rem;
-}
-
 .min-w-\[23rem\] {
   min-width: 23rem;
->>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .max-w-laptop-full {
@@ -1095,21 +1056,16 @@ video {
   cursor: pointer;
 }
 
+.grid-cols-8 {
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+}
+
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
 }
 
 .grid-cols-custom-laptop {
   grid-template-columns: repeat(12, 80px);
-}
-
-<<<<<<< HEAD
-.grid-cols-8 {
-  grid-template-columns: repeat(8, minmax(0, 1fr));
-=======
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
->>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 }
 
 .flex-row {
@@ -1140,10 +1096,6 @@ video {
   align-items: center;
 }
 
-.justify-start {
-  justify-content: flex-start;
-}
-
 .justify-end {
   justify-content: flex-end;
 }
@@ -1156,12 +1108,12 @@ video {
   justify-content: space-between;
 }
 
-.gap-4 {
-  gap: 1rem;
-}
-
 .gap-2 {
   gap: 0.5rem;
+}
+
+.gap-4 {
+  gap: 1rem;
 }
 
 .self-center {
@@ -1265,19 +1217,6 @@ video {
   background-color: rgb(253 164 175 / var(--tw-bg-opacity));
 }
 
-.bg-red-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(239 68 68 / var(--tw-bg-opacity));
-}
-
-<<<<<<< HEAD
-=======
-.bg-yellow-500 {
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity));
-}
-
->>>>>>> 19d19625895abe1003755ef61dcac22abe3c7c73
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
 }
@@ -1322,16 +1261,16 @@ video {
   padding: 1.5rem;
 }
 
+.p-11 {
+  padding: 2.75rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
 
 .p-4 {
   padding: 1rem;
-}
-
-.p-11 {
-  padding: 2.75rem;
 }
 
 .px-4 {
@@ -1415,12 +1354,12 @@ video {
   line-height: 2rem;
 }
 
-.text-\[1\.625rem\] {
-  font-size: 1.625rem;
-}
-
 .text-\[22px\] {
   font-size: 22px;
+}
+
+.text-\[1\.625rem\] {
+  font-size: 1.625rem;
 }
 
 .text-\[1\.3rem\] {

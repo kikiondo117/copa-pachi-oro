@@ -17,8 +17,6 @@ export const createUser = async (user: RegisterForm) => {
         plataforma: user.plataforma,
         img: 'img-url',
       },
-      members: user.members,
-      subs: user.subs,
       isApproved: false,
       admin: false
     },
@@ -33,19 +31,13 @@ export const addTeamMember = async (email: string, member: TeamMemberInterface) 
   })
 
   if (user) {
-    const players = [...user.members, member]
-    const updateUser = await prisma.user.update({
-      where: {
-        email: email
-      },
-      data: {
-        members: players
-      }
+    const updateUser = await prisma.member.create({
+      data: { ...member, userId: user.id }
     })
     return updateUser
   }
 
-  return 'nani'
+  return json({ error: 'user invalid' })
 }
 
 export const addSub = async (email: string, member: TeamMemberInterface) => {
@@ -55,14 +47,8 @@ export const addSub = async (email: string, member: TeamMemberInterface) => {
   })
 
   if (user) {
-    const subs = [...user.subs, member]
-    const updateUser = await prisma.user.update({
-      where: {
-        email: email
-      },
-      data: {
-        subs: subs
-      }
+    const updateUser = await prisma.sub.create({
+      data: { ...member, userId: user.id }
     })
     return updateUser
   }

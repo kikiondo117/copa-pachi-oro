@@ -10,23 +10,23 @@ type CardPlayerProps = {
 export function CardPlayer(props: CardPlayerProps) {
   return (
     <div
-      // onClick={props.onClick}
-      className={` flex flex-row w-full h-[3.75rem] transition ease-in-out delay-150 bg-white hover:bg-blue-gray-dark
+      onClick={props.onClick}
+      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out hover:bg-blue-gray-dark
       ${props.className ? props.className : ""} `}
     >
       <img
         src="/assets/PlayerExmapleImg.svg"
         alt=""
-        className="h-full w-auto mr-2"
+        className="mr-2 h-full w-auto"
       />
 
-      <div className=" w-full flex flex-col justify-center">
-        <div className="text-special-orange font-coolveltica">
+      <div className=" flex w-full flex-col justify-center">
+        <div className="font-coolveltica text-special-orange">
           <p>{props.player.name}</p>
         </div>
         <div className="flex font-coolveltica">
           <img
-            className="h-[24px] mr-1"
+            className="mr-1 h-[24px]"
             src="/assets/icons/Platino-IconRank-PrincipalWeb.svg"
             alt=""
           />
@@ -36,18 +36,18 @@ export function CardPlayer(props: CardPlayerProps) {
           </p>
         </div>
       </div>
-      <div className="flex items-center justify-end w-24 mx-0">
+      <div className="mx-0 flex w-24 items-center justify-end">
         {props.player.capitan && (
           // <img src="/assets/icons/Icon Crown-leader.svg" alt="" />
           <img
-            className="h-[24px] mr-2"
+            className="mr-2 h-[24px]"
             src="/assets/icons/IconCrown-leader-orange.svg"
             alt=""
           />
         )}
         <img className="h-[24px]" src="/assets/icons/RolTank.svg" alt="" />
       </div>
-      <div className="bg-special-orange  w-2 ml-2"></div>
+      <div className="ml-2  w-2 bg-special-orange"></div>
     </div>
   );
 }

@@ -18,5 +18,11 @@ export function TeamMember(props: TeamMemberProps) {
     );
   }
 
-  return <CardPlayer className="mb-4" player={props.member} />;
+  return (
+    <CardPlayer
+      className="mb-4"
+      player={props.member}
+      onClick={props.onClick}
+    />
+  );
 }
