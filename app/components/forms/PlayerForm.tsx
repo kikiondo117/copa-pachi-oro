@@ -41,6 +41,8 @@ export function PlayerForm(props: AddPlayerProps) {
     }));
   };
 
+  console.log("users", props.playerSelected);
+
   return (
     <div className=" my-6">
       <h2 className="font-coolveltica text-[1.3rem] text-blue-gray-default">
@@ -51,11 +53,18 @@ export function PlayerForm(props: AddPlayerProps) {
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
         {props.playerSelected ? (
-          <input
-            type="hidden"
-            name="action"
-            value={`${props.isSub ? "updateSub" : "updatePlayer"}`}
-          />
+          <>
+            <input
+              type="hidden"
+              name="action"
+              value={`${props.isSub ? "updateSub" : "updatePlayer"}`}
+            />
+            <input
+              type="hidden"
+              name="user_id"
+              value={props.playerSelected.id}
+            />
+          </>
         ) : (
           <input
             type="hidden"

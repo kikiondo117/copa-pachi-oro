@@ -5,6 +5,7 @@ export type TeamMemberInterface = {
   rango: string
   rol: string
   capitan: boolean
+  id?: string
 }
 
 export type TeamInterface = {

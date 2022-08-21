@@ -5,7 +5,12 @@ import { json, redirect } from "@remix-run/node";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { UserInterface, TeamMemberInterface } from "~/types/types.user";
 import { getUser } from "~/utils/auth.server";
-import { addTeamMember, addSub } from "../utils/user.server";
+import {
+  addTeamMember,
+  addSub,
+  updatedSub,
+  updateTeamMember,
+} from "../utils/user.server";
 // * Components
 import {
   Modal,
@@ -96,6 +101,8 @@ export const loader: LoaderFunction = async ({ request }) => {
   const sub = user?.subs.find((sub) => sub.capitan);
   let capitan = false;
 
+  console.log("user");
+
   if (!user) {
     return redirect("/");
   }
@@ -120,6 +127,7 @@ export const action: ActionFunction = async ({ request }) => {
   const rol = "test";
   const img = "test";
   const capitan = form.get("capitan") === "on" ? true : false;
+  let id = form.get("user_id");
 
   if (
     typeof name !== "string" ||
@@ -151,9 +159,9 @@ export const action: ActionFunction = async ({ request }) => {
       });
     }
 
-    if (action === "updatePlayer") {
-      console.log("hola soy player");
-      return await addTeamMember(user?.id, {
+    if (action === "updatePlayer" && id) {
+      id = id as string;
+      return await updateTeamMember(id, {
         name,
         rango,
         rol,
@@ -162,9 +170,9 @@ export const action: ActionFunction = async ({ request }) => {
       });
     }
 
-    if (action === "updateSub") {
-      console.log("hola soy sub");
-      return await addSub(user.email, {
+    if (action === "updateSub" && id) {
+      id = id as string;
+      return await updatedSub(id, {
         name,
         rango,
         rol,
