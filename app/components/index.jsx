@@ -16,3 +16,5 @@ export { TeamSent } from "./TeamSent";
 export { CardPlayer } from "./CardPlayer";
 export { CardEmptyPlayer } from "./CardEmptyPlayer";
 export { CardAddPlayer } from "./CardAddPlayer";
+export { CardTournament } from "./CardTournament";
+

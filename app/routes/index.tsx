@@ -13,6 +13,7 @@ import {
   TeamSent,
   Modal,
   CardTeam,
+  CardTournament,
 } from "~/components";
 
 // * Types
@@ -221,14 +222,16 @@ export default function Index() {
 
           <Container className="mt-4">
             {teams.map((data) => (
-              <CardTeam
-                key={data.id}
-                onClick={() =>
-                  setShowModal(() => ({ status: true, data: data }))
-                }
-                team={data.team}
-                className="col-span-4"
-              />
+              <>
+                <CardTeam
+                  key={data.id}
+                  onClick={() =>
+                    setShowModal(() => ({ status: true, data: data }))
+                  }
+                  team={data.team}
+                  className="col-span-4"
+                />
+              </>
             ))}
           </Container>
 
