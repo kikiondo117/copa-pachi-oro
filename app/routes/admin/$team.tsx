@@ -8,7 +8,7 @@ import { getUser } from "~/utils/auth.server";
 import { getTeam, approveTeam } from "~/utils/user.server";
 // * Components
 import Toggle from "react-toggle";
-import { Header, Container, TeamMember } from "~/components";
+import { Header, Container, TeamMember, FormField } from "~/components";
 
 interface loaderData {
   user: UserInterface;
@@ -81,30 +81,32 @@ export default function AdminTeam() {
   }, [team]);
 
   return (
-    <div>
+    <div className="h-screen bg-blue-gray-dark text-white">
       <Header user={user} />
 
       <Container className="py-24">
-        <div className="col-span-12">hola</div>
-
-        <article className="col-span-4 flex flex-col">
-          <h2>Datos del equipo {team.team.name}</h2>
+        <article className="col-span-4 flex flex-col font-coolveltica ">
+          <h2 className=" text-xl">Datos del equipo </h2>
           <p>
             MARCAR EQUIPO COMO APROBADO:{" "}
-            <Toggle icons={false} onClick={approveTeam} />
+            <Toggle
+              checked={team.isApproved}
+              icons={false}
+              onClick={approveTeam}
+            />
           </p>
 
-          <p>{team.isApproved ? "true" : "false"}</p>
-
-          <button name="button" onClick={approveTeam}>
-            Approved
-          </button>
+          <FormField
+            htmlFor="name"
+            value=""
+            type="text"
+            className=" w-80"
+            placeholder={team.team.name}
+          />
         </article>
 
         <section className="col-span-4 font-coolveltica">
-          <p className=" mb-4 text-[22px] text-blue-gray-default">
-            Jugadores principales
-          </p>
+          <p className=" mb-4 text-[22px] text-white">Jugadores principales</p>
           <div>
             <ul>
               {members.length &&
@@ -125,8 +127,8 @@ export default function AdminTeam() {
           </div>
         </section>
 
-        <section className="col-span-4 font-coolveltica ">
-          <p className=" mb-4 text-2xl text-blue-gray-default">
+        <section className="col-span-4 font-coolveltica">
+          <p className=" mb-4 text-2xl text-white">
             Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
           </p>
           <ul>

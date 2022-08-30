@@ -13,7 +13,7 @@ import {
   TeamSent,
   Modal,
   CardTeam,
-  CardTournament,
+  TeamPlayers,
 } from "~/components";
 
 // * Types
@@ -35,90 +35,6 @@ interface ModalInterface {
   status: boolean;
   data: UserInterface | null;
 }
-
-export const loader: LoaderFunction = async ({ request }) => {
-  const user = await getUser(request);
-  const teams = await getTeamsApproved();
-
-  if (user && user.admin) {
-    return redirect("/admin");
-  }
-
-  if (user) {
-    return redirect("/team");
-  }
-
-  return json({ user, teams });
-};
-
-export const action: ActionFunction = async ({ request }) => {
-  const form = await request.formData();
-  const email = form.get("email");
-  const password = form.get("password");
-  let confirm_password = form.get("confirm_password");
-  let team = form.get("team");
-  let region = form.get("region");
-  let plataforma = form.get("plataforma");
-  let isApproved = false;
-  let subs: TeamMemberInterface[] = [];
-  let members: TeamMemberInterface[] = [];
-  const action = form.get("action");
-
-  if (typeof email !== "string" || typeof password !== "string") {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-  }
-
-  if (
-    action === "register" &&
-    (typeof team !== "string" ||
-      typeof confirm_password !== "string" ||
-      typeof region !== "string" ||
-      typeof plataforma !== "string")
-  ) {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-  }
-
-  const errors = {
-    email: validateEmail(email),
-    password: validatePassword(password),
-    ...(action === "register"
-      ? {
-          confirm_password: validatePassword(
-            (confirm_password as string) || ""
-          ),
-          team: validateName((team as string) || ""),
-        }
-      : {}),
-  };
-
-  if (Object.values(errors).some(Boolean)) {
-    return json({ errors, fields: { email, password } }, { status: 400 });
-  }
-
-  switch (action) {
-    case "login": {
-      return await login({ email, password });
-    }
-
-    case "register": {
-      confirm_password = confirm_password as string;
-      team = team as string;
-      region = region as string;
-      plataforma = plataforma as string;
-      return await register({
-        email,
-        password,
-        confirm_password,
-        team,
-        region,
-        plataforma,
-        members,
-        subs,
-        isApproved,
-      });
-    }
-  }
-};
 
 export default function Index() {
   const { user, teams } = useLoaderData<IndexInterface>();
@@ -222,28 +138,38 @@ export default function Index() {
 
           <Container className="mt-4">
             {teams.map((data) => (
-              <>
-                <CardTeam
-                  key={data.id}
-                  onClick={() =>
-                    setShowModal(() => ({ status: true, data: data }))
-                  }
-                  team={data.team}
-                  className="col-span-4"
-                />
-              </>
+              <CardTeam
+                key={data.id}
+                onClick={() =>
+                  setShowModal(() => ({ status: true, data: data }))
+                }
+                team={data.team}
+                className="col-span-4"
+              />
             ))}
           </Container>
 
-          {showModal.status && (
+          {/* TODO Refacto */}
+          {showModal.status && showModal.data ? (
             <Modal
+              modalClassName="h-[36.8rem] w-[52.5rem]"
               onClose={() =>
                 setShowModal((prevState) => ({ ...prevState, status: false }))
               }
             >
-              {showModal.data?.members.length ? "hola" : "no members"}
+              <div className="p-11">
+                <CardTeam team={showModal.data?.team} />
+
+                <TeamPlayers
+                  className="mt-4 grid grid-cols-8 gap-2"
+                  classNameMembers="col-span-4"
+                  classNameSubs="col-span-4"
+                  members={showModal.data.members}
+                  subs={showModal.data.subs}
+                />
+              </div>
             </Modal>
-          )}
+          ) : null}
         </div>
       </section>
 
@@ -251,3 +177,87 @@ export default function Index() {
     </div>
   );
 }
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
+  const teams = await getTeamsApproved();
+
+  if (user && user.admin) {
+    return redirect("/admin");
+  }
+
+  if (user) {
+    return redirect("/team");
+  }
+
+  return json({ user, teams });
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const form = await request.formData();
+  const email = form.get("email");
+  const password = form.get("password");
+  let confirm_password = form.get("confirm_password");
+  let team = form.get("team");
+  let region = form.get("region");
+  let plataforma = form.get("plataforma");
+  let isApproved = false;
+  let subs: TeamMemberInterface[] = [];
+  let members: TeamMemberInterface[] = [];
+  const action = form.get("action");
+
+  if (typeof email !== "string" || typeof password !== "string") {
+    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
+  }
+
+  if (
+    action === "register" &&
+    (typeof team !== "string" ||
+      typeof confirm_password !== "string" ||
+      typeof region !== "string" ||
+      typeof plataforma !== "string")
+  ) {
+    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
+  }
+
+  const errors = {
+    email: validateEmail(email),
+    password: validatePassword(password),
+    ...(action === "register"
+      ? {
+          confirm_password: validatePassword(
+            (confirm_password as string) || ""
+          ),
+          team: validateName((team as string) || ""),
+        }
+      : {}),
+  };
+
+  if (Object.values(errors).some(Boolean)) {
+    return json({ errors, fields: { email, password } }, { status: 400 });
+  }
+
+  switch (action) {
+    case "login": {
+      return await login({ email, password });
+    }
+
+    case "register": {
+      confirm_password = confirm_password as string;
+      team = team as string;
+      region = region as string;
+      plataforma = plataforma as string;
+      return await register({
+        email,
+        password,
+        confirm_password,
+        team,
+        region,
+        plataforma,
+        members,
+        subs,
+        isApproved,
+      });
+    }
+  }
+};

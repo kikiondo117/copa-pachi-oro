@@ -41,6 +41,8 @@ export function PlayerForm(props: AddPlayerProps) {
     }));
   };
 
+  console.log("users", props.playerSelected);
+
   return (
     <div className=" my-6">
       <h2 className="font-coolveltica text-[1.3rem] text-blue-gray-default">
@@ -50,11 +52,27 @@ export function PlayerForm(props: AddPlayerProps) {
         <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
-        <input
-          type="hidden"
-          name="action"
-          value={`${props.isSub ? "addSub" : "addPlayer"}`}
-        />
+        {props.playerSelected ? (
+          <>
+            <input
+              type="hidden"
+              name="action"
+              value={`${props.isSub ? "updateSub" : "updatePlayer"}`}
+            />
+            <input
+              type="hidden"
+              name="user_id"
+              value={props.playerSelected.id}
+            />
+          </>
+        ) : (
+          <input
+            type="hidden"
+            name="action"
+            value={`${props.isSub ? "addSub" : "addPlayer"}`}
+          />
+        )}
+
         <input
           className="my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black"
           name="name"
@@ -115,12 +133,7 @@ export function PlayerForm(props: AddPlayerProps) {
         {isCreating ? (
           <div>Loading...</div>
         ) : (
-          <Button.Primary
-            className=" mt-16 w-[1] "
-            {...(props.playerSelected
-              ? { disabled: true }
-              : { disabled: false })}
-          >
+          <Button.Primary className=" mt-16 w-[1] ">
             GUARDAR JUGADOR
           </Button.Primary>
         )}

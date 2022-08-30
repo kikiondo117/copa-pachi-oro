@@ -13,6 +13,7 @@ export { TeamForm } from "./forms/TeamForm";
 export { CardTeam } from "./CardTeam";
 export { TeamMember } from "./TeamMember";
 export { TeamSent } from "./TeamSent";
+export { TeamPlayers } from "./TeamPlayers";
 export { CardPlayer } from "./CardPlayer";
 export { CardEmptyPlayer } from "./CardEmptyPlayer";
 export { CardAddPlayer } from "./CardAddPlayer";

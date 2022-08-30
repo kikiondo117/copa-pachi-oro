@@ -11,16 +11,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
-  password  String
-  team      Team
-  members   Member[]
-  subs      Member[] 
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  email      String   @unique
+  password   String
   isApproved Boolean
-  admin     Boolean
+  admin      Boolean
+  team       Team
+  members    Member[]
+  subs       Sub[]
 }
 
 type Team {
@@ -30,10 +30,24 @@ type Team {
   img        String
 }
 
-type Member {
-  img       String
-  name      String
-  rango     String
-  rol       String
-  capitan   Boolean
+model Sub {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  img     String
+  name    String
+  rango   String
+  rol     String
+  capitan Boolean
+  author  User    @relation(fields: [userId], references: [id])
+  userId  String  @db.ObjectId
+}
+
+model Member {
+  id      String  @id @default(auto()) @map("_id") @db.ObjectId
+  img     String
+  name    String
+  rango   String
+  rol     String
+  capitan Boolean
+  author  User    @relation(fields: [userId], references: [id])
+  userId  String  @db.ObjectId
 }
