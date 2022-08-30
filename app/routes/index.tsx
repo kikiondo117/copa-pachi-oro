@@ -25,6 +25,7 @@ import { validateEmail, validatePassword } from "../utils/validators.server";
 import { validateName } from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
 import { getTeamsApproved } from "../utils/user.server";
+import { Modal2 } from "~/components/ui/Modal2";
 
 interface IndexInterface {
   user: UserInterface;
@@ -151,7 +152,7 @@ export default function Index() {
 
           {/* TODO Refacto */}
           {showModal.status && showModal.data ? (
-            <Modal
+            <Modal2
               modalClassName="h-[36.8rem] w-[52.5rem]"
               onClose={() =>
                 setShowModal((prevState) => ({ ...prevState, status: false }))
@@ -160,15 +161,15 @@ export default function Index() {
               <div className="p-11">
                 <CardTeam team={showModal.data?.team} />
 
-                <TeamPlayers
+                {/* <TeamPlayers
                   className="mt-4 grid grid-cols-8 gap-2"
                   classNameMembers="col-span-4"
                   classNameSubs="col-span-4"
                   members={showModal.data.members}
                   subs={showModal.data.subs}
-                />
+                /> */}
               </div>
-            </Modal>
+            </Modal2>
           ) : null}
         </div>
       </section>

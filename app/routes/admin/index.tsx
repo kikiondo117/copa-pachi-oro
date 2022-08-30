@@ -22,7 +22,7 @@ export default function AdminTeam() {
         <div className="col-start-3 col-end-11 flex flex-wrap content-start gap-4 overflow-scroll ">
           {teams &&
             teams.map((user: UserInterface) => (
-              <div className="h-fit min-w-[23rem]">
+              <div key={user.id} className="h-fit min-w-[23rem]">
                 <div className=" flex justify-end ">
                   <Link to={`/admin/${user.id}`} key={user.id}>
                     <img

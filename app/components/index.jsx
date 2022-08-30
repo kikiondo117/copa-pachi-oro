@@ -1,4 +1,4 @@
-export { Modal } from "./ui/Modal";
+export { Modal2 } from "./ui/Modal2";
 export { Container } from "./ui/Container";
 export { Button } from "./ui/Button";
 export { Header } from "./ui/Header";

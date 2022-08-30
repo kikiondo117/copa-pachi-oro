@@ -30,6 +30,7 @@ export default function App() {
       </head>
       <body>
         <Outlet />
+        <div id="modal-root"></div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
