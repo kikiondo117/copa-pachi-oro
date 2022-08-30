@@ -101,7 +101,13 @@ export const getTeamsApproved = async () => {
 
 export const getTeam = async (id: string) => {
   const team = await prisma.user.findUnique({
-    where: { id: id }
+    where: { id: id },
+    select: {
+      id: true, email: true,
+      team: true,
+      members: true, subs: true,
+      isApproved: true, admin: true,
+    },
   })
 
   return team

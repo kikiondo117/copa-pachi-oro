@@ -41,8 +41,6 @@ export function PlayerForm(props: AddPlayerProps) {
     }));
   };
 
-  console.log("users", props.playerSelected);
-
   return (
     <div className=" my-6">
       <h2 className="font-coolveltica text-[1.3rem] text-blue-gray-default">

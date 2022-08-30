@@ -13,7 +13,7 @@ import {
 } from "../utils/user.server";
 // * Components
 import {
-  Modal,
+  Modal2,
   PlayerForm,
   Container,
   Header,
@@ -78,7 +78,7 @@ export default function Team() {
       </main>
 
       {isModal.status && (
-        <Modal
+        <Modal2
           onClose={() => setIsModal({ status: false })}
           className="grid grid-cols-6"
         >
@@ -89,7 +89,7 @@ export default function Team() {
               playerSelected={playerSelected}
             />
           </div>
-        </Modal>
+        </Modal2>
       )}
     </div>
   );
@@ -100,8 +100,6 @@ export const loader: LoaderFunction = async ({ request }) => {
   const member = user?.members.find((member) => member.capitan);
   const sub = user?.subs.find((sub) => sub.capitan);
   let capitan = false;
-
-  console.log("user");
 
   if (!user) {
     return redirect("/");
