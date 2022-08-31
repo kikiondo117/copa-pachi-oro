@@ -5,17 +5,23 @@ import type {
 } from "../../types/types.user";
 import * as React from "react";
 import { redirect, json } from "@remix-run/node";
-import { useLoaderData, useSubmit, useActionData } from "@remix-run/react";
-// * Utils
+import {
+  useLoaderData,
+  useSubmit,
+  useActionData,
+  useTransition,
+} from "@remix-run/react";
+// * Utils and controllers
 import { getUser } from "~/utils/auth.server";
 import {
-  getTeam,
   approveTeam,
   addTeamMember,
   addSub,
   updateTeamMember,
   updatedSub,
-} from "~/utils/user.server";
+  getOwner,
+  deleteTeam
+} from "~/controller/team.controller";
 // * Components
 import Toggle from "react-toggle";
 import {
@@ -25,15 +31,17 @@ import {
   FormField,
   Modal2,
   PlayerForm,
+  Nav,
 } from "~/components";
 
 interface loaderData {
-  user: UserInterface;
-  team: UserInterface;
+  admin: UserInterface;
+  owner: UserInterface;
 }
 
 export default function AdminTeam() {
-  const { user, team } = useLoaderData<loaderData>();
+  const { admin, owner } = useLoaderData<loaderData>();
+  const transition = useTransition();
   const [members, setMembers] = React.useState(() => new Array(5).fill(null));
   const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
   const [isSub, setIsSub] = React.useState(false);
@@ -45,7 +53,9 @@ export default function AdminTeam() {
   const submit = useSubmit();
 
   const approveTeam = () => {
-    submit(null, { method: "post" });
+    const formData = new FormData();
+    formData.append("action", "approveTeam");
+    submit(formData, { method: "post" });
   };
 
   React.useEffect(() => {
@@ -53,42 +63,48 @@ export default function AdminTeam() {
   }, [response]);
 
   React.useEffect(() => {
-    if (team && team.members) {
+    if (owner && owner.members) {
       setMembers((prevState) =>
         prevState.map((value, index) => {
-          if (team.members[index] !== undefined) {
-            return team.members[index];
+          if (owner.members[index] !== undefined) {
+            return owner.members[index];
           }
           return null;
         })
       );
     }
 
-    if (team && team.subs) {
+    if (owner && owner.subs) {
       setSubs((prevState) =>
         prevState.map((value, index) => {
-          if (team.subs[index] !== undefined) {
-            return team.subs[index];
+          if (owner.subs[index] !== undefined) {
+            return owner.subs[index];
           }
           return null;
         })
       );
     }
-  }, [team]);
+  }, [owner]);
 
   return (
     <div className="h-screen bg-blue-gray-dark text-white">
-      <Header user={user} />
+      <Header user={admin}/>
 
       <Container className="py-24">
+        <Nav />
+
         <article className="col-span-4 flex flex-col font-coolveltica ">
           <h2 className=" text-xl">Datos del equipo </h2>
           <span>
-            MARCAR EQUIPO COMO APROBADO:{" "}
+            MARCAR EQUIPO COMO APROBADO:
             <Toggle
-              checked={team.isApproved}
+              disabled={
+                transition.submission?.formData.get("action") === "approveTeam"
+              }
+              checked={owner.isApproved}
               icons={false}
               onClick={approveTeam}
+              onChange={() => null}
             />
           </span>
 
@@ -97,7 +113,7 @@ export default function AdminTeam() {
             value=""
             type="text"
             className=" w-80"
-            placeholder={team.team.name}
+            placeholder={owner.team.name}
           />
         </article>
 
@@ -138,6 +154,7 @@ export default function AdminTeam() {
                       label="Opcional"
                       member={sub ? sub : null}
                       onClick={() => {
+                        setIsSub(true);
                         setShowModal(true);
                         setPlayerSelected(sub);
                       }}
@@ -168,26 +185,31 @@ export default function AdminTeam() {
 }
 
 export const loader: LoaderFunction = async ({ request, params }) => {
-  const user = await getUser(request);
+  const admin = await getUser(request);
 
-  if (!user || !user.admin) {
+  if (!admin || !admin.admin) {
     return redirect("/");
   }
 
-  if (params.team) {
+  if (params.owner) {
     try {
-      const team = await getTeam(params.team);
-      return json({ user, team });
+      const owner = await getOwner(params.owner);
+
+      if (owner) {
+        return json({ admin, owner });
+      } else {
+        return redirect("/");
+      }
     } catch {
       return redirect("/");
     }
   }
 
-  return json({ user });
+  return json({ admin });
 };
 
-export const action: ActionFunction = async ({ request }) => {
-  const user = await getUser(request);
+export const action: ActionFunction = async ({ request, params }) => {
+  const owner = await getOwner(params.owner);
   const form = await request.formData();
   const name = form.get("name");
   const rango = form.get("rango");
@@ -195,61 +217,71 @@ export const action: ActionFunction = async ({ request }) => {
   const rol = form.get("rol");
   const img = "test";
   const capitan = form.get("capitan") === "on" ? true : false;
+
   let id = form.get("user_id");
+
+  if (action === "delete_team" && owner) {
+    await deleteTeam({ id: owner?.id });
+    return redirect("/");
+  }
+
+  if (action === "approveTeam" && owner) {
+    return await approveTeam(owner.email);
+  }
 
   if (
     typeof name !== "string" ||
     typeof rango !== "string" ||
     typeof capitan !== "boolean" ||
-    typeof img !== "string"
+    typeof img !== "string" ||
+    typeof rol !== "string"
   ) {
     return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
   }
-  console.log("rol", rol, id);
 
-  // if (user) {
-  //   if (action === "addPlayer") {
-  //     return await addTeamMember(user.email, {
-  //       name,
-  //       rango,
-  //       rol,
-  //       capitan,
-  //       img,
-  //     });
-  //   }
+  if (owner) {
+    if (action === "addPlayer") {
+      return await addTeamMember(owner.email, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
 
-  //   if (action === "addSub") {
-  //     return await addSub(user.email, {
-  //       name,
-  //       rango,
-  //       rol,
-  //       capitan,
-  //       img,
-  //     });
-  //   }
+    if (action === "addSub") {
+      return await addSub(owner.email, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
 
-  //   if (action === "updatePlayer" && id) {
-  //     id = id as string;
-  //     return await updateTeamMember(id, {
-  //       name,
-  //       rango,
-  //       rol,
-  //       capitan,
-  //       img,
-  //     });
-  //   }
+    if (action === "updatePlayer" && id) {
+      id = id as string;
+      return await updateTeamMember(id, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
 
-  //   if (action === "updateSub" && id) {
-  //     id = id as string;
-  //     return await updatedSub(id, {
-  //       name,
-  //       rango,
-  //       rol,
-  //       capitan,
-  //       img,
-  //     });
-  //   }
-  // }
+    if (action === "updateSub" && id) {
+      id = id as string;
+      return await updatedSub(id, {
+        name,
+        rango,
+        rol,
+        capitan,
+        img,
+      });
+    }
+  }
 
   return json({ error: `Invalid User`, form: action }, { status: 400 });
 };

@@ -31,10 +31,12 @@ export function Modal2({
         }`}
       >
         <div
-          className={`h-full  rounded-lg bg-special-gray  ${
+          className={`relative h-full  rounded-lg bg-special-gray  ${
             className ? className : ""
           }`}
         >
+          <button onClick={onClose} className=" absolute right-6 top-3">X</button>
+
           {children}
         </div>
       </div>

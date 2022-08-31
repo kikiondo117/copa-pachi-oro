@@ -1,10 +1,18 @@
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from '@remix-run/react';
+import { redirect } from "@remix-run/node";
+// * Types
+import type { LoaderFunction } from "@remix-run/node";
+// * Utils
+import { getUser } from '~/utils/auth.server';
+// * Components
 import { Header } from "~/components";
 
 export default function Error() {
+  const {user} = useLoaderData()
+
   return (
     <div className="relative h-screen">
-      <Header />
+      <Header user={user} />
       <div className="pt-14">
         {/* HACERLO CON UN BOTON */}
         <Link to="/">
@@ -23,3 +31,19 @@ export default function Error() {
     </div>
   );
 }
+
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request);
+
+  if (!user) {
+    return redirect("/");
+  }
+
+  if (user.admin) {
+    return redirect("/admin");
+  }
+
+  return { user };
+};
+

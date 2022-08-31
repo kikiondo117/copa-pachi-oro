@@ -1,24 +1,40 @@
-import type { LoaderFunction } from "@remix-run/node";
-import type { UserInterface } from "../../types/types.user";
+import type { LoaderFunction, ActionFunction } from "@remix-run/node";
+import type { UserInterface } from "~/types/types.user";
 import { redirect, json } from "@remix-run/node";
-import { Link, useLoaderData } from "@remix-run/react";
-// * Utils
+import { Link, useLoaderData, useSubmit } from "@remix-run/react";
+import * as React from 'react'
+// * UTILS && CONTROLLER
 import { getUser } from "~/utils/auth.server";
-import { getTeams } from "~/utils/user.server";
-import { Header, Container, CardTeam, Button } from "~/components/";
+import { getTeams, deleteTeam } from "~/controller/team.controller";
+// * Components
+import { Header, Container, CardTeam, Button, Modal2, PreviewTeamPlayes } from "~/components/";
+
+
 
 export default function AdminTeam() {
+  const [showModal, setShowModal] = React.useState(false)
+  const [userSelected, setUserSelected] = React.useState<UserInterface>()
   const { user, teams } = useLoaderData();
+  const submit = useSubmit();
 
   return (
     <div className="bg-gray-1 bg-cover">
       <Header user={user} />
-      <Button.Primary className=" col-start-3 m-0 flex h-10 w-[7.6rem] ">
-        Crear equipo{" "}
-        <img className=" h-5" src="/assets/icons/IconAdd-white.svg" alt="" />
-      </Button.Primary>
 
-      <Container className=" flex h-screen flex-row overflow-y-scroll pt-20">
+      <Container className="flex h-screen flex-row overflow-y-scroll pt-20">
+        <header className="col-start-3 col-end-11 h-fit">
+          <Link to="/admin/team">
+            <Button.Primary className="flex h-10 w-[7.6rem] items-center justify-around">
+              Crear equipo
+              <img
+                className=" h-5"
+                src="/assets/icons/IconAdd-white.svg"
+                alt=""
+              />
+            </Button.Primary>
+          </Link>
+        </header>
+
         <div className="col-start-3 col-end-11 flex flex-wrap content-start gap-4 overflow-scroll ">
           {teams &&
             teams.map((user: UserInterface) => (
@@ -31,20 +47,38 @@ export default function AdminTeam() {
                       alt=""
                     />
                   </Link>
-                  <img
-                    className="mb-4 ml-6 h-6"
-                    src="/assets/icons/iconDelete.svg"
-                    alt=""
-                  />
+                  <button
+                    onClick={() => {
+                      const formData = new FormData();
+                      formData.append("action", "delete_team");
+                      formData.append("id", user.id);
+                      submit(formData, { method: "post" });
+                    }}
+                  >
+                    <img
+                      className="mb-4 ml-6 h-6"
+                      src="/assets/icons/iconDelete.svg"
+                      alt=""
+                    />
+                  </button>
                 </div>
-                <Link to={`/admin/${user.id}`} key={user.id}>
+                <button onClick={() => {
+                  setShowModal(true);
+                  setUserSelected(user)
+                }} className='w-full' key={user.id}>
                   <CardTeam team={user.team} />
-                </Link>
+                </button>
               </div>
             ))}
         </div>
       </Container>
-    </div>
+
+      {showModal && userSelected && <Modal2 modalClassName="w-[52rem] h-[36.6rem]" onClose={() => setShowModal(false)}>
+        <PreviewTeamPlayes team={userSelected.team} members={userSelected.members} subs={userSelected.subs} />
+      </Modal2>
+      }
+
+    </div >
   );
 }
 
@@ -55,4 +89,26 @@ export const loader: LoaderFunction = async ({ request }) => {
   }
   const teams = await getTeams();
   return json({ user, teams });
+};
+
+export const action: ActionFunction = async ({ request }) => {
+  const form = await request.formData();
+  const action = form.get("action");
+  let id = form.get('id')
+
+
+
+  switch (action) {
+    case "delete_team": {
+      if (id) {
+        id = id as string
+        await deleteTeam({ id })
+        return redirect('/')
+      }
+
+      return json({ payload: 'Error ID' })
+    }
+    default:
+      break;
+  }
 };

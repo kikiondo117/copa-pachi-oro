@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { TeamMemberInterface } from "~/types/types.user";
+import classNames from 'classnames';
 
 type CardPlayerProps = {
   className?: string;
@@ -11,8 +12,10 @@ export function CardPlayer(props: CardPlayerProps) {
   return (
     <div
       onClick={props.onClick}
-      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out hover:bg-blue-gray-dark
-      ${props.className ? props.className : ""} `}
+      className={classNames(
+        'flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out', 
+        props.className)
+      }
     >
       <img
         src="/assets/PlayerExmapleImg.svg"
@@ -48,6 +51,6 @@ export function CardPlayer(props: CardPlayerProps) {
         <img className="h-[24px]" src="/assets/icons/RolTank.svg" alt="" />
       </div>
       <div className="ml-2  w-2 bg-special-orange"></div>
-    </div>
+    </div >
   );
 }

@@ -1,4 +1,5 @@
 export { Modal2 } from "./ui/Modal2";
+
 export { Container } from "./ui/Container";
 export { Button } from "./ui/Button";
 export { Header } from "./ui/Header";
@@ -17,3 +18,7 @@ export { TeamPlayers } from "./TeamPlayers";
 export { CardPlayer } from "./CardPlayer";
 export { CardEmptyPlayer } from "./CardEmptyPlayer";
 export { CardAddPlayer } from "./CardAddPlayer";
+export { PreviewTeamPlayes } from "./PreviewTeamPlayers";
+
+// * OWNER COMPONENTS
+export { Nav } from "./owner/Nav/Nav";

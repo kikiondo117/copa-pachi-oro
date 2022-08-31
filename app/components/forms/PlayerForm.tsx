@@ -1,4 +1,4 @@
-import type { TeamMemberInterface } from "~/types/types.user";
+import type { TeamMemberInterface, TeamInterface } from "~/types/types.user";
 import * as React from "react";
 import { Form, useTransition } from "@remix-run/react";
 // * Components
@@ -9,6 +9,7 @@ type AddPlayerProps = {
   isSub: boolean;
   playerSelected?: TeamMemberInterface | null;
   showCapitan: boolean;
+  team?: TeamInterface;
 };
 
 export function PlayerForm(props: AddPlayerProps) {
@@ -50,6 +51,8 @@ export function PlayerForm(props: AddPlayerProps) {
         <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
+        <input type="hidden" name="team" value={props.team} />
+
         {props.playerSelected ? (
           <>
             <input
@@ -112,7 +115,6 @@ export function PlayerForm(props: AddPlayerProps) {
                 name="capitan"
                 className="custom-classname ml-4"
                 icons={false}
-                checked={dataForm.capitan}
                 onChange={() =>
                   setDataForm((prevState) => ({
                     ...prevState,
