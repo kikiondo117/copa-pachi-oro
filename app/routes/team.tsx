@@ -10,7 +10,7 @@ import {
   addSub,
   updatedSub,
   updateTeamMember,
-} from "../utils/user.server";
+} from "~/controller/team.controller";
 // * Components
 import {
   Modal2,

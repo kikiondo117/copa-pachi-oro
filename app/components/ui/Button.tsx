@@ -15,10 +15,12 @@ export function Primary({
     <button
       {...props}
       onClick={onClick}
-      className={` bg-special-blue-light 
-                  text-white w-fit mx-auto p-2
-                  font-big-noodle-oblique 
-                  rounded-md mb-3 cursor-pointer ${className ? className : ""}`}
+      className={` mb-3 
+                  w-fit cursor-pointer rounded-md
+                  bg-special-blue-light 
+                  p-2 font-big-noodle-oblique text-white ${
+                    className ? className : "mx-auto"
+                  }`}
     >
       {children}
     </button>
@@ -29,7 +31,7 @@ export function Button({ children, className, onClick }: any) {
   return (
     <button
       onClick={onClick}
-      className={`mx-auto rounded-md w-fit text-white btn-orange-default ${
+      className={`btn-orange-default mx-auto w-fit rounded-md text-white ${
         className ? className : ""
       }`}
     >

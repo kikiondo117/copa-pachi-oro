@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { UserInterface } from "~/types/types.user";
-
 // * Components
+import classNames from "classnames";
 import { LoginForm } from "~/components";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
 
@@ -34,10 +34,10 @@ export function Header({ user }: HeaderProps) {
           {user && !user.admin ? (
             <>
               <li className="mx-4">
-                <a href="/torneos">TORNEOS</a>
+                <a href="/team">Equipo</a>
               </li>
               <li className="mx-4">
-                <a href="/team">EQUIPOS</a>
+                <a href="/teams">EQUIPOS</a>
               </li>
             </>
           ) : null}
@@ -55,15 +55,17 @@ export function Header({ user }: HeaderProps) {
 
           <li>
             <button
-              className={`mx-4 rounded-md  ${
-                user ? "mx-2 bg-special-blue-light px-2" : "btn-orange-default"
-              }`}
+              className={classNames("mx-4 rounded-md px-2", {
+                " bg-special-blue-light ": user,
+                "bg-organge-light": user?.admin || !user,
+              })}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);
               }}
             >
               {user ? user.email : " INICIAR SESIÓN"}
             </button>
+
             {showLogin && (
               <div className="absolute right-7 mt-5 w-96 rounded-lg bg-special-gray p-4 ">
                 <LoginForm />

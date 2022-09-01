@@ -1,9 +1,14 @@
 import * as React from "react";
-
-import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { TeamMemberInterface } from "../types/types.user";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
+// * Types
+import type { UserInterface } from "../types/types.user";
+import type { ActionFunction, LoaderFunction } from "@remix-run/node";
+import type { TeamMemberInterface } from "../types/types.user";
+// * Utils and Controllers
+import { validateEmail, validatePassword, validateName} from "../utils/validators.server";
+import { login, getUser, register } from "~/utils/auth.server";
+import { getTeamsApproved } from "~/controller/team.controller";
 // * Components
 import {
   Header,
@@ -11,38 +16,21 @@ import {
   Footer,
   Container,
   TeamSent,
-  Modal,
   CardTeam,
-  TeamPlayers,
+  PreviewTeamPlayes,
+  Modal2
 } from "~/components";
-
-// * Types
-import type { UserInterface } from "../types/types.user";
-// * Utils
-import TwitchLogoJuanYut from "~/../public/assets/juanyut-logo-nombre.svg";
-import MainMessage from "~/../public/assets/main-landing-message.svg";
-import { validateEmail, validatePassword } from "../utils/validators.server";
-import { validateName } from "../utils/validators.server";
-import { login, getUser, register } from "~/utils/auth.server";
-import { getTeamsApproved } from "../utils/user.server";
-import { Modal2 } from "~/components/ui/Modal2";
 
 interface IndexInterface {
   user: UserInterface;
   teams: UserInterface[];
 }
 
-interface ModalInterface {
-  status: boolean;
-  data: UserInterface | null;
-}
-
 export default function Index() {
   const { user, teams } = useLoaderData<IndexInterface>();
-  const [showModal, setShowModal] = React.useState<ModalInterface>({
-    status: false,
-    data: null,
-  });
+  const [teamSelected, setTeamSelected] = React.useState<UserInterface>();
+  const [showModal, setShowModal] = React.useState(false);
+
 
   return (
     <div className="min-h-screen ">
@@ -56,7 +44,7 @@ export default function Index() {
           <div className="col-start-1 col-end-7 h-full">
             <div className="flex h-full flex-col items-start justify-between">
               <img
-                src={MainMessage}
+                src={'/assets/main-landing-message.svg'}
                 alt=""
                 className="my-auto mx-0 h-[13.5rem]"
               />
@@ -67,7 +55,7 @@ export default function Index() {
                   target="_blank"
                 >
                   <img
-                    src={TwitchLogoJuanYut}
+                    src={'/assets/juanyut-logo-nombre.svg'}
                     className=" mb-2 h-10 w-[13.313rem] hover:animate-bounce"
                     alt=""
                   />
@@ -138,37 +126,32 @@ export default function Index() {
           </h3>
 
           <Container className="mt-4">
-            {teams.map((data) => (
+            {teams.map((user) => (
               <CardTeam
-                key={data.id}
-                onClick={() =>
-                  setShowModal(() => ({ status: true, data: data }))
-                }
-                team={data.team}
-                className="col-span-4"
+                key={user.id}
+                onClick={() => {
+                  setShowModal(true);
+                  setTeamSelected(user);
+                }}
+                team={user.team}
+                className="col-span-4 cursor-pointer"
               />
             ))}
           </Container>
 
-          {/* TODO Refacto */}
-          {showModal.status && showModal.data ? (
+
+          {showModal && teamSelected ? (
             <Modal2
               modalClassName="h-[36.8rem] w-[52.5rem]"
               onClose={() =>
-                setShowModal((prevState) => ({ ...prevState, status: false }))
+                setShowModal(false)
               }
             >
-              <div className="p-11">
-                <CardTeam team={showModal.data?.team} />
-
-                {/* <TeamPlayers
-                  className="mt-4 grid grid-cols-8 gap-2"
-                  classNameMembers="col-span-4"
-                  classNameSubs="col-span-4"
-                  members={showModal.data.members}
-                  subs={showModal.data.subs}
-                /> */}
-              </div>
+              <PreviewTeamPlayes
+                team={teamSelected.team}
+                members={teamSelected.members}
+                subs={teamSelected.subs}
+              />
             </Modal2>
           ) : null}
         </div>

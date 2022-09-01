@@ -7,20 +7,20 @@ export function Container({ children, className }: ContainerProps) {
   return (
     <div
       className={` 
+      md:max-tablet-full
+      sm:max-w-mobile 
+      mx-auto 
       w-full 
       max-w-laptop-full 
-      md:max-tablet-full 
-      sm:max-w-mobile 
     ${className ? className : ""}`}
     >
       <div
         className="
-        
-      w-laptop h-full mx-auto px-0 grid
-      grid-cols-custom-laptop
-      md:grid-cols-custom-laptop md:w-tablet
-      sm:grid-cols-custom-mobile gap-4 sm:w-mobile
-      "
+          sm:grid-cols-custom-mobile mx-auto grid h-full w-laptop
+          grid-cols-custom-laptop
+          content-start gap-4 px-0
+          md:w-tablet md:grid-cols-custom-laptop sm:w-mobile
+        "
       >
         {children}
       </div>

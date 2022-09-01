@@ -1,5 +1,6 @@
 import * as React from "react";
 import type { TeamInterface } from "~/types/types.user";
+import classNames from 'classnames';
 
 type CardTeamProps = {
   className?: string;
@@ -8,11 +9,11 @@ type CardTeamProps = {
 };
 
 export function CardTeam(props: CardTeamProps) {
+
   return (
     <div
       onClick={props.onClick}
-      className={`flex h-[3.75rem] w-full flex-row bg-blue-gray-default
-      ${props.className ? props.className : ""} `}
+      className={classNames('bg-blue-gray-default flex flex-row w-full h-[3.75rem]', props.className)}
     >
       <div className="">
         <img

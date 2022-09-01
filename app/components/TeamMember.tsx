@@ -13,16 +13,16 @@ export function TeamMember(props: TeamMemberProps) {
       <CardAddPlayer
         label={props.label}
         onClick={props.onClick}
-        className=" mb-4"
+        className="mb-4"
       ></CardAddPlayer>
     );
   }
 
   return (
     <CardPlayer
-      className="mb-4"
       player={props.member}
       onClick={props.onClick}
+      className="mb-4"
     />
   );
 }

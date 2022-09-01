@@ -1,28 +1,6 @@
-import type { RegisterForm } from '../types/types.server'
 import type { TeamMemberInterface } from '../types/types.user'
-import bcrypt from 'bcryptjs'
-import { prisma } from './prisma.server'
+import { prisma } from '../utils/prisma.server'
 import { json } from '@remix-run/node';
-
-
-export const createUser = async (user: RegisterForm) => {
-  const passwordHash = await bcrypt.hash(user.password, 10)
-  const newUser = await prisma.user.create({
-    data: {
-      email: user.email,
-      password: passwordHash,
-      team: {
-        name: user.team,
-        region: user.region,
-        plataforma: user.plataforma,
-        img: 'img-url',
-      },
-      isApproved: false,
-      admin: false
-    },
-  })
-  return { id: newUser.id, email: user.email }
-}
 
 export const addTeamMember = async (email: string, member: TeamMemberInterface) => {
 
@@ -77,7 +55,15 @@ export const updatedSub = async (subId: string, member: TeamMemberInterface) => 
 }
 
 export const getTeams = async () => {
-  const teams = await prisma.user.findMany()
+  const teams = await prisma.user.findMany({
+    select: {
+      id: true, email: true,
+      team: true, members: true,
+      isApproved: true, admin: true,
+      subs: true
+    }
+  })
+
   if (teams) {
     return teams
   }
@@ -89,6 +75,12 @@ export const getTeamsApproved = async () => {
   const teams = await prisma.user.findMany({
     where: {
       isApproved: true
+    },
+    select: {
+      id: true, email: true,
+      team: true,
+      members: true, subs: true,
+      isApproved: true, admin: true,
     }
   })
 
@@ -99,8 +91,8 @@ export const getTeamsApproved = async () => {
   return []
 }
 
-export const getTeam = async (id: string) => {
-  const team = await prisma.user.findUnique({
+export const getOwner = async (id: string) => {
+  const owner = await prisma.user.findUnique({
     where: { id: id },
     select: {
       id: true, email: true,
@@ -110,13 +102,26 @@ export const getTeam = async (id: string) => {
     },
   })
 
-  return team
+  return owner
 }
 
-export const approveTeam = async (id: string) => {
+export const approveTeam = async (email: string) => {
+  const approvedStatus = await prisma.user.findFirst({ where: { email } })
+
   const team = await prisma.user.update({
-    where: { id: id }, data: { isApproved: true }
+    where: { email }, data: { isApproved: !approvedStatus?.isApproved }
   })
 
   return team
 }
+
+export const deleteTeam = async ({ id }: { id: string }) => {
+  await prisma.sub.deleteMany({ where: { userId: id } })
+  await prisma.member.deleteMany({ where: { userId: id } })
+  const deleteUser = await prisma.user.delete({ where: { id } })
+
+  return deleteUser
+}
+
+
+

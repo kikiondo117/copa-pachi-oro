@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 type CardEmptyPlayerProps = {
   className?: string;
 };
@@ -5,10 +7,12 @@ type CardEmptyPlayerProps = {
 export function CardEmptyPlayer(props: CardEmptyPlayerProps) {
   return (
     <div
-      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out hover:bg-blue-gray-dark
-      ${props.className ? props.className : ""} `}
+      className={classNames(
+        'flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out mb-4', 
+        props.className)
+      }
     >
-      <div className="">
+      <div>
         <img
           src="/assets/img/EmptyPlayerImg.svg"
           alt=""
