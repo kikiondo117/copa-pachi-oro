@@ -19,12 +19,12 @@ export function CardTeam(props: CardTeamProps) {
         <img
           src="/assets/team-example-image.svg"
           alt=""
-          className="h-full mr-4"
+          className="mr-4 h-full"
         />
       </div>
       <div className="flex flex-col justify-center">
-        <p className="text-white font-coolveltica font text-team-name">
-          {props.team.name}
+        <p className="font font-coolveltica text-team-name text-white">
+          {props.team.name.toUpperCase()}
         </p>
       </div>
     </div>

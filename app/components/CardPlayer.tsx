@@ -16,6 +16,7 @@ export function CardPlayer(props: CardPlayerProps) {
         'flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out', 
         props.className)
       }
+
     >
       <img
         src="/assets/PlayerExmapleImg.svg"

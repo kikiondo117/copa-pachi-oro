@@ -1,9 +1,11 @@
+import React from "react";
+
 // app/components/form-field.tsx
 interface FormFieldProps {
   htmlFor: string;
   type?: string;
   value: any;
-  onChange?: (...args: any) => any;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   className?: string;
 }
@@ -29,7 +31,7 @@ export function FormField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className={`my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black ${
+        className={`my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-blue-gray-default ${
           className ? className : ""
         }`}
         value={value}

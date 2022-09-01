@@ -6,6 +6,8 @@ export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
 export { Switch } from "./ui/Switch";
 export { FormField } from "./ui/form/FormField";
+export  *  from "./ui/form/FormSelect";
+
 // * FORMS
 export { LoginForm } from "./forms/LoginForm";
 export { PlayerForm } from "./forms/PlayerForm";
@@ -18,7 +20,9 @@ export { TeamPlayers } from "./TeamPlayers";
 export { CardPlayer } from "./CardPlayer";
 export { CardEmptyPlayer } from "./CardEmptyPlayer";
 export { CardAddPlayer } from "./CardAddPlayer";
+export { CardTournament } from "./CardTournament";
 export { PreviewTeamPlayes } from "./PreviewTeamPlayers";
 
 // * OWNER COMPONENTS
 export { Nav } from "./owner/Nav/Nav";
+
