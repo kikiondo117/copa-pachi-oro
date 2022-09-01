@@ -5,6 +5,8 @@ export { Header } from "./ui/Header";
 export { Footer } from "./ui/Footer";
 export { Switch } from "./ui/Switch";
 export { FormField } from "./ui/form/FormField";
+export  *  from "./ui/form/FormSelect";
+
 // * FORMS
 export { LoginForm } from "./forms/LoginForm";
 export { PlayerForm } from "./forms/PlayerForm";

@@ -11,19 +11,19 @@ export function CardTeam(props: CardTeamProps) {
   return (
     <div
       onClick={props.onClick}
-      className={`bg-blue-gray-default flex flex-row w-full h-[3.75rem]
+      className={`flex h-[3.75rem] w-full flex-row bg-blue-gray-default
       ${props.className ? props.className : ""} `}
     >
       <div className="">
         <img
           src="/assets/team-example-image.svg"
           alt=""
-          className="h-full mr-4"
+          className="mr-4 h-full"
         />
       </div>
       <div className="flex flex-col justify-center">
-        <p className="text-white font-coolveltica font text-team-name">
-          {props.team.name}
+        <p className="font font-coolveltica text-team-name text-white">
+          {props.team.name.toUpperCase()}
         </p>
       </div>
     </div>

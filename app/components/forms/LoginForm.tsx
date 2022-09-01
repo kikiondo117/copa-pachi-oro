@@ -39,10 +39,11 @@ export function LoginForm() {
         onChange={(e) => handleInputChange(e, "password")}
         placeholder="Constraseña"
       />
+      {/* <img src="/assets/" className="absolute mr-2 w-10" alt="Search Icon" /> */}
       <button
         type="submit"
         className={`
-          self-center mt-4 w-fit bg-special-orange p-2 text-base rounded
+          mt-4 w-fit self-center rounded bg-special-orange p-2 text-base
           ${transition.submission ? "bg-grey-500" : ""} 
           `}
         {...(transition.submission ? { disabled: true } : { disabled: false })}

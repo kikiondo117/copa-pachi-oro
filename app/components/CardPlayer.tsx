@@ -11,7 +11,7 @@ export function CardPlayer(props: CardPlayerProps) {
   return (
     <div
       onClick={props.onClick}
-      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out hover:bg-blue-gray-dark
+      className={` flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out 
       ${props.className ? props.className : ""} `}
     >
       <img

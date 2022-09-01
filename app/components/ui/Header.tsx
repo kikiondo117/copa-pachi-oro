@@ -65,7 +65,7 @@ export function Header({ user }: HeaderProps) {
               {user ? user.email : " INICIAR SESIÓN"}
             </button>
             {showLogin && (
-              <div className="absolute right-7 mt-5 w-96 rounded-lg bg-special-gray p-4">
+              <div className="absolute right-7 mt-5 w-96 rounded-lg bg-special-gray p-4 ">
                 <LoginForm />
               </div>
             )}

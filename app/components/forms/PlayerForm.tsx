@@ -89,6 +89,7 @@ export function PlayerForm(props: AddPlayerProps) {
         />
 
         <select
+          title="Rol"
           className=" my-2 h-10 w-full rounded px-4 font-big-noodle-oblique"
           name="rol"
           id="rol"
