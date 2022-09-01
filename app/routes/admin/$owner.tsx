@@ -98,6 +98,7 @@ export default function AdminTeam() {
           <span>
             MARCAR EQUIPO COMO APROBADO:
             <Toggle
+              className="custom-classname ml-4"
               disabled={
                 transition.submission?.formData.get("action") === "approveTeam"
               }
@@ -168,7 +169,7 @@ export default function AdminTeam() {
         {showModal && (
           <Modal2
             onClose={() => setShowModal(false)}
-            className="grid grid-cols-6"
+            className="w-[35rem] grid grid-cols-6"
           >
             <div className=" col-start-2 col-end-6">
               <PlayerForm
