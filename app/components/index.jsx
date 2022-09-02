@@ -7,6 +7,7 @@ export { Footer } from "./ui/Footer";
 export { Switch } from "./ui/Switch";
 export { FormField } from "./ui/form/FormField";
 export  *  from "./ui/form/FormSelect";
+export { Delete } from './ui/modal/Delete'
 
 // * FORMS
 export { LoginForm } from "./forms/LoginForm";

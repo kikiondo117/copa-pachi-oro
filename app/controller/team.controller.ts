@@ -144,5 +144,29 @@ export const getCapitan = async ({id}: {id:string}) => {
   return null
 }
 
+export const saveTeam =async ({id, body}: {
+  id:string, body: {team: string, region: string, plataforma: string}
+}) => {
+
+  if(body.team !== undefined && body.region !== undefined && body.plataforma !== undefined ){
+    const teamUpdated = await prisma.user.update( 
+      {
+        where: { id }, 
+        data: { 
+          team: {
+            name: body.team,
+            region: body.region,
+            plataforma: body.plataforma,
+            img: ''
+          }  
+        }
+      }
+    )
+
+    return teamUpdated
+  }
+
+
+}
 
 

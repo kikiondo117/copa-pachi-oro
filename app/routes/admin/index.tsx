@@ -14,6 +14,7 @@ import {
   Button,
   Modal2,
   PreviewTeamPlayes,
+  Delete,
 } from "~/components/";
 
 export default function AdminTeam() {
@@ -96,30 +97,16 @@ export default function AdminTeam() {
           className="w-[35rem] h-[12.25rem] p-4"
           onClose={() => setShowDeleteModal(false)}
         >
-          <div className="h-full flex justify-center flex-col mt-auto">
-            <p className="text-center font-coolveltica text-2xl text-blue-gray-default">
-              ¿Esta seguro que desea eliminar el equipo actual?
-            </p>
-            <div className="mt-4 flex justify-center">
-              <button
-                className="mr-6"
-                onClick={() => setShowDeleteModal(false)}
-              >
-                No, no eliminar
-              </button>
-              <button
-                onClick={() => {
-                  const formData = new FormData();
-                  formData.append("action", "delete_team");
-                  formData.append("id", userSelected?.id);
-                  submit(formData, { method: "post" });
-                  setShowModal(false);
-                }}
-              >
-                Si, eliminar equipo
-              </button>
-            </div>
-          </div>
+          <Delete
+            cancel={() => setShowDeleteModal(false)}
+            confirm={() => {
+              const formData = new FormData();
+              formData.append("action", "delete_team");
+              formData.append("id", userSelected?.id);
+              submit(formData, { method: "post" });
+              setShowModal(false);
+            }}
+          />
         </Modal2>
       )}
     </div>

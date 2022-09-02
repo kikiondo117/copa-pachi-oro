@@ -23,6 +23,7 @@ import {
   getOwner,
   deleteTeam,
   getCapitan,
+  saveTeam,
 } from "~/controller/team.controller";
 // * Components
 import Toggle from "react-toggle";
@@ -46,18 +47,20 @@ interface loaderData {
 
 export default function AdminTeam() {
   const { admin, owner, capitan } = useLoaderData<loaderData>();
-  const transition = useTransition();
   const [members, setMembers] = React.useState(() => new Array(5).fill(null));
   const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
   const [isSub, setIsSub] = React.useState(false);
   const [showModal, setShowModal] = React.useState(false);
   const [playerSelected, setPlayerSelected] =
     React.useState<null | TeamMemberInterface>(null);
+  const transition = useTransition();
+  const response = useActionData();
+  const submit = useSubmit();
 
   const [form, setFormData] = React.useState({
-    team: "",
-    region: "",
-    platform: "",
+    team: owner.team.name,
+    region: owner.team.region,
+    platform: owner.team.plataforma,
   });
 
   const handleInputChange = (
@@ -69,12 +72,19 @@ export default function AdminTeam() {
     setFormData((form) => ({ ...form, [field]: event.target.value }));
   };
 
-  const response = useActionData();
-  const submit = useSubmit();
-
   const approveTeam = () => {
     const formData = new FormData();
     formData.append("action", "approveTeam");
+    submit(formData, { method: "post" });
+  };
+
+  const saveTeam = () => {
+    const formData = new FormData();
+    formData.append("action", "saveTeam");
+    formData.append(`team`, `${form.team}`);
+    formData.append(`region`, `${form.region}`);
+    formData.append(`plataforma`, `${form.platform}`);
+
     submit(formData, { method: "post" });
   };
 
@@ -111,7 +121,7 @@ export default function AdminTeam() {
       <Header user={admin} />
 
       <Container className="py-24">
-        <Nav />
+        <Nav save={saveTeam} />
         <article className="col-span-4 flex flex-col font-coolveltica ">
           <h2 className=" pb-5 text-xl tracking-wider">Datos del equipo </h2>
           <div className="flex items-center pb-5">
@@ -126,7 +136,6 @@ export default function AdminTeam() {
               checked={owner.isApproved}
               icons={false}
               onClick={approveTeam}
-              onChange={() => null}
             />
           </div>
 
@@ -136,10 +145,11 @@ export default function AdminTeam() {
           >
             <FormField
               htmlFor="name"
-              value=""
+              value={form.team}
               type="text"
               className=" w-80"
               placeholder={owner.team.name}
+              onChange={(e) => handleInputChange(e, "team")}
             />
 
             <div className="flex w-80 justify-between ">
@@ -265,11 +275,29 @@ export const action: ActionFunction = async ({ request, params }) => {
   const name = form.get("name");
   const rango = form.get("rango");
   const action = form.get("action");
+  let team = form.get("team");
+  let region = form.get("region");
+  let plataforma = form.get("plataforma");
   const rol = form.get("rol");
   const img = "test";
   const capitan = form.get("capitan") === "on" ? true : false;
 
   let id = form.get("user_id");
+
+  if (action === "saveTeam" && owner) {
+    if (
+      typeof team !== "string" ||
+      typeof region !== "string" ||
+      typeof plataforma !== "string"
+    ) {
+      return json(
+        { error: `Invalid Form Data`, form: action },
+        { status: 400 }
+      );
+    }
+
+    return await saveTeam({ id: owner.id, body: { team, region, plataforma } });
+  }
 
   if (action === "delete_team" && owner) {
     await deleteTeam({ id: owner?.id });

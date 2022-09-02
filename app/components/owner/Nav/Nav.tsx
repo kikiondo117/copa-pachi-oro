@@ -1,21 +1,36 @@
 import * as React from "react";
-import { Modal2 } from "~/components/ui/Modal2";
-import { useSubmit } from "@remix-run/react";
-import { Button } from "~/components/ui/Button";
+import { Link, useSubmit, useTransition } from "@remix-run/react";
+import { Button, Delete, Modal2 } from "~/components";
+import classNames from "classnames";
 
-export function Nav() {
+export function Nav({ save }: { save: () => void }) {
   const [showModal, setShowModal] = React.useState(false);
+  const transition = useTransition();
   const submit = useSubmit();
+
+  const action = transition.submission?.formData.get("action");
 
   return (
     <article className=" col-span-12 flex h-12 w-full items-center justify-between">
       <div className="flex w-full">
-        <Button.Primary className=" flex h-full w-[3.1rem] justify-center border-2 border-white bg-transparent ">
-          <img src="/assets/icons/IconBack-white.svg" className=" h-5" alt="" />
-        </Button.Primary>
+        <Link to="/admin">
+          <Button.Primary className=" flex h-full w-[3.1rem] justify-center border-2 border-white bg-transparent ">
+            <img
+              src="/assets/icons/IconBack-white.svg"
+              className=" h-5"
+              alt=""
+            />
+          </Button.Primary>
+        </Link>
 
-        <Button.Primary className="w-[4.6rem ml-4 h-full px-4">
-          guardar
+        <Button.Primary
+          onClick={save}
+          className={classNames("w-[4.6rem ml-4 h-full px-4", {
+            "bg-red-500": action === "saveTeam",
+          })}
+          disabled={action === "saveTeam"}
+        >
+          {action === "saveTeam" ? "guardando..." : "guardar"}
         </Button.Primary>
       </div>
 
@@ -35,30 +50,14 @@ export function Nav() {
           className="h-[12.25rem] w-[35rem] p-4"
           onClose={() => setShowModal(false)}
         >
-          <div className="mt-auto flex h-full flex-col justify-center">
-            <p className="text-center font-coolveltica text-2xl text-blue-gray-default">
-              ¿Esta seguro que desea eliminar el equipo actual?
-            </p>
-            <div className="mt-4 flex justify-center">
-              <Button.Primary
-                className=" text-gray-blue-default mx-3 border border-black bg-transparent px-4 text-black"
-                onClick={() => setShowModal(false)}
-              >
-                NO, NO ELIMINAR
-              </Button.Primary>
-
-              <Button.Primary
-                className="mx-3 bg-red-error px-4"
-                onClick={() => {
-                  const formData = new FormData();
-                  formData.append("action", "delete_team");
-                  submit(formData, { method: "post" });
-                }}
-              >
-                SI, ELIMINAR EQUIPO
-              </Button.Primary>
-            </div>
-          </div>
+          <Delete
+            cancel={() => setShowModal(false)}
+            confirm={() => {
+              const formData = new FormData();
+              formData.append("action", "delete_team");
+              submit(formData, { method: "post" });
+            }}
+          />
         </Modal2>
       )}
     </article>
