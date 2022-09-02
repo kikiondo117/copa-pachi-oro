@@ -1,21 +1,8 @@
 import * as React from "react";
 import { Form, useTransition } from "@remix-run/react";
 
-import { FormField, FormSelect, Button, IOption } from "~/components";
-
-const regions: IOption[] = [
-  { value: "na", label: "NA" },
-  { value: "sa", label: "SA" },
-  { value: "eu", label: "EU" },
-];
-
-const platforms: IOption[] = [
-  { value: "pc", label: "PC" },
-  { value: "xbox", label: "XBOX" },
-  { value: "playstation", label: "PLAYSTATION" },
-  { value: "switch", label: "SWITCH" },
-  { value: "mixto", label: "MIXTO" },
-];
+import { FormField, FormSelect, Button } from "~/components";
+import { platforms, regions } from "~/constants/selectOptions";
 
 export function TeamForm() {
   const [form, setFormData] = React.useState({
@@ -85,9 +72,11 @@ export function TeamForm() {
             className=" h-9"
             defaultLabel="Región"
             options={regions}
+            name="region"
           />
 
           <FormSelect
+            className=" ml-2"
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               handleInputChange(e, "platform")
             }
@@ -96,6 +85,7 @@ export function TeamForm() {
             name="plataforma"
             defaultLabel="Plataforma"
             options={platforms}
+            name="plataforma"
           />
         </div>
 
@@ -103,13 +93,16 @@ export function TeamForm() {
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
       </div>
-
-      <Button.Primary
-        className="mb-4"
-        {...(transition.submission ? { disabled: true } : { disabled: false })}
-      >
-        {transition.submission ? "Guardando" : "Registrar equipo"}
-      </Button.Primary>
+      <div className=" flex w-full items-center justify-center">
+        <Button.Primary
+          className="mb-4 px-4"
+          {...(transition.submission
+            ? { disabled: true }
+            : { disabled: false })}
+        >
+          {transition.submission ? "Guardando" : "Registrar equipo"}
+        </Button.Primary>
+      </div>
     </Form>
   );
 }

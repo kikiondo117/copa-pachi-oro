@@ -1,7 +1,7 @@
 interface PrimaryInterface {
   children: any;
   className?: string;
-  onClick?: () => null;
+  onClick?: () => void;
   disabled?: boolean;
 }
 
@@ -15,8 +15,8 @@ export function Primary({
     <button
       {...props}
       onClick={onClick}
-      className={` mb-3 
-                  w-fit cursor-pointer rounded-md
+      className={`
+                  w-fit cursor-pointer rounded-[4px]
                   bg-special-blue-light 
                   p-2 font-big-noodle-oblique text-white ${
                     className ? className : "mx-auto"
@@ -31,7 +31,7 @@ export function Button({ children, className, onClick }: any) {
   return (
     <button
       onClick={onClick}
-      className={`btn-orange-default mx-auto w-fit rounded-md text-white ${
+      className={`btn-orange-default mx-auto w-fit rounded-[4px] text-white ${
         className ? className : ""
       }`}
     >
