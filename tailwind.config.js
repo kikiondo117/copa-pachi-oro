@@ -67,6 +67,8 @@ module.exports = {
         "green-one": "#B7D019",
         "red-one": "#D63231",
         "yellow-one": "#FFD028",
+
+        "red-error": "#D63231",
       },
       fontFamily: {
         "big-noodle": ["Big Noodle Titling"],

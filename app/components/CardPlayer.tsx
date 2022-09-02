@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { TeamMemberInterface } from "~/types/types.user";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 type CardPlayerProps = {
   className?: string;
@@ -13,10 +13,9 @@ export function CardPlayer(props: CardPlayerProps) {
     <div
       onClick={props.onClick}
       className={classNames(
-        'flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out', 
-        props.className)
-      }
-
+        "delay-50 flex h-[3.75rem] w-full flex-row bg-white transition duration-300 ease-in-out hover:scale-105",
+        props.className
+      )}
     >
       <img
         src="/assets/PlayerExmapleImg.svg"
@@ -25,7 +24,7 @@ export function CardPlayer(props: CardPlayerProps) {
       />
 
       <div className=" flex w-full flex-col justify-center">
-        <div className="font-coolveltica text-special-orange">
+        <div className="font-big-noodle-oblique text-special-orange">
           <p>{props.player.name}</p>
         </div>
         <div className="flex font-coolveltica">
@@ -52,6 +51,6 @@ export function CardPlayer(props: CardPlayerProps) {
         <img className="h-[24px]" src="/assets/icons/RolTank.svg" alt="" />
       </div>
       <div className="ml-2  w-2 bg-special-orange"></div>
-    </div >
+    </div>
   );
 }

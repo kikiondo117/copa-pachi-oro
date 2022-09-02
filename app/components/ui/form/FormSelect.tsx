@@ -1,10 +1,5 @@
 import React from "react";
-
-export interface IOption {
-  label: string;
-  value: string;
-}
-
+import { IOption } from "~/types/interfaces";
 interface FormSelectProps extends React.HtmlHTMLAttributes<HTMLSelectElement> {
   defaultLabel?: string;
   options: IOption[];
@@ -21,7 +16,7 @@ export function FormSelect({
     <select
       {...rest}
       value={value}
-      className={`ml-1 mt-1 w-full rounded pl-4 font-big-noodle-oblique text-blue-gray-default ${rest.className}`}
+      className={` my-1 my-2 h-[36px] w-full rounded pl-4 font-big-noodle-oblique text-blue-gray-default ${rest.className}`}
     >
       <option value="" disabled className="text-blue-gray-default">
         {defaultLabel}

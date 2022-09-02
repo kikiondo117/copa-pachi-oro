@@ -1,6 +1,6 @@
 import * as React from "react";
 import type { TeamInterface } from "~/types/types.user";
-import classNames from 'classnames';
+import classNames from "classnames";
 
 type CardTeamProps = {
   className?: string;
@@ -9,11 +9,13 @@ type CardTeamProps = {
 };
 
 export function CardTeam(props: CardTeamProps) {
-
   return (
     <div
       onClick={props.onClick}
-      className={classNames('bg-blue-gray-default flex flex-row w-full h-[3.75rem]', props.className)}
+      className={classNames(
+        "delay-50 flex h-[3.75rem] w-full flex-row bg-blue-gray-default transition  hover:opacity-75",
+        props.className
+      )}
     >
       <div className="">
         <img
@@ -23,7 +25,7 @@ export function CardTeam(props: CardTeamProps) {
         />
       </div>
       <div className="flex flex-col justify-center">
-        <p className="font font-coolveltica text-team-name text-white">
+        <p className="font font-big-noodle-oblique text-team-name text-white">
           {props.team.name.toUpperCase()}
         </p>
       </div>

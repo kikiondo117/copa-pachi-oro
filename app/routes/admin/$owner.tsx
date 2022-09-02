@@ -10,6 +10,7 @@ import {
   useSubmit,
   useActionData,
   useTransition,
+  Form,
 } from "@remix-run/react";
 // * Utils and controllers
 import { getUser } from "~/utils/auth.server";
@@ -20,11 +21,12 @@ import {
   updateTeamMember,
   updatedSub,
   getOwner,
-  deleteTeam
+  deleteTeam,
 } from "~/controller/team.controller";
 // * Components
 import Toggle from "react-toggle";
 import {
+  FormSelect,
   Header,
   Container,
   TeamMember,
@@ -33,6 +35,7 @@ import {
   PlayerForm,
   Nav,
 } from "~/components";
+import { platforms, regions } from "~/constants/selectOptions";
 
 interface loaderData {
   admin: UserInterface;
@@ -48,6 +51,21 @@ export default function AdminTeam() {
   const [showModal, setShowModal] = React.useState(false);
   const [playerSelected, setPlayerSelected] =
     React.useState<null | TeamMemberInterface>(null);
+
+  const [form, setFormData] = React.useState({
+    team: "",
+    region: "",
+    platform: "",
+  });
+
+  const handleInputChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>,
+    field: string
+  ) => {
+    setFormData((form) => ({ ...form, [field]: event.target.value }));
+  };
 
   const response = useActionData();
   const submit = useSubmit();
@@ -88,15 +106,16 @@ export default function AdminTeam() {
 
   return (
     <div className="h-screen bg-blue-gray-dark text-white">
-      <Header user={admin}/>
+      <Header user={admin} />
 
       <Container className="py-24">
         <Nav />
-
         <article className="col-span-4 flex flex-col font-coolveltica ">
-          <h2 className=" text-xl">Datos del equipo </h2>
-          <span>
-            MARCAR EQUIPO COMO APROBADO:
+          <h2 className=" pb-5 text-xl tracking-wider">Datos del equipo </h2>
+          <div className="flex items-center pb-5">
+            <span className="pr-5 font-big-noodle-oblique text-lg">
+              Marcar equipo como aprobado:
+            </span>
             <Toggle
               disabled={
                 transition.submission?.formData.get("action") === "approveTeam"
@@ -106,15 +125,43 @@ export default function AdminTeam() {
               onClick={approveTeam}
               onChange={() => null}
             />
-          </span>
+          </div>
 
-          <FormField
-            htmlFor="name"
-            value=""
-            type="text"
-            className=" w-80"
-            placeholder={owner.team.name}
-          />
+          <Form
+            method="post"
+            className="flex h-[32rem] w-full flex-col font-coolveltica"
+          >
+            <FormField
+              htmlFor="name"
+              value=""
+              type="text"
+              className=" w-80"
+              placeholder={owner.team.name}
+            />
+
+            <div className="flex w-80 justify-between ">
+              <FormSelect
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  handleInputChange(e, "region")
+                }
+                value={form.region}
+                title="Región"
+                className=" mr-2 h-9"
+                defaultLabel="Región"
+                options={regions}
+              />
+
+              <FormSelect
+                onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                  handleInputChange(e, "platform")
+                }
+                value={form.platform}
+                title="Plataforma"
+                defaultLabel="Plataforma"
+                options={platforms}
+              />
+            </div>
+          </Form>
         </article>
 
         <section className="col-span-4 font-coolveltica">

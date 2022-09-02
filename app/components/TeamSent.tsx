@@ -9,10 +9,10 @@ interface TeamSentProps {
 
 export function TeamSent(props: TeamSentProps) {
   return (
-    <div className="flex flex-col justify-between bg-special-gray px-4 w-full font-coolveltica h-[39rem]">
+    <div className="flex h-[39rem] w-full flex-col justify-between bg-special-gray px-4 font-coolveltica">
       <div className="my-auto">
         <img src="/assets/img/pachi.svg" alt="Pachi" className="mx-auto" />
-        <p className="text-center text-special-blue-light text-2xl">
+        <p className="text-center text-2xl text-special-blue-light">
           ¡Registro exitoso!
         </p>
         <p>
