@@ -32,7 +32,7 @@ export function Nav() {
 
       {showModal && (
         <Modal2
-          className="my-auto h-[12rem]"
+          className="h-[12.25rem] w-[35rem] p-4"
           onClose={() => setShowModal(false)}
         >
           <div className="mt-auto flex h-full flex-col justify-center">
@@ -41,21 +41,21 @@ export function Nav() {
             </p>
             <div className="mt-4 flex justify-center">
               <Button.Primary
-                className=" text-gray-blue-default border border-black bg-transparent"
+                className=" text-gray-blue-default mx-3 border border-black bg-transparent px-4 text-black"
                 onClick={() => setShowModal(false)}
               >
                 NO, NO ELIMINAR
               </Button.Primary>
 
               <Button.Primary
-                className="bg-red-error"
+                className="mx-3 bg-red-error px-4"
                 onClick={() => {
                   const formData = new FormData();
                   formData.append("action", "delete_team");
                   submit(formData, { method: "post" });
                 }}
               >
-                SI
+                SI, ELIMINAR EQUIPO
               </Button.Primary>
             </div>
           </div>
