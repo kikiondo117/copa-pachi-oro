@@ -41,14 +41,21 @@ export function CardPlayer(props: CardPlayerProps) {
       </div>
       <div className="mx-0 flex w-24 items-center justify-end">
         {props.player.capitan && (
-          // <img src="/assets/icons/Icon Crown-leader.svg" alt="" />
           <img
             className="mr-2 h-[24px]"
             src="/assets/icons/IconCrown-leader-orange.svg"
             alt=""
           />
         )}
-        <img className="h-[24px]" src="/assets/icons/RolTank.svg" alt="" />
+        {props.player.rol === "Tank" && (
+          <img className="h-[24px]" src="/assets/icons/RolTank.svg" alt="" />
+        )}
+        {props.player.rol === "Damage" && (
+          <img className="h-[24px]" src="/assets/icons/RolDPS.svg" alt="" />
+        )}
+        {props.player.rol === "Support" && (
+          <img className="h-[24px]" src="/assets/icons/RolSupport.svg" alt="" />
+        )}
       </div>
       <div className="ml-2  w-2 bg-special-orange"></div>
     </div>

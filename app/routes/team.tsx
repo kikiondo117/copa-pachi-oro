@@ -40,7 +40,6 @@ export default function Team() {
   }, [response]);
 
   const handleClick = (isSub: boolean, player: TeamMemberInterface) => {
-    console.log("isSub", isSub);
     setIsSub(!!isSub);
     setPlayerSelected(player);
     setIsModal({ status: true });
@@ -80,7 +79,7 @@ export default function Team() {
       {isModal.status && (
         <Modal2
           onClose={() => setIsModal({ status: false })}
-          className="grid grid-cols-6"
+          className="w-[35rem] grid grid-cols-6"
         >
           <div className=" col-start-2 col-end-6">
             <PlayerForm
@@ -122,7 +121,7 @@ export const action: ActionFunction = async ({ request }) => {
   const name = form.get("name");
   const rango = form.get("rango");
   const action = form.get("action");
-  const rol = "test";
+  const rol = form.get("rol");
   const img = "test";
   const capitan = form.get("capitan") === "on" ? true : false;
   let id = form.get("user_id");

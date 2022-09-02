@@ -31,8 +31,6 @@ export async function login({ email, password }: LoginForm) {
 
   const user = await prisma.user.findUnique({ where: { email } })
 
-  console.log('USER', user)
-
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return json({ error: `Incorrect login` }, { status: 400 })
   }
