@@ -53,7 +53,12 @@ export default function AdminTeam() {
                       alt=""
                     />
                   </Link>
-                  <button onClick={() => setShowDeleteModal(true)}>
+                  <button
+                    onClick={() => {
+                      setShowDeleteModal(true);
+                      setUserSelected(user);
+                    }}
+                  >
                     <img
                       className="mb-4 ml-6 h-6"
                       src="/assets/icons/iconDelete.svg"
