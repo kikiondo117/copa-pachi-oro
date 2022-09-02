@@ -6,7 +6,11 @@ import type { UserInterface } from "../types/types.user";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import type { TeamMemberInterface } from "../types/types.user";
 // * Utils and Controllers
-import { validateEmail, validatePassword, validateName} from "../utils/validators.server";
+import {
+  validateEmail,
+  validatePassword,
+  validateName,
+} from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
 import { getTeamsApproved } from "~/controller/team.controller";
 // * Components
@@ -18,7 +22,7 @@ import {
   TeamSent,
   CardTeam,
   PreviewTeamPlayes,
-  Modal2
+  Modal2,
 } from "~/components";
 
 interface IndexInterface {
@@ -30,7 +34,6 @@ export default function Index() {
   const { user, teams } = useLoaderData<IndexInterface>();
   const [teamSelected, setTeamSelected] = React.useState<UserInterface>();
   const [showModal, setShowModal] = React.useState(false);
-
 
   return (
     <div className="min-h-screen ">
@@ -44,7 +47,7 @@ export default function Index() {
           <div className="col-start-1 col-end-7 h-full">
             <div className="flex h-full flex-col items-start justify-between">
               <img
-                src={'/assets/main-landing-message.svg'}
+                src={"/assets/main-landing-message.svg"}
                 alt=""
                 className="my-auto mx-0 h-[13.5rem]"
               />
@@ -55,7 +58,7 @@ export default function Index() {
                   target="_blank"
                 >
                   <img
-                    src={'/assets/juanyut-logo-nombre.svg'}
+                    src={"/assets/juanyut-logo-nombre.svg"}
                     className=" mb-2 h-10 w-[13.313rem] hover:animate-bounce"
                     alt=""
                   />
@@ -139,13 +142,10 @@ export default function Index() {
             ))}
           </Container>
 
-
           {showModal && teamSelected ? (
             <Modal2
               modalClassName="h-[36.8rem] w-[52.5rem]"
-              onClose={() =>
-                setShowModal(false)
-              }
+              onClose={() => setShowModal(false)}
             >
               <PreviewTeamPlayes
                 team={teamSelected.team}

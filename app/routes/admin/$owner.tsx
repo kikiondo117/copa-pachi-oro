@@ -20,7 +20,8 @@ import {
   updateTeamMember,
   updatedSub,
   getOwner,
-  deleteTeam
+  deleteTeam,
+  getCapitan,
 } from "~/controller/team.controller";
 // * Components
 import Toggle from "react-toggle";
@@ -37,10 +38,11 @@ import {
 interface loaderData {
   admin: UserInterface;
   owner: UserInterface;
+  capitan: null | UserInterface;
 }
 
 export default function AdminTeam() {
-  const { admin, owner } = useLoaderData<loaderData>();
+  const { admin, owner, capitan } = useLoaderData<loaderData>();
   const transition = useTransition();
   const [members, setMembers] = React.useState(() => new Array(5).fill(null));
   const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
@@ -88,7 +90,7 @@ export default function AdminTeam() {
 
   return (
     <div className="h-screen bg-blue-gray-dark text-white">
-      <Header user={admin}/>
+      <Header user={admin} />
 
       <Container className="py-24">
         <Nav />
@@ -173,7 +175,7 @@ export default function AdminTeam() {
           >
             <div className=" col-start-2 col-end-6">
               <PlayerForm
-                showCapitan={false}
+                showCapitan={capitan !== null ? false : true}
                 isSub={isSub}
                 playerSelected={playerSelected}
               />
@@ -195,9 +197,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
   if (params.owner) {
     try {
       const owner = await getOwner(params.owner);
+      const capitan = await getCapitan({ id: params.owner });
 
       if (owner) {
-        return json({ admin, owner });
+        return json({ admin, owner, capitan });
       } else {
         return redirect("/");
       }

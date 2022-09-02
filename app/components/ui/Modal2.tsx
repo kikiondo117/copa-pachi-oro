@@ -14,7 +14,7 @@ export function Modal2({ children, className, onClose }: Props) {
   const container = document.getElementById("modal-root");
 
   return ReactDOM.createPortal(
-    <section className="absolute flex items-center justify-center top-0 z-50 h-screen w-screen ">
+    <section className="fixed flex items-center justify-center top-0 z-50 h-screen w-screen ">
       <div
         onClick={onClose}
         className="absolute inset-0 z-20 bg-gray-500 bg-opacity-75 transition-opacity"

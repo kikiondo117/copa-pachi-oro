@@ -80,7 +80,8 @@ export function TeamForm() {
               handleInputChange(e, "region")
             }
             value={form.region}
-            title="Región"
+            title="region"
+            name="region"
             className=" h-9"
             defaultLabel="Región"
             options={regions}
@@ -91,7 +92,8 @@ export function TeamForm() {
               handleInputChange(e, "platform")
             }
             value={form.platform}
-            title="Plataforma"
+            title="plataforma"
+            name="plataforma"
             defaultLabel="Plataforma"
             options={platforms}
           />

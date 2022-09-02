@@ -77,10 +77,7 @@ export default function AdminTeam() {
       </Container>
 
       {showModal && userSelected && (
-        <Modal2
-          modalClassName="w-[52rem] h-[36.6rem]"
-          onClose={() => setShowModal(false)}
-        >
+        <Modal2 onClose={() => setShowModal(false)}>
           <PreviewTeamPlayes
             team={userSelected.team}
             members={userSelected.members}
@@ -89,7 +86,7 @@ export default function AdminTeam() {
         </Modal2>
       )}
 
-      {showDeleteModal && (
+      {showDeleteModal && userSelected && (
         <Modal2
           className="w-[35rem] h-[12.25rem] p-4"
           onClose={() => setShowDeleteModal(false)}
@@ -103,17 +100,18 @@ export default function AdminTeam() {
                 className="mr-6"
                 onClick={() => setShowDeleteModal(false)}
               >
-               No, no eliminar
+                No, no eliminar
               </button>
               <button
                 onClick={() => {
                   const formData = new FormData();
                   formData.append("action", "delete_team");
-                  formData.append("id", user.id);
+                  formData.append("id", userSelected?.id);
                   submit(formData, { method: "post" });
+                  setShowModal(false);
                 }}
               >
-               Si, eliminar equipo
+                Si, eliminar equipo
               </button>
             </div>
           </div>
@@ -145,7 +143,7 @@ export const action: ActionFunction = async ({ request }) => {
         return redirect("/");
       }
 
-      return json({ payload: "Error ID" });
+      // return json({ payload: "Error ID" });
     }
     default:
       break;
