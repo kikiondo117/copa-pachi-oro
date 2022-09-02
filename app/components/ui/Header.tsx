@@ -55,7 +55,7 @@ export function Header({ user }: HeaderProps) {
 
           <li>
             <button
-              className={classNames("mx-4 rounded-md px-2", {
+              className={classNames("mx-4 h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
                 "bg-organge-light": user?.admin || !user,
               })}

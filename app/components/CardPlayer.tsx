@@ -13,7 +13,7 @@ export function CardPlayer(props: CardPlayerProps) {
     <div
       onClick={props.onClick}
       className={classNames(
-        "flex h-[3.75rem] w-full flex-row bg-white transition delay-150 ease-in-out",
+        "delay-50 flex h-[3.75rem] w-full flex-row bg-white transition duration-300 ease-in-out hover:scale-105",
         props.className
       )}
     >
@@ -24,7 +24,7 @@ export function CardPlayer(props: CardPlayerProps) {
       />
 
       <div className=" flex w-full flex-col justify-center">
-        <div className="font-coolveltica text-special-orange">
+        <div className="font-big-noodle-oblique text-special-orange">
           <p>{props.player.name}</p>
         </div>
         <div className="flex font-coolveltica">

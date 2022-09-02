@@ -1,6 +1,3 @@
-import * as React from "react";
-import { Switch } from "~/components/ui/Switch";
-
 type CardTournamentProps = {
   className?: string;
 };
@@ -33,7 +30,7 @@ export function CardTournament(props: CardTournamentProps) {
         </div>
         <div className="">
           <img
-            className=" duration-50 h-5 transition delay-150 ease-in-out hover:-translate-y-1 hover:scale-110"
+            className=" duration-50 h-5 transition delay-150 ease-in-out hover:scale-110"
             src="/assets/icons/IconTournament-white.svg"
             alt=""
           />
