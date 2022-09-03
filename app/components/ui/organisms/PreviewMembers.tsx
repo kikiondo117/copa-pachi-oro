@@ -1,7 +1,7 @@
-import type { TeamMemberInterface } from "../types/types.user";
+import type { TeamMemberInterface } from "../../../types/types.user";
 import * as React from "react";
 import { TeamMember } from "./TeamMember";
-import { CardEmptyPlayer } from "./CardEmptyPlayer";
+import { CardEmptyPlayer } from "../molecules/CardEmptyPlayer";
 
 interface TeamPLayersInterface {
   members: TeamMemberInterface[] | [];
@@ -22,11 +22,9 @@ export function PreviewMembers(props: TeamPLayersInterface) {
     );
   }, [props.members]);
 
-
   return (
     <section
-      className={` font-coolveltica ${props.className ? props.className : ""
-        }`}
+      className={` font-coolveltica ${props.className ? props.className : ""}`}
     >
       <p className=" mb-4 text-[22px] text-blue-gray-default">
         Jugadores principales
@@ -36,12 +34,15 @@ export function PreviewMembers(props: TeamPLayersInterface) {
           {members.map((member, index) => {
             return (
               <li key={index}>
-                {member !== null ? <TeamMember
-                  member={member}
-                  label="Obligatorio"
-                  onClick={() => null}
-                /> : <CardEmptyPlayer />}
-
+                {member !== null ? (
+                  <TeamMember
+                    member={member}
+                    label="Obligatorio"
+                    onClick={() => null}
+                  />
+                ) : (
+                  <CardEmptyPlayer />
+                )}
               </li>
             );
           })}

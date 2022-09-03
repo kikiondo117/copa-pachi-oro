@@ -2,9 +2,8 @@ import * as React from "react";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Types
-import type { UserInterface } from "../types/types.user";
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { TeamMemberInterface } from "../types/types.user";
+import type { TeamMemberInterface, UserInterface } from "../types/types.user";
 // * Utils and Controllers
 import {
   validateEmail,
@@ -25,13 +24,13 @@ import {
   Modal2,
 } from "~/components";
 
-interface IndexInterface {
-  user: UserInterface;
-  teams: UserInterface[];
+interface LoaderData {
+  user: Awaited<ReturnType<typeof getUser>>;
+  teams: Awaited<ReturnType<typeof getTeamsApproved>>;
 }
 
 export default function Index() {
-  const { user, teams } = useLoaderData<IndexInterface>();
+  const { user, teams } = useLoaderData() as LoaderData;
   const [teamSelected, setTeamSelected] = React.useState<UserInterface>();
   const [showModal, setShowModal] = React.useState(false);
 
@@ -174,7 +173,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/team");
   }
 
-  return json({ user, teams });
+  return json<LoaderData>({ user, teams });
 };
 
 export const action: ActionFunction = async ({ request }) => {

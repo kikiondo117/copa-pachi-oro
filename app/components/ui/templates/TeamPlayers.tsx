@@ -1,6 +1,6 @@
-import type { TeamMemberInterface } from "../types/types.user";
+import type { TeamMemberInterface } from "../../../types/types.user";
 import * as React from "react";
-import { TeamMember } from "./TeamMember";
+import { TeamMember } from "../organisms/TeamMember";
 
 interface TeamPLayersInterface {
   members: TeamMemberInterface[] | [];

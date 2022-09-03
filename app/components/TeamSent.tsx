@@ -1,7 +1,7 @@
 import * as React from "react";
 import type { User } from "../types/types.user";
 
-import { Button } from "./ui/Button";
+import { Button } from "./ui/atoms/Button";
 
 interface TeamSentProps {
   user?: User;
