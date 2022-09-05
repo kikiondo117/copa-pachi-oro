@@ -15,7 +15,7 @@ import {
   TeamForm,
   Footer,
   Container,
-  TeamSent,
+  TeamConfirmedRegister,
   CardTeam,
   PreviewTeamPlayes,
   Modal2,
@@ -71,7 +71,7 @@ export default function Index() {
           </div>
           <div className="col-start-9 col-end-13 w-full">
             <div className="h-24 w-auto bg-form-top bg-cover" />
-            {user ? <TeamSent /> : <TeamForm />}
+            {user ? <TeamConfirmedRegister /> : <TeamForm />}
           </div>
         </Container>
       </main>

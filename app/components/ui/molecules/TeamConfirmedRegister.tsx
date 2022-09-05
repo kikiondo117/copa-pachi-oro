@@ -1,10 +1,6 @@
-import { Button } from "./ui/atoms/Button";
+import { Button } from "../atoms/Button";
 
-interface TeamSentProps {
-  user?: User;
-}
-
-export function TeamSent(props: TeamSentProps) {
+export function TeamConfirmedRegister() {
   return (
     <div className="flex h-[39rem] w-full flex-col justify-between bg-special-gray px-4 font-coolveltica">
       <div className="my-auto">

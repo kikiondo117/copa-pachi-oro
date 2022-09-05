@@ -3,7 +3,7 @@ import { Link, useSubmit, useTransition } from "@remix-run/react";
 import { Button, Delete, Modal2 } from "~/components";
 import classNames from "classnames";
 
-export function Nav({ save }: { save: () => void }) {
+export function NavAdminTeam({ save }: { save: () => void }) {
   const [showModal, setShowModal] = React.useState(false);
   const transition = useTransition();
   const submit = useSubmit();

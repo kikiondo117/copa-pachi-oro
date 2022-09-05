@@ -30,7 +30,7 @@ import {
   FormField,
   Modal2,
   PlayerForm,
-  Nav,
+  NavAdminTeam,
   ErrorTemplate,
 } from "~/components";
 
@@ -116,7 +116,7 @@ export default function AdminTeam() {
       <Header user={admin} />
 
       <Container className="py-24">
-        <Nav save={saveTeam} />
+        <NavAdminTeam save={saveTeam} />
         <article className="col-span-4 flex flex-col font-coolveltica ">
           <h2 className=" pb-5 text-xl tracking-wider">Datos del equipo </h2>
           <div className="flex items-center pb-5">

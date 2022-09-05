@@ -1,4 +1,4 @@
-import { Button } from "../atoms/Button";
+import { Button } from "../ui/atoms/Button";
 
 type Props = {
   cancel: () => void;

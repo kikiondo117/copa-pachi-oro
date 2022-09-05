@@ -4,8 +4,6 @@ import { redirect } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 // * Utils
 import { getUser } from "~/utils/auth.server";
-// * Components
-import { Header } from "~/components";
 
 export function ErrorTemplate() {
   return (
