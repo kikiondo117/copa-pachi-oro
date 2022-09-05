@@ -5,6 +5,7 @@ import { getUser } from "~/utils/auth.server";
 import classNames from "classnames";
 import { LoginForm } from "~/components";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
+import { Link } from "@remix-run/react";
 
 interface HeaderProps {
   user?: Awaited<ReturnType<typeof getUser>>;
@@ -24,10 +25,10 @@ export function Header({ user }: HeaderProps) {
           {user?.admin && (
             <>
               <li className="mx-4">
-                <a href="/admin/torneo">TORNEOS</a>
+                <Link to="/admin/torneo">TORNEOS</Link>
               </li>
               <li className="mx-4">
-                <a href="/admin">EQUIPOS</a>
+                <Link to="/admin">EQUIPOS</Link>
               </li>
             </>
           )}
@@ -35,10 +36,10 @@ export function Header({ user }: HeaderProps) {
           {user && !user.admin ? (
             <>
               <li className="mx-4">
-                <a href="/team">Equipo</a>
+                <Link to="/team">EQUIPO</Link>
               </li>
               <li className="mx-4">
-                <a href="/teams">EQUIPOS</a>
+                <Link to="/teams">EQUIPOS</Link>
               </li>
             </>
           ) : null}

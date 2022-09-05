@@ -23,13 +23,18 @@ export const createUser = async (user: RegisterForm) => {
 
   
 export const getOwner = async (id: string) => {
-  return prisma.user.findUnique({
-      where: { id: id },
-      select: {
-        id: true, email: true,
-        team: true,
-        members: true, subs: true,
-        isApproved: true, admin: true,
-      },
-  })
+  try {
+    const owner =  await prisma.user.findUnique({
+        where: { id: id },
+        select: {
+          id: true, email: true,
+          team: true,
+          members: true, subs: true,
+          isApproved: true, admin: true,
+        },
+    })
+    return owner
+  } catch {
+    return null
+  }
 }

@@ -10,9 +10,11 @@ import {
   useActionData,
   useTransition,
   Form,
+  useCatch,
 } from "@remix-run/react";
 // * Utils and controllers
 import { getUser } from "~/utils/auth.server";
+import { platforms, regions } from "~/constants/selectOptions";
 import { addTeamMember, updateTeamMember } from "~/models/member.server";
 import { addSub, updatedSub } from "~/models/subs.server";
 import { getOwner } from "~/models/user.server";
@@ -29,8 +31,8 @@ import {
   Modal2,
   PlayerForm,
   Nav,
+  ErrorTemplate,
 } from "~/components";
-import { platforms, regions } from "~/constants/selectOptions";
 
 interface LoaderData {
   admin: Awaited<ReturnType<typeof getUser>>;
@@ -248,19 +250,19 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 
   const owner = await getOwner(userId);
 
-  if (owner) {
-    return json<LoaderData>({
-      admin,
-      owner,
-      capitan: await getCapitan({ id: owner.id }),
-    });
-  } else {
-    return redirect("/");
+  if (!owner) {
+    throw new Response("Not found", { status: 404 });
   }
+
+  return json<LoaderData>({
+    admin,
+    owner,
+    capitan: await getCapitan({ id: owner.id }),
+  });
 };
 
 export const action: ActionFunction = async ({ request, params }) => {
-  const owner = await getOwner(params.owner);
+  const owner = await getOwner(params.userId);
   const form = await request.formData();
   const name = form.get("name");
   const rango = form.get("rango");
@@ -274,42 +276,32 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   let id = form.get("user_id");
 
-  if (action === "saveTeam" && owner) {
-    if (
-      typeof team !== "string" ||
-      typeof region !== "string" ||
-      typeof plataforma !== "string"
-    ) {
-      return json(
-        { error: `Invalid Form Data`, form: action },
-        { status: 400 }
-      );
+  invariant(typeof team === "string", "Team si required");
+  invariant(typeof region === "string", "Region si required");
+  invariant(typeof plataforma === "string", "Plataforma si required");
+
+  switch (action) {
+    case "saveTeam": {
+      return await saveTeam({
+        id: owner.id,
+        body: { team, region, plataforma },
+      });
     }
 
-    return await saveTeam({ id: owner.id, body: { team, region, plataforma } });
-  }
+    case "delete_team": {
+      await deleteTeam({ id: owner?.id });
+      return redirect("/");
+    }
 
-  if (action === "delete_team" && owner) {
-    await deleteTeam({ id: owner?.id });
-    return redirect("/");
-  }
+    case "approveTeam": {
+      return await approveTeam(owner.email);
+    }
 
-  if (action === "approveTeam" && owner) {
-    return await approveTeam(owner.email);
-  }
+    case "addPlayer": {
+      invariant(typeof name === "string", "Name is required");
+      invariant(typeof rango === "string", "Rango is required");
+      invariant(typeof rol === "string", "Rol is required");
 
-  if (
-    typeof name !== "string" ||
-    typeof rango !== "string" ||
-    typeof capitan !== "boolean" ||
-    typeof img !== "string" ||
-    typeof rol !== "string"
-  ) {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-  }
-
-  if (owner) {
-    if (action === "addPlayer") {
       return await addTeamMember(owner.email, {
         name,
         rango,
@@ -319,7 +311,11 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
 
-    if (action === "addSub") {
+    case "addSub": {
+      invariant(typeof name === "string", "Name is required");
+      invariant(typeof rango === "string", "Rango is required");
+      invariant(typeof rol === "string", "Rol is required");
+
       return await addSub(owner.email, {
         name,
         rango,
@@ -329,8 +325,11 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
 
-    if (action === "updatePlayer" && id) {
-      id = id as string;
+    case "updatePlayer": {
+      invariant(typeof name === "string", "Name is required");
+      invariant(typeof rango === "string", "Rango is required");
+      invariant(typeof rol === "string", "Rol is required");
+      invariant(typeof id === "string", "Id is required");
       return await updateTeamMember(id, {
         name,
         rango,
@@ -340,8 +339,11 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
 
-    if (action === "updateSub" && id) {
-      id = id as string;
+    case "updatePlayer": {
+      invariant(typeof name === "string", "Name is required");
+      invariant(typeof rango === "string", "Rango is required");
+      invariant(typeof rol === "string", "Rol is required");
+      invariant(typeof id === "string", "Id is required");
       return await updatedSub(id, {
         name,
         rango,
@@ -354,3 +356,13 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   return json({ error: `Invalid User`, form: action }, { status: 400 });
 };
+
+export function CatchBoundary() {
+  const caught = useCatch();
+
+  if (caught.status === 404) {
+    return <ErrorTemplate />;
+  }
+
+  throw new Error(`Unsupported thrown response status code: ${caught.status}`);
+}

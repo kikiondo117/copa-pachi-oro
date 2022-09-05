@@ -17,12 +17,13 @@ export { TeamForm } from "./forms/TeamForm";
 export { CardTeam } from "./ui/molecules/CardTeam";
 export { TeamMember } from "./ui/organisms/TeamMember";
 export { TeamSent } from "./TeamSent";
-export { TeamPlayers } from "./ui/templates/TeamPlayers";
 export { CardPlayer } from "./ui/molecules/CardPlayer";
 export { CardEmptyPlayer } from "./ui/molecules/CardEmptyPlayer";
 export { CardAddPlayer } from "./ui/molecules/CardAddPlayer";
 export { CardTournament } from "./ui/molecules/CardTournament";
 export { PreviewTeamPlayes } from "./ui/templates/PreviewTeamPlayers";
-
+// * Templates
+export { TeamPlayers } from "./ui/templates/TeamPlayers";
+export { ErrorTemplate } from "./ui/templates/Error";
 // * OWNER COMPONENTS
 export { Nav } from "./owner/Nav/Nav";
