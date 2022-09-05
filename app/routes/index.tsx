@@ -1,15 +1,12 @@
 import * as React from "react";
+import invariant from "tiny-invariant";
 import { json, redirect } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 // * Types
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { TeamMemberInterface, UserInterface } from "../types/types.user";
+import type { TeamMemberInterface } from "~/types/types.user";
+import type { ActionDataLogin, ActionDataRegister } from "~/types/actions";
 // * Utils and Controllers
-import {
-  validateEmail,
-  validatePassword,
-  validateName,
-} from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
 import { getTeamsApproved } from "~/models/team.server";
 // * Components
@@ -191,47 +188,53 @@ export const action: ActionFunction = async ({ request }) => {
   let members: TeamMemberInterface[] = [];
   const action = form.get("action");
 
-  if (typeof email !== "string" || typeof password !== "string") {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-  }
-
-  if (
-    action === "register" &&
-    (typeof team !== "string" ||
-      typeof confirm_password !== "string" ||
-      typeof region !== "string" ||
-      typeof plataforma !== "string")
-  ) {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
-  }
-
-  const errors = {
-    email: validateEmail(email),
-    password: validatePassword(password),
-    ...(action === "register"
-      ? {
-          confirm_password: validatePassword(
-            (confirm_password as string) || ""
-          ),
-          team: validateName((team as string) || ""),
-        }
-      : {}),
-  };
-
-  if (Object.values(errors).some(Boolean)) {
-    return json({ errors, fields: { email, password } }, { status: 400 });
-  }
+  invariant(typeof email === "string", "Email must be a string");
+  invariant(typeof password === "string", "Password must be a string");
 
   switch (action) {
     case "login": {
+      const errors: ActionDataLogin = {
+        email: email ? null : "Email is required",
+        password: password ? null : "Password is required",
+      };
+
+      const hasErros = Object.values(errors).some(
+        (errorMessage) => errorMessage
+      );
+
+      if (hasErros) {
+        return json<ActionDataLogin>(errors);
+      }
+
       return await login({ email, password });
     }
 
     case "register": {
-      confirm_password = confirm_password as string;
-      team = team as string;
-      region = region as string;
-      plataforma = plataforma as string;
+      const errors: ActionDataRegister = {
+        email: email ? null : "Email is required",
+        password: password ? null : "Password is requiered",
+        confirm_password: confirm_password ? null : "confirm_password error",
+        team: team ? null : "Team is required",
+        region: region ? null : "Region is required",
+        plataforma: plataforma ? null : "Plataforma is required",
+      };
+
+      const hasErros = Object.values(errors).some(
+        (errorMessage) => errorMessage
+      );
+
+      if (hasErros) {
+        return json<ActionDataRegister>(errors);
+      }
+
+      invariant(
+        typeof confirm_password === "string",
+        "confirm_password must be a string"
+      );
+      invariant(typeof team === "string", "Team must be a string");
+      invariant(typeof region === "string", "Region must be a string");
+      invariant(typeof plataforma === "string", "Plataforma must be a string");
+
       return await register({
         email,
         password,

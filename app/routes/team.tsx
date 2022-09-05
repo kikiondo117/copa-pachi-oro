@@ -46,7 +46,6 @@ export default function Team() {
   const { user, capitan } = useLoaderData() as LoaderData;
 
   React.useEffect(() => {
-    console.log("errors", errors);
     if (errors === null) {
       setIsModal({ status: false });
     }
