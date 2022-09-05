@@ -5,7 +5,7 @@ import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import * as React from "react";
 // * UTILS && CONTROLLER
 import { getUser } from "~/utils/auth.server";
-import { getTeams, deleteTeam } from "~/controller/team.controller";
+import { getTeams, deleteTeam } from "~/models/team.server";
 // * Components
 import {
   Header,

@@ -1,7 +1,7 @@
 import type { RegisterForm, LoginForm } from '../types/types.server';
 import { prisma } from './prisma.server';
 import { redirect, createCookieSessionStorage, json } from '@remix-run/node';
-import { createUser } from '../controller/user.controller'
+import { createUser } from '~/models/user.server'
 import bcrypt from 'bcryptjs';
 
 export async function register(user: RegisterForm) {

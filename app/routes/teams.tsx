@@ -6,9 +6,15 @@ import type { LoaderFunction } from "@remix-run/node";
 import type { UserInterface } from "~/types/types.user";
 // * Utils and Controllers
 import { getUser } from "~/utils/auth.server";
-import { getTeamsApproved } from "~/controller/team.controller";
+import { getTeamsApproved } from "~/models/team.server";
 // * Components
-import { Container, Header, CardTeam, Modal2, PreviewTeamPlayes } from "~/components";
+import {
+  Container,
+  Header,
+  CardTeam,
+  Modal2,
+  PreviewTeamPlayes,
+} from "~/components";
 
 interface TeamsInterface {
   user: UserInterface;
@@ -38,12 +44,15 @@ export default function Teams() {
       </Container>
 
       {showModal && teamSelected && (
-        <Modal2 modalClassName="h-[36.8rem] w-[52.5rem]" onClose={() => setShowModal(false)}>
-            <PreviewTeamPlayes
-                team={teamSelected.team}
-                members={teamSelected.members}
-                subs={teamSelected.subs}
-              />
+        <Modal2
+          modalClassName="h-[36.8rem] w-[52.5rem]"
+          onClose={() => setShowModal(false)}
+        >
+          <PreviewTeamPlayes
+            team={teamSelected.team}
+            members={teamSelected.members}
+            subs={teamSelected.subs}
+          />
         </Modal2>
       )}
     </div>

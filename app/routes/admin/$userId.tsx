@@ -1,9 +1,8 @@
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type {
-  UserInterface,
-  TeamMemberInterface,
-} from "../../types/types.user";
+import type { TeamMemberInterface } from "../../types/types.user";
+
 import * as React from "react";
+import invariant from "tiny-invariant";
 import { redirect, json } from "@remix-run/node";
 import {
   useLoaderData,
@@ -14,17 +13,11 @@ import {
 } from "@remix-run/react";
 // * Utils and controllers
 import { getUser } from "~/utils/auth.server";
-import {
-  approveTeam,
-  addTeamMember,
-  addSub,
-  updateTeamMember,
-  updatedSub,
-  getOwner,
-  deleteTeam,
-  getCapitan,
-  saveTeam,
-} from "~/controller/team.controller";
+import { addTeamMember, updateTeamMember } from "~/models/member.server";
+import { addSub, updatedSub } from "~/models/subs.server";
+import { getOwner } from "~/models/user.server";
+import { getCapitan } from "~/models/capitan.server";
+import { approveTeam, deleteTeam, saveTeam } from "~/models/team.server";
 // * Components
 import Toggle from "react-toggle";
 import {
@@ -39,14 +32,14 @@ import {
 } from "~/components";
 import { platforms, regions } from "~/constants/selectOptions";
 
-interface loaderData {
-  admin: UserInterface;
-  owner: UserInterface;
-  capitan: null | UserInterface;
+interface LoaderData {
+  admin: Awaited<ReturnType<typeof getUser>>;
+  owner: Awaited<ReturnType<typeof getOwner>>;
+  capitan: Awaited<ReturnType<typeof getCapitan>>;
 }
 
 export default function AdminTeam() {
-  const { admin, owner, capitan } = useLoaderData<loaderData>();
+  const { admin, owner, capitan } = useLoaderData<LoaderData>();
   const [members, setMembers] = React.useState(() => new Array(5).fill(null));
   const [subs, setSubs] = React.useState(() => new Array(4).fill(null));
   const [isSub, setIsSub] = React.useState(false);
@@ -58,9 +51,9 @@ export default function AdminTeam() {
   const submit = useSubmit();
 
   const [form, setFormData] = React.useState({
-    team: owner.team.name,
-    region: owner.team.region,
-    platform: owner.team.plataforma,
+    team: owner?.team.name,
+    region: owner?.team.region,
+    platform: owner?.team.plataforma,
   });
 
   const handleInputChange = (
@@ -133,7 +126,7 @@ export default function AdminTeam() {
               disabled={
                 transition.submission?.formData.get("action") === "approveTeam"
               }
-              checked={owner.isApproved}
+              checked={owner?.isApproved}
               icons={false}
               onClick={approveTeam}
             />
@@ -148,7 +141,7 @@ export default function AdminTeam() {
               value={form.team}
               type="text"
               className=" w-80"
-              placeholder={owner.team.name}
+              placeholder={owner?.team.name}
               onChange={(e) => handleInputChange(e, "team")}
             />
 
@@ -246,27 +239,24 @@ export default function AdminTeam() {
 
 export const loader: LoaderFunction = async ({ request, params }) => {
   const admin = await getUser(request);
+  const { userId } = params;
+  invariant(userId, "userId is required");
 
   if (!admin || !admin.admin) {
     return redirect("/");
   }
 
-  if (params.owner) {
-    try {
-      const owner = await getOwner(params.owner);
-      const capitan = await getCapitan({ id: params.owner });
+  const owner = await getOwner(userId);
 
-      if (owner) {
-        return json({ admin, owner, capitan });
-      } else {
-        return redirect("/");
-      }
-    } catch {
-      return redirect("/");
-    }
+  if (owner) {
+    return json<LoaderData>({
+      admin,
+      owner,
+      capitan: await getCapitan({ id: owner.id }),
+    });
+  } else {
+    return redirect("/");
   }
-
-  return json({ admin });
 };
 
 export const action: ActionFunction = async ({ request, params }) => {

@@ -11,7 +11,7 @@ import {
   validateName,
 } from "../utils/validators.server";
 import { login, getUser, register } from "~/utils/auth.server";
-import { getTeamsApproved } from "~/controller/team.controller";
+import { getTeamsApproved } from "~/models/team.server";
 // * Components
 import {
   Header,
@@ -25,13 +25,16 @@ import {
 } from "~/components";
 
 interface LoaderData {
-  user: Awaited<ReturnType<typeof getUser>>;
-  teams: Awaited<ReturnType<typeof getTeamsApproved>>;
+  user: User;
+  teams: Teams;
 }
+
+type User = Awaited<ReturnType<typeof getUser>>;
+type Teams = Awaited<ReturnType<typeof getTeamsApproved>>;
 
 export default function Index() {
   const { user, teams } = useLoaderData() as LoaderData;
-  const [teamSelected, setTeamSelected] = React.useState<UserInterface>();
+  const [teamSelected, setTeamSelected] = React.useState<User>();
   const [showModal, setShowModal] = React.useState(false);
 
   return (
@@ -143,7 +146,7 @@ export default function Index() {
 
           {showModal && teamSelected ? (
             <Modal2
-              modalClassName="h-[36.8rem] w-[52.5rem]"
+              className="h-[36.8rem] w-[52.5rem]"
               onClose={() => setShowModal(false)}
             >
               <PreviewTeamPlayes
@@ -163,7 +166,6 @@ export default function Index() {
 
 export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request);
-  const teams = await getTeamsApproved();
 
   if (user && user.admin) {
     return redirect("/admin");
@@ -173,7 +175,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     return redirect("/team");
   }
 
-  return json<LoaderData>({ user, teams });
+  return json<LoaderData>({ user, teams: await getTeamsApproved() });
 };
 
 export const action: ActionFunction = async ({ request }) => {

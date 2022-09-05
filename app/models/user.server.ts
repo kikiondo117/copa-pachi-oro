@@ -20,3 +20,16 @@ export const createUser = async (user: RegisterForm) => {
     })
     return { id: newUser.id, email: user.email }
   }
+
+  
+export const getOwner = async (id: string) => {
+  return prisma.user.findUnique({
+      where: { id: id },
+      select: {
+        id: true, email: true,
+        team: true,
+        members: true, subs: true,
+        isApproved: true, admin: true,
+      },
+  })
+}

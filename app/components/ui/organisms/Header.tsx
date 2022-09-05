@@ -1,12 +1,13 @@
 import * as React from "react";
-import type { UserInterface } from "~/types/types.user";
+// * Types
+import { getUser } from "~/utils/auth.server";
 // * Components
 import classNames from "classnames";
 import { LoginForm } from "~/components";
 import Logo from "~/../public/assets/logo-pachi-retas.svg";
 
 interface HeaderProps {
-  user?: UserInterface;
+  user?: Awaited<ReturnType<typeof getUser>>;
 }
 
 export function Header({ user }: HeaderProps) {

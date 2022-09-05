@@ -10,7 +10,18 @@ type AddPlayerProps = {
   playerSelected?: TeamMemberInterface | null;
   showCapitan: boolean;
   team?: TeamInterface;
+  errors: Errors;
 };
+
+type Errors =
+  | {
+      name: null | string;
+      rango: null | string;
+      rol: null | string;
+      img: null | string;
+    }
+  | undefined
+  | null;
 
 export function PlayerForm(props: AddPlayerProps) {
   const transition = useTransition();
@@ -74,6 +85,9 @@ export function PlayerForm(props: AddPlayerProps) {
           />
         )}
 
+        {props.errors?.name ? (
+          <em className=" text-red-500">{props.errors.name}</em>
+        ) : null}
         <input
           className="my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black"
           name="name"
@@ -82,6 +96,10 @@ export function PlayerForm(props: AddPlayerProps) {
           value={dataForm.name}
           onChange={(e) => inputChange(e)}
         />
+
+        {props.errors?.rango ? (
+          <em className=" text-red-500">{props.errors.rango}</em>
+        ) : null}
         <input
           className="my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-black"
           name="rango"
@@ -91,6 +109,9 @@ export function PlayerForm(props: AddPlayerProps) {
           onChange={(e) => inputChange(e)}
         />
 
+        {props.errors?.rol ? (
+          <em className=" text-red-500">{props.errors.rol}</em>
+        ) : null}
         <select
           title="Rol"
           className=" my-2 h-10 w-full rounded px-4 font-big-noodle-oblique"
