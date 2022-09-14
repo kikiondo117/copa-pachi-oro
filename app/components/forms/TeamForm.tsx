@@ -31,7 +31,7 @@ export function TeamForm() {
       className="flex h-[32rem] w-full flex-col justify-between bg-special-gray px-4 font-coolveltica"
     >
       <input type="hidden" name="action" value={"register"} />
-      <div>
+      <div className=" gap-2">
         <p className="mt-6 text-xs text-blue-gray-default">Crea tu cuenta</p>
         <FormField
           htmlFor="email"
@@ -61,7 +61,7 @@ export function TeamForm() {
           onChange={(e) => handleInputChange(e, "team")}
           placeholder="Nombre del equipo"
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           <FormSelect
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               handleInputChange(e, "region")
@@ -76,7 +76,6 @@ export function TeamForm() {
           />
 
           <FormSelect
-            className=" ml-2"
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               handleInputChange(e, "platform")
             }

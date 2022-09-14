@@ -31,7 +31,7 @@ export function FormField({
         type={type}
         id={htmlFor}
         name={htmlFor}
-        className={`my-2 w-full rounded p-2 pl-4 font-big-noodle-oblique text-base text-blue-gray-default ${
+        className={` w-full rounded p-2 font-big-noodle-oblique text-base text-blue-gray-default ${
           className ? className : ""
         }`}
         value={value}

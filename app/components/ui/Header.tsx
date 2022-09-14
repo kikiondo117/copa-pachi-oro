@@ -57,7 +57,7 @@ export function Header({ user }: HeaderProps) {
             <button
               className={classNames("mx-4 h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
-                "bg-organge-light": user?.admin || !user,
+                "bg-green-admin": user?.admin || !user,
               })}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);

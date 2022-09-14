@@ -876,6 +876,10 @@ video {
   height: 24px;
 }
 
+.h-\[80px\] {
+  height: 80px;
+}
+
 .h-\[12\.8rem\] {
   height: 12.8rem;
 }
@@ -968,10 +972,6 @@ video {
 
 .h-12 {
   height: 3rem;
-}
-
-.h-\[12rem\] {
-  height: 12rem;
 }
 
 .h-\[36px\] {
@@ -1173,6 +1173,10 @@ video {
   gap: 0.75rem;
 }
 
+.gap-2 {
+  gap: 0.5rem;
+}
+
 .gap-4 {
   gap: 1rem;
 }
@@ -1272,9 +1276,9 @@ video {
   background-color: rgb(39 53 79 / var(--tw-bg-opacity));
 }
 
-.bg-organge-light {
+.bg-green-admin {
   --tw-bg-opacity: 1;
-  background-color: rgb(243 119 49 / var(--tw-bg-opacity));
+  background-color: rgb(183 208 25 / var(--tw-bg-opacity));
 }
 
 .bg-blue-600 {
@@ -1443,7 +1447,7 @@ video {
 }
 
 .text-team-name {
-  font-size: 1.375rem;
+  font-size: 32px;
 }
 
 .text-2xl {
@@ -1518,11 +1522,6 @@ video {
   color: rgb(0 0 0 / var(--tw-text-opacity));
 }
 
-.text-gray-two {
-  --tw-text-opacity: 1;
-  color: rgb(194 194 194 / var(--tw-text-opacity));
-}
-
 .text-gray-500 {
   --tw-text-opacity: 1;
   color: rgb(107 114 128 / var(--tw-text-opacity));
@@ -1554,6 +1553,10 @@ video {
 
 .delay-150 {
   transition-delay: 150ms;
+}
+
+.duration-100 {
+  transition-duration: 100ms;
 }
 
 .duration-300 {
