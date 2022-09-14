@@ -1,16 +1,14 @@
 import * as React from "react";
+import invariant from "tiny-invariant";
 import { useLoaderData, useActionData } from "@remix-run/react";
 import { json, redirect } from "@remix-run/node";
 // * Utils and Types
 import type { ActionFunction, LoaderFunction } from "@remix-run/node";
-import type { UserInterface, TeamMemberInterface } from "~/types/types.user";
+import type { TeamMemberInterface } from "~/types/types.user";
 import { getUser } from "~/utils/auth.server";
-import {
-  addTeamMember,
-  addSub,
-  updatedSub,
-  updateTeamMember,
-} from "~/controller/team.controller";
+// * Models
+import { addTeamMember, updateTeamMember } from "~/models/member.server";
+import { addSub, updatedSub } from "~/models/subs.server";
 // * Components
 import {
   Modal2,
@@ -21,10 +19,22 @@ import {
   TeamPlayers,
 } from "~/components";
 
-interface LoaderInterface {
-  user: UserInterface;
+type User = Awaited<ReturnType<typeof getUser>>;
+
+interface LoaderData {
+  user: User;
   capitan: boolean;
 }
+
+type ActionData =
+  | {
+      name: null | string;
+      rango: null | string;
+      rol: null | string;
+      img: null | string;
+    }
+  | undefined
+  | null;
 
 export default function Team() {
   const [isModal, setIsModal] = React.useState({ status: false });
@@ -32,12 +42,14 @@ export default function Team() {
   const [playerSelected, setPlayerSelected] =
     React.useState<null | TeamMemberInterface>(null);
 
-  const response = useActionData();
-  const { user, capitan } = useLoaderData<LoaderInterface>();
+  const errors = useActionData() as ActionData;
+  const { user, capitan } = useLoaderData() as LoaderData;
 
   React.useEffect(() => {
-    setIsModal({ status: false });
-  }, [response]);
+    if (errors === null) {
+      setIsModal({ status: false });
+    }
+  }, [errors]);
 
   const handleClick = (isSub: boolean, player: TeamMemberInterface) => {
     setIsSub(!!isSub);
@@ -52,7 +64,7 @@ export default function Team() {
       <main className=" h-screen bg-hero-rein bg-cover pt-28">
         <Container className="mx-auto">
           <div className=" col-start-3 col-end-11">
-            <CardTeam team={user.team} />
+            <CardTeam team={user?.team} />
           </div>
 
           <TeamPlayers
@@ -83,6 +95,7 @@ export default function Team() {
         >
           <div className=" col-start-2 col-end-6">
             <PlayerForm
+              errors={errors}
               showCapitan={!capitan}
               isSub={isSub}
               playerSelected={playerSelected}
@@ -112,7 +125,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     capitan = true;
   }
 
-  return { user, capitan };
+  return json<LoaderData>({ user, capitan });
 };
 
 export const action: ActionFunction = async ({ request }) => {
@@ -126,58 +139,71 @@ export const action: ActionFunction = async ({ request }) => {
   const capitan = form.get("capitan") === "on" ? true : false;
   let id = form.get("user_id");
 
-  if (
-    typeof name !== "string" ||
-    typeof rango !== "string" ||
-    typeof capitan !== "boolean" ||
-    typeof img !== "string"
-  ) {
-    return json({ error: `Invalid Form Data`, form: action }, { status: 400 });
+  const errors: ActionData = {
+    name: name ? null : "Title is required",
+    rango: rango ? null : "Rango is required",
+    rol: rol ? null : "Rol is required",
+    img: img ? null : "Img is required",
+  };
+
+  const hasErrors = Object.values(errors).some((errorMesage) => errorMesage);
+
+  if (hasErrors) {
+    return json<ActionData>(errors);
   }
 
-  if (user) {
-    if (action === "addPlayer") {
-      return await addTeamMember(user.email, {
-        name,
-        rango,
-        rol,
-        capitan,
-        img,
-      });
-    }
+  invariant(typeof name === "string", "title must be a string");
+  invariant(typeof rango === "string", "rango must be a string");
+  invariant(typeof rol === "string", "rol miust be a string");
+  invariant(typeof img === "string", "img must be a string");
 
-    if (action === "addSub") {
-      return await addSub(user.email, {
-        name,
-        rango,
-        rol,
-        capitan,
-        img,
-      });
-    }
+  if (action === "addPlayer") {
+    await addTeamMember(user.email, {
+      name,
+      rango,
+      rol,
+      capitan,
+      img,
+    });
 
-    if (action === "updatePlayer" && id) {
-      id = id as string;
-      return await updateTeamMember(id, {
-        name,
-        rango,
-        rol,
-        capitan,
-        img,
-      });
-    }
-
-    if (action === "updateSub" && id) {
-      id = id as string;
-      return await updatedSub(id, {
-        name,
-        rango,
-        rol,
-        capitan,
-        img,
-      });
-    }
+    return null;
   }
 
-  return json({ error: `Invalid User`, form: action }, { status: 400 });
+  if (action === "addSub") {
+    await addSub(user.email, {
+      name,
+      rango,
+      rol,
+      capitan,
+      img,
+    });
+
+    return null;
+  }
+
+  if (action === "updatePlayer" && id) {
+    id = id as string;
+    await updateTeamMember(id, {
+      name,
+      rango,
+      rol,
+      capitan,
+      img,
+    });
+
+    return null;
+  }
+
+  if (action === "updateSub" && id) {
+    id = id as string;
+    await updatedSub(id, {
+      name,
+      rango,
+      rol,
+      capitan,
+      img,
+    });
+
+    return null;
+  }
 };

@@ -4,15 +4,10 @@ import { redirect } from "@remix-run/node";
 import type { LoaderFunction } from "@remix-run/node";
 // * Utils
 import { getUser } from "~/utils/auth.server";
-// * Components
-import { Header } from "~/components";
 
-export default function Error() {
-  const { user } = useLoaderData();
-
+export function ErrorTemplate() {
   return (
     <div className="relative h-screen">
-      <Header user={user} />
       <div className="pt-14">
         {/* HACERLO CON UN BOTON */}
         <Link to="/">

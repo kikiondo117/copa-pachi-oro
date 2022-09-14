@@ -1,4 +1,3 @@
-import * as React from "react";
 import type { TeamInterface } from "~/types/types.user";
 import classNames from "classnames";
 
