@@ -3,6 +3,8 @@ import type { UserInterface } from "~/types/types.user";
 import { redirect, json } from "@remix-run/node";
 import { Link, useLoaderData, useSubmit } from "@remix-run/react";
 import * as React from "react";
+// *  3 party libraries
+import { useScreenshot, createFileName } from "use-react-screenshot";
 // * UTILS && CONTROLLER
 import { getUser } from "~/utils/auth.server";
 import { getTeams, deleteTeam } from "~/models/team.server";
@@ -23,6 +25,24 @@ export default function AdminTeam() {
   const [userSelected, setUserSelected] = React.useState<UserInterface>();
   const { user, teams } = useLoaderData();
   const submit = useSubmit();
+  // SCREENSHOT
+  const ref = useScreenshot();
+  const [image, takeScreenShot] = useScreenshot({
+    type: "image/jpeg",
+    quality: 1.0,
+  });
+
+  const download = (
+    image: string,
+    { name = "img", extension = "jpg" } = {}
+  ) => {
+    const a = document.createElement("a");
+    a.href = image;
+    a.download = createFileName(extension, name);
+    a.click();
+  };
+
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
   return (
     <div className="bg-gray-1 bg-cover">
@@ -31,7 +51,7 @@ export default function AdminTeam() {
       <Container className="flex h-screen flex-row overflow-y-scroll pt-20">
         <header className="col-start-3 col-end-11 h-fit">
           <Link to="/admin/team">
-            <Button.Primary className="flex h-10 w-[7.6rem] items-center justify-around">
+            <Button.Primary className="flex h-10 w-[7.6rem] items-center justify-around bg-special-blue-light">
               Crear equipo
               <img
                 className=" h-5"
@@ -84,11 +104,20 @@ export default function AdminTeam() {
 
       {showModal && userSelected && (
         <Modal2 onClose={() => setShowModal(false)}>
-          <PreviewTeamPlayes
-            team={userSelected.team}
-            members={userSelected.members}
-            subs={userSelected.subs}
-          />
+          <div ref={ref}>
+            <PreviewTeamPlayes
+              team={userSelected.team}
+              members={userSelected.members}
+              subs={userSelected.subs}
+            />
+          </div>
+
+          <button
+            className="fixed bottom-0 right-0 mr-6 mb-16 duration-100 ease-in-out hover:scale-110"
+            onClick={downloadScreenshot}
+          >
+            <img src="/assets/icons/camera.svg" alt="camera button" />
+          </button>
         </Modal2>
       )}
 

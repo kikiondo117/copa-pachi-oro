@@ -70,6 +70,7 @@ export default function AdminTeam() {
   const approveTeam = () => {
     const formData = new FormData();
     formData.append("action", "approveTeam");
+
     submit(formData, { method: "post" });
   };
 
@@ -112,7 +113,7 @@ export default function AdminTeam() {
   }, [owner]);
 
   return (
-    <div className="h-screen bg-blue-gray-dark text-white">
+    <div className=" bg-blue-gray-dark text-white">
       <Header user={admin} />
 
       <Container className="pt-24">
@@ -276,12 +277,14 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   let id = form.get("user_id");
 
-  invariant(typeof team === "string", "Team si required");
-  invariant(typeof region === "string", "Region si required");
-  invariant(typeof plataforma === "string", "Plataforma si required");
+  invariant(owner, "Owner is required");
 
   switch (action) {
     case "saveTeam": {
+      invariant(typeof team === "string", "Team is required");
+      invariant(typeof region === "string", "Region is required");
+      invariant(typeof plataforma === "string", "Plataforma is required");
+
       return await saveTeam({
         id: owner.id,
         body: { team, region, plataforma },
@@ -339,7 +342,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
 
-    case "updatePlayer": {
+    case "updateSub": {
       invariant(typeof name === "string", "Name is required");
       invariant(typeof rango === "string", "Rango is required");
       invariant(typeof rol === "string", "Rol is required");
