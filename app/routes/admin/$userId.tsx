@@ -70,6 +70,7 @@ export default function AdminTeam() {
   const approveTeam = () => {
     const formData = new FormData();
     formData.append("action", "approveTeam");
+
     submit(formData, { method: "post" });
   };
 
@@ -276,12 +277,14 @@ export const action: ActionFunction = async ({ request, params }) => {
 
   let id = form.get("user_id");
 
-  invariant(typeof team === "string", "Team si required");
-  invariant(typeof region === "string", "Region si required");
-  invariant(typeof plataforma === "string", "Plataforma si required");
+  invariant(owner, "Owner is required");
 
   switch (action) {
     case "saveTeam": {
+      invariant(typeof team === "string", "Team is required");
+      invariant(typeof region === "string", "Region is required");
+      invariant(typeof plataforma === "string", "Plataforma is required");
+
       return await saveTeam({
         id: owner.id,
         body: { team, region, plataforma },
