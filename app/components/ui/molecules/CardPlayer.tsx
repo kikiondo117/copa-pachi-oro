@@ -13,7 +13,7 @@ export function CardPlayer(props: CardPlayerProps) {
     <div
       onClick={props.onClick}
       className={classNames(
-        "delay-50 flex h-[3.75rem] w-full flex-row bg-white transition duration-300 ease-in-out hover:scale-105",
+        " flex h-[3.75rem] w-full flex-row bg-white ",
         props.className
       )}
     >

@@ -18,7 +18,7 @@ export function Primary({
       className={`
                   w-fit cursor-pointer rounded-[4px]
                   bg-special-blue-light 
-                  p-2 font-big-noodle-oblique text-white ${
+                  py-2 font-big-noodle-oblique text-white ${
                     className ? className : "mx-auto"
                   }`}
     >

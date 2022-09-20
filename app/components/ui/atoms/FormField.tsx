@@ -20,12 +20,6 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <>
-      {/* {withLabel ? (
-        <label htmlFor={htmlFor} className="text-black text-base">
-          {label}
-        </label>
-      ) : null} */}
-
       <input
         onChange={onChange}
         type={type}

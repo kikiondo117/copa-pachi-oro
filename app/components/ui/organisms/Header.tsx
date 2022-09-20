@@ -24,10 +24,10 @@ export function Header({ user }: HeaderProps) {
         <ul className="flex items-center font-big-noodle-oblique text-base ">
           {user?.admin && (
             <>
-              <li className="mx-4">
+              <li className="">
                 <Link to="/admin/torneo">TORNEOS</Link>
               </li>
-              <li className="mx-4">
+              <li className="">
                 <Link to="/admin">EQUIPOS</Link>
               </li>
             </>
@@ -35,10 +35,10 @@ export function Header({ user }: HeaderProps) {
 
           {user && !user.admin ? (
             <>
-              <li className="mx-4">
+              <li className="">
                 <Link to="/team">EQUIPO</Link>
               </li>
-              <li className="mx-4">
+              <li className="">
                 <Link to="/teams">EQUIPOS</Link>
               </li>
             </>
@@ -57,7 +57,7 @@ export function Header({ user }: HeaderProps) {
 
           <li>
             <button
-              className={classNames("mx-4 h-[34px] rounded-[4px] px-4", {
+              className={classNames("ml-4 h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
                 "bg-green-admin": user?.admin || !user,
               })}

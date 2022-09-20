@@ -35,7 +35,7 @@ export default function Index() {
   const [showModal, setShowModal] = React.useState(false);
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen">
       <Header user={user} />
       <div className="absolute z-10">
         <img src="/assets/img_graffiti_effect_1.svg" alt="" />
@@ -70,13 +70,13 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-9 col-end-13 w-full">
-            <div className="h-24 w-auto bg-form-top bg-cover" />
+            <div className="h-[100px] w-auto bg-form-top bg-cover" />
             {user ? <TeamConfirmedRegister /> : <TeamForm />}
           </div>
         </Container>
       </main>
 
-      <div className="absolute right-0 top-2/3">
+      <div className="absolute right-0 top-[80%]">
         <img src="/assets/img/graffiti2.svg" alt="" />
       </div>
 
@@ -102,10 +102,10 @@ export default function Index() {
             </div>
           </div>
           <div className="col-start-8 col-end-13 flex flex-col justify-center">
-            <h4 className="font-coolveltica text-[1.625rem] text-special-orange">
-              ✌ ¿Qué es?
+            <h4 className="font-coolveltica text-[1.625rem] tracking-wider text-special-orange">
+              ✌¿Qué es?
             </h4>
-            <p className=" text-md w-full font-coolveltica font-normal leading-5 tracking-wider text-white">
+            <p className=" text-md w-full font-coolveltica font-normal leading-[19px] tracking-wider text-white">
               Es un torneo rápido, el cual reúne a jugadores apasionados de
               Overwatch. La finalidad de{" "}
               <span className="text-special-orange">Pachi Retas</span> es
@@ -123,7 +123,7 @@ export default function Index() {
         className="relative mx-auto flex h-screen  flex-col items-center justify-center bg-teams-bg bg-cover"
       >
         <div className="h-screen">
-          <h3 className="mt-28 h-fit font-coolveltica text-2xl leading-7 tracking-wider">
+          <h3 className="mt-28 h-fit font-coolveltica text-2xl leading-7 tracking-wider text-blue-gray-default">
             Equipos
           </h3>
 
@@ -136,7 +136,7 @@ export default function Index() {
                   setTeamSelected(user);
                 }}
                 team={user.team}
-                className="col-span-4 cursor-pointer"
+                className="col-span-4 cursor-pointer transition duration-100 ease-in-out hover:scale-105"
               />
             ))}
           </Container>
