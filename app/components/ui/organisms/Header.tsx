@@ -1,11 +1,12 @@
 import * as React from "react";
+import { Link, useLocation } from "@remix-run/react";
 // * Types
 import { getUser } from "~/utils/auth.server";
+// * Utils
+import Logo from "~/../public/assets/logo-pachi-retas.svg";
 // * Components
 import classNames from "classnames";
 import { LoginForm } from "~/components";
-import Logo from "~/../public/assets/logo-pachi-retas.svg";
-import { Link } from "@remix-run/react";
 
 interface HeaderProps {
   user?: Awaited<ReturnType<typeof getUser>>;
@@ -13,6 +14,9 @@ interface HeaderProps {
 
 export function Header({ user }: HeaderProps) {
   const [showLogin, setShowLogin] = React.useState(false);
+  const { pathname } = useLocation();
+
+  console.log("pathname", pathname);
 
   return (
     <header className="fixed z-20 flex h-14 w-full items-center bg-special-blue text-white">
@@ -59,7 +63,8 @@ export function Header({ user }: HeaderProps) {
             <button
               className={classNames("mx-4 h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
-                "bg-organge-light": user?.admin || !user,
+                "bg-organge-light": !user && pathname == "/",
+                "bg-green-500": user?.admin && pathname !== "/",
               })}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);
