@@ -21,7 +21,7 @@ export function Header({ user }: HeaderProps) {
           <img src={Logo} className="h-full w-auto" alt="Copa Pachichi Oro" />
         </a>
 
-        <ul className="flex items-center font-big-noodle-oblique text-base ">
+        <ul className="flex gap-x-8 items-center font-big-noodle-oblique text-base ">
           {user?.admin && (
             <>
               <li className="">
@@ -46,10 +46,10 @@ export function Header({ user }: HeaderProps) {
 
           {!user && (
             <>
-              <li className="mx-4">
+              <li>
                 <a href="#acerca">ACERCA DE</a>
               </li>
-              <li className="mx-4">
+              <li>
                 <a href="#equipos">EQUIPOS</a>
               </li>
             </>
@@ -57,7 +57,7 @@ export function Header({ user }: HeaderProps) {
 
           <li>
             <button
-              className={classNames("ml-4 h-[34px] rounded-[4px] px-4", {
+              className={classNames(" h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
                 "bg-green-admin": user?.admin || !user,
               })}

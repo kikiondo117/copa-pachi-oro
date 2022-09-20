@@ -24,21 +24,19 @@ export function PreviewSubs(props: TeamPLayersInterface) {
 
   return (
     <section
-      className={`font-coolveltica ${props.className ? props.className : ""}`}
+      className={` flex flex-col gap-y-4 font-coolveltica ${
+        props.className ? props.className : ""
+      }`}
     >
-      <p className=" mb-4 text-2xl text-blue-gray-default">
+      <p className=" text-2xl text-blue-gray-default">
         Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
       </p>
-      <ul>
+      <ul className="flex flex-col gap-y-4">
         {subs.map((sub, index) => {
           return (
             <li key={index}>
               {sub !== null ? (
-                <TeamMember
-                  label="Opcional"
-                  onClick={() => null}
-                  member={sub}
-                />
+                <TeamMember label="Opcional" member={sub} />
               ) : (
                 <CardEmptyPlayer />
               )}

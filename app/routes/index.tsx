@@ -136,7 +136,7 @@ export default function Index() {
                   setTeamSelected(user);
                 }}
                 team={user.team}
-                className="col-span-4 cursor-pointer transition duration-100 ease-in-out hover:scale-105"
+                className="col-span-4 cursor-pointer "
               />
             ))}
           </Container>
