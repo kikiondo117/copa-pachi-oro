@@ -69,7 +69,7 @@ export default function AdminTeam() {
                 <div className=" flex justify-end ">
                   <Link to={`/admin/${user.id}`} key={user.id}>
                     <img
-                      className="mb-4 h-6"
+                      className="mb-4 h-6 transition duration-100 ease-in-out hover:scale-110 cursor-pointer"
                       src="/assets/icons/iconEdit.svg"
                       alt=""
                     />
@@ -81,7 +81,7 @@ export default function AdminTeam() {
                     }}
                   >
                     <img
-                      className="mb-4 ml-6 h-6"
+                      className="mb-4 ml-6 h-6 transition duration-100 ease-in-out hover:scale-110 cursor-pointer"
                       src="/assets/icons/iconDelete.svg"
                       alt=""
                     />

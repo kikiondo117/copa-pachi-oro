@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useLocation } from "@remix-run/react";
+import { Link, NavLink, useLocation } from "@remix-run/react";
 // * Types
 import { getUser } from "~/utils/auth.server";
 // * Utils
@@ -29,10 +29,24 @@ export function Header({ user }: HeaderProps) {
           {user?.admin && (
             <>
               <li className="">
-                <Link to="/admin/torneo">TORNEOS</Link>
+                <NavLink
+                  to="/admin/torneo"
+                  className={classNames({
+                    "text-special-orange": pathname === "/admin/torneo",
+                  })}
+                >
+                  TORNEOS
+                </NavLink>
               </li>
               <li className="">
-                <Link to="/admin">EQUIPOS</Link>
+                <NavLink
+                  to="/admin"
+                  className={classNames({
+                    "text-special-orange": pathname === "/admin",
+                  })}
+                >
+                  EQUIPOS
+                </NavLink>
               </li>
             </>
           )}
@@ -40,10 +54,24 @@ export function Header({ user }: HeaderProps) {
           {user && !user.admin ? (
             <>
               <li className="">
-                <Link to="/team">EQUIPO</Link>
+                <NavLink
+                  to="/team"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#F16414" } : null
+                  }
+                >
+                  EQUIPO
+                </NavLink>
               </li>
               <li className="">
-                <Link to="/teams">EQUIPOS</Link>
+                <NavLink
+                  to="/teams"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#F16414" } : null
+                  }
+                >
+                  EQUIPOS
+                </NavLink>
               </li>
             </>
           ) : null}

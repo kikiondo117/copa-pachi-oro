@@ -155,7 +155,7 @@ export function PlayerForm(props: AddPlayerProps) {
         {isCreating ? (
           <div className=" font-big-noodle-oblique">Loading...</div>
         ) : (
-          <Button.Primary className=" mt-16 w-[1] px-[45.5px] bg-special-blue-light">
+          <Button.Primary className=" mt-16 mx-auto w-[1] px-[45.5px] bg-special-blue-light">
             GUARDAR JUGADOR
           </Button.Primary>
         )}

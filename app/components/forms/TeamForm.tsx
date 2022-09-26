@@ -125,7 +125,7 @@ export function TeamForm() {
       </div>
       <div className=" flex w-full items-center justify-center">
         <Button.Primary
-          className=" px-4"
+          className=" px-4 bg-special-blue-light"
           {...(transition.submission?.formData.get("action") === "register"
             ? { disabled: true }
             : { disabled: false })}
