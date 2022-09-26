@@ -41,10 +41,10 @@ export function TeamForm() {
   return (
     <Form
       method="post"
-      className="flex h-[32rem] w-full flex-col justify-between bg-special-gray px-4 font-coolveltica"
+      className=" flex min-h-[526px] w-full flex-col justify-between bg-special-gray px-6 pb-6 font-coolveltica"
     >
       <input type="hidden" name="action" value={"register"} />
-      <div>
+      <div className="flex flex-col gap-y-2 ">
         <p className="mt-6 text-xs text-blue-gray-default">Crea tu cuenta</p>
 
         {errors?.email ? (
@@ -80,7 +80,7 @@ export function TeamForm() {
           placeholder="Repetir Contraseña"
         />
 
-        <p className="mt-2 text-xs text-blue-gray-default">Datos del equipo</p>
+        <p className=" mt-2 text-xs text-blue-gray-default">Datos del equipo</p>
         {errors?.team ? <em className="bg-red-500">Team is required</em> : null}
         <FormField
           htmlFor="team"
@@ -88,7 +88,7 @@ export function TeamForm() {
           onChange={(e) => handleInputChange(e, "team")}
           placeholder="Nombre del equipo"
         />
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           {errors?.region ? (
             <em className="bg-red-500">Region is required</em>
           ) : null}
@@ -102,14 +102,12 @@ export function TeamForm() {
             className=" h-9"
             defaultLabel="Región"
             options={regions}
-            name="region"
           />
 
           {errors?.plataforma ? (
             <em className="bg-red-500">Plataforma is required</em>
           ) : null}
           <FormSelect
-            className=" ml-2"
             onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
               handleInputChange(e, "platform")
             }
@@ -118,17 +116,16 @@ export function TeamForm() {
             name="plataforma"
             defaultLabel="Plataforma"
             options={platforms}
-            name="plataforma"
           />
         </div>
 
-        <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
+        <div className=" h-[6.25rem] w-[6.25rem]">
           <img src="/assets/img/imageInput.svg" alt="" />
         </div>
       </div>
       <div className=" flex w-full items-center justify-center">
         <Button.Primary
-          className="mb-4 px-4"
+          className=" px-4 bg-special-blue-light"
           {...(transition.submission?.formData.get("action") === "register"
             ? { disabled: true }
             : { disabled: false })}

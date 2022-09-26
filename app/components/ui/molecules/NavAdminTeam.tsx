@@ -12,7 +12,7 @@ export function NavAdminTeam({ save }: { save: () => void }) {
 
   return (
     <article className=" col-span-12 flex h-12 w-full items-center justify-between">
-      <div className="flex w-full">
+      <div className="flex gap-x-4 w-full">
         <Link to="/admin">
           <Button.Primary className=" flex h-full w-[3.1rem] justify-center border-2 border-white bg-transparent ">
             <img
@@ -25,7 +25,7 @@ export function NavAdminTeam({ save }: { save: () => void }) {
 
         <Button.Primary
           onClick={save}
-          className={classNames("w-[4.6rem ml-4 h-full px-4", {
+          className={classNames("w-[4.6rem h-full px-4 bg-special-blue-light", {
             "bg-red-500": action === "saveTeam",
           })}
           disabled={action === "saveTeam"}

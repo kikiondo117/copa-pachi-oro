@@ -113,19 +113,19 @@ export default function AdminTeam() {
   }, [owner]);
 
   return (
-    <div className="h-screen bg-blue-gray-dark text-white">
+    <div className=" bg-blue-gray-dark text-white">
       <Header user={admin} />
 
-      <Container className="py-24">
+      <Container className="pt-24">
         <NavAdminTeam save={saveTeam} />
-        <article className="col-span-4 flex flex-col font-coolveltica ">
-          <h2 className=" pb-5 text-xl tracking-wider">Datos del equipo </h2>
-          <div className="flex items-center pb-5">
-            <span className="pr-5 font-big-noodle-oblique text-lg">
+        <article className="col-span-4 flex flex-col gap-y-[22px] font-coolveltica ">
+          <h2 className=" text-xl tracking-wider">Datos del equipo </h2>
+          <div className="flex gap-x-4 items-center">
+            <span className=" font-big-noodle-oblique text-lg">
               Marcar equipo como aprobado:
             </span>
             <Toggle
-              className="custom-classname ml-4"
+              className="custom-classname"
               disabled={
                 transition.submission?.formData.get("action") === "approveTeam"
               }
@@ -137,7 +137,7 @@ export default function AdminTeam() {
 
           <Form
             method="post"
-            className="flex h-[32rem] w-full flex-col font-coolveltica"
+            className="flex gap-y-4 h-[32rem] w-full flex-col font-coolveltica"
           >
             <FormField
               htmlFor="name"
@@ -173,10 +173,10 @@ export default function AdminTeam() {
           </Form>
         </article>
 
-        <section className="col-span-4 font-coolveltica">
-          <p className=" mb-4 text-[22px] text-white">Jugadores principales</p>
+        <section className=" flex flex-col gap-y-4 col-span-4 font-coolveltica">
+          <p className=" text-[22px] text-white">Jugadores principales</p>
           <div>
-            <ul>
+            <ul className="flex flex-col gap-y-4">
               {members.length &&
                 members.map((member, index) => {
                   return (
@@ -197,11 +197,11 @@ export default function AdminTeam() {
           </div>
         </section>
 
-        <section className="col-span-4 font-coolveltica">
-          <p className=" mb-4 text-2xl text-white">
+        <section className=" flex flex-col gap-y-4 col-span-4 font-coolveltica">
+          <p className=" text-2xl text-white">
             Jugadores suplentes <span className=" text-base ">(hasta 4)</span>
           </p>
-          <ul>
+          <ul className="flex flex-col gap-y-4">
             {subs.length &&
               subs.map((sub, index) => {
                 return (
@@ -342,7 +342,7 @@ export const action: ActionFunction = async ({ request, params }) => {
       });
     }
 
-    case "updatePlayer": {
+    case "updateSub": {
       invariant(typeof name === "string", "Name is required");
       invariant(typeof rango === "string", "Rango is required");
       invariant(typeof rol === "string", "Rol is required");

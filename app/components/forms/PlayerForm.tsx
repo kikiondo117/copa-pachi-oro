@@ -56,7 +56,7 @@ export function PlayerForm(props: AddPlayerProps) {
   return (
     <div className=" my-6">
       <h2 className="font-coolveltica text-[1.3rem] text-blue-gray-default">
-        Registrar Jugador
+        Completa los datos de jugador
       </h2>
       <Form className="flex flex-col" method="post">
         <div className=" mt-2 h-[6.25rem] w-[6.25rem]">
@@ -145,7 +145,7 @@ export function PlayerForm(props: AddPlayerProps) {
                 }
               />
             </div>
-            <p className="font-coolveltica text-xs tracking-wider text-gray-two">
+            <p className="font-coolveltica text-xs tracking-wider text-gray-three">
               Solo puede haber un capitán por equipo, seleccionar este campo
               cambiará de capitán si ya tienes uno.
             </p>
@@ -155,7 +155,7 @@ export function PlayerForm(props: AddPlayerProps) {
         {isCreating ? (
           <div className=" font-big-noodle-oblique">Loading...</div>
         ) : (
-          <Button.Primary className=" mt-16 w-[1] px-[45.5px]">
+          <Button.Primary className=" mt-16 mx-auto w-[1] px-[45.5px] bg-special-blue-light">
             GUARDAR JUGADOR
           </Button.Primary>
         )}

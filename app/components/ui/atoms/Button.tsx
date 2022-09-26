@@ -16,9 +16,8 @@ export function Primary({
       {...props}
       onClick={onClick}
       className={`
-                  w-fit cursor-pointer rounded-[4px]
-                  bg-special-blue-light 
-                  p-2 font-big-noodle-oblique text-white ${
+                  w-fit cursor-pointer rounded-[4px] 
+                  py-2 font-big-noodle-oblique text-white ${
                     className ? className : "mx-auto"
                   }`}
     >

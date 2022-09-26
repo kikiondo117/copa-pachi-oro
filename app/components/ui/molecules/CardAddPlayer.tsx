@@ -13,7 +13,7 @@ export function CardAddPlayer(props: CardAddPlayerProps) {
       onClick={props.onClick}
       aria-label="Add Player"
       className={classNames(
-        "flex h-[3.75rem] w-full flex-col items-center justify-center border-2 border-dashed border-gray-three bg-gray-two font-coolveltica text-gray-three transition  hover:opacity-75",
+        "flex h-[3.75rem] w-full flex-col items-center justify-center border-2 border-dashed border-gray-three bg-gray-two font-coolveltica text-gray-three transition  duration-100 ease-in-out hover:scale-105",
         props.className
       )}
     >

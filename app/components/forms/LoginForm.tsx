@@ -22,12 +22,13 @@ export function LoginForm() {
   };
 
   return (
-    <Form className=" flex flex-col justify-center" method="post">
+    <Form className=" flex flex-col justify-center gap-y-2" method="post">
       <img
         src="/assets/ArrowLogin.svg"
         className=" absolute -top-3 right-20"
         alt=""
       />
+      <p className=" font-coolveltica text-blue-gray-default">Inicia sesión</p>
       <input type="hidden" name="action" value={"login"} />
 
       {errors?.email ? <em className="bg-red-500">Email is required</em> : null}

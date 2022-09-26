@@ -18,8 +18,8 @@ interface TeamPLayersInterface {
 
 export function PreviewTeamPlayes(props: TeamPLayersInterface) {
   return (
-    <div className={classNames("grid grid-cols-2 gap-3 p-11", classNames)}>
-      <CardTeam className="col-span-2" team={props.team} />
+    <div className={classNames("grid grid-cols-2 gap-4 p-11", classNames)}>
+      <CardTeam className="col-span-2 h-20" team={props.team} />
 
       <PreviewMembers members={props.members} />
       <PreviewSubs subs={props.subs} />

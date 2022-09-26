@@ -12,7 +12,7 @@ export function CardTeam(props: CardTeamProps) {
     <div
       onClick={props.onClick}
       className={classNames(
-        "delay-50 flex h-[3.75rem] w-full flex-row bg-blue-gray-default transition  hover:opacity-75",
+        "h-60px] flex w-full flex-row bg-blue-gray-default",
         props.className
       )}
     >
@@ -24,7 +24,7 @@ export function CardTeam(props: CardTeamProps) {
         />
       </div>
       <div className="flex flex-col justify-center">
-        <p className="font font-big-noodle-oblique text-team-name text-white">
+        <p className="font font-big-noodle-oblique text-team-name text-white ">
           {props.team.name.toUpperCase()}
         </p>
       </div>

@@ -14,7 +14,7 @@ export function Modal2({ children, className, onClose }: Props) {
   const container = document.getElementById("modal-root");
 
   return ReactDOM.createPortal(
-    <section className="fixed flex items-center justify-center top-0 z-50 h-screen w-screen ">
+    <section className="fixed top-0 z-50 flex h-screen w-screen items-center justify-center ">
       <div
         onClick={onClose}
         className="absolute inset-0 z-20 bg-gray-500 bg-opacity-75 transition-opacity"
@@ -27,8 +27,12 @@ export function Modal2({ children, className, onClose }: Props) {
           className
         )}
       >
-        <button onClick={onClose} className=" absolute right-6 top-3">
-          X
+        <button onClick={onClose} className=" absolute right-3 top-3">
+          <img
+            src="/assets/icons/Icon Close.svg"
+            className="h-[16px] w-[16px]"
+            alt=""
+          />
         </button>
 
         {children}

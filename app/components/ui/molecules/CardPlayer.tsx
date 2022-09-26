@@ -1,6 +1,8 @@
 import * as React from "react";
 import type { TeamMemberInterface } from "~/types/types.user";
 import classNames from "classnames";
+import { betweenRange } from "~/utils/functions";
+import { getRange } from "~/utils/functions";
 
 type CardPlayerProps = {
   className?: string;
@@ -13,8 +15,12 @@ export function CardPlayer(props: CardPlayerProps) {
     <div
       onClick={props.onClick}
       className={classNames(
-        "delay-50 flex h-[3.75rem] w-full flex-row bg-white transition duration-300 ease-in-out hover:scale-105",
-        props.className
+        " flex h-[3.75rem] w-full flex-row bg-white ",
+        props.className,
+        {
+          "transition duration-100 ease-in-out hover:scale-105 cursor-pointer":
+            props.onClick,
+        }
       )}
     >
       <img
@@ -30,10 +36,9 @@ export function CardPlayer(props: CardPlayerProps) {
         <div className="flex font-coolveltica">
           <img
             className="mr-1 h-[24px]"
-            src="/assets/icons/Platino-IconRank-PrincipalWeb.svg"
+            src={`/assets/icons/${getRange(props.player.rango)}`}
             alt=""
           />
-
           <p className="text-base text-blue-gray-default">
             {props.player.rango} SR
           </p>

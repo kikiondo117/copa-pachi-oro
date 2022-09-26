@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, useLocation } from "@remix-run/react";
+import { Link, NavLink, useLocation } from "@remix-run/react";
 // * Types
 import { getUser } from "~/utils/auth.server";
 // * Utils
@@ -25,35 +25,63 @@ export function Header({ user }: HeaderProps) {
           <img src={Logo} className="h-full w-auto" alt="Copa Pachichi Oro" />
         </a>
 
-        <ul className="flex items-center font-big-noodle-oblique text-base ">
+        <ul className="flex gap-x-8 items-center font-big-noodle-oblique text-base ">
           {user?.admin && (
             <>
-              <li className="mx-4">
-                <Link to="/admin/torneo">TORNEOS</Link>
+              <li className="">
+                <NavLink
+                  to="/admin/torneo"
+                  className={classNames({
+                    "text-special-orange": pathname === "/admin/torneo",
+                  })}
+                >
+                  TORNEOS
+                </NavLink>
               </li>
-              <li className="mx-4">
-                <Link to="/admin">EQUIPOS</Link>
+              <li className="">
+                <NavLink
+                  to="/admin"
+                  className={classNames({
+                    "text-special-orange": pathname === "/admin",
+                  })}
+                >
+                  EQUIPOS
+                </NavLink>
               </li>
             </>
           )}
 
           {user && !user.admin ? (
             <>
-              <li className="mx-4">
-                <Link to="/team">EQUIPO</Link>
+              <li className="">
+                <NavLink
+                  to="/team"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#F16414" } : null
+                  }
+                >
+                  EQUIPO
+                </NavLink>
               </li>
-              <li className="mx-4">
-                <Link to="/teams">EQUIPOS</Link>
+              <li className="">
+                <NavLink
+                  to="/teams"
+                  style={({ isActive }) =>
+                    isActive ? { color: "#F16414" } : null
+                  }
+                >
+                  EQUIPOS
+                </NavLink>
               </li>
             </>
           ) : null}
 
           {!user && (
             <>
-              <li className="mx-4">
+              <li>
                 <a href="#acerca">ACERCA DE</a>
               </li>
-              <li className="mx-4">
+              <li>
                 <a href="#equipos">EQUIPOS</a>
               </li>
             </>
@@ -61,10 +89,10 @@ export function Header({ user }: HeaderProps) {
 
           <li>
             <button
-              className={classNames("mx-4 h-[34px] rounded-[4px] px-4", {
+              className={classNames(" h-[34px] rounded-[4px] px-4", {
                 " bg-special-blue-light ": user,
                 "bg-organge-light": !user && pathname == "/",
-                "bg-green-500": user?.admin && pathname !== "/",
+                "bg-green-admin": user?.admin && pathname !== "/",
               })}
               onClick={() => {
                 return user ? null : setShowLogin((prevState) => !prevState);

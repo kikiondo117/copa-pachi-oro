@@ -51,7 +51,7 @@ export default function AdminTeam() {
       <Container className="flex h-screen flex-row overflow-y-scroll pt-20">
         <header className="col-start-3 col-end-11 h-fit">
           <Link to="/admin/team">
-            <Button.Primary className="flex h-10 w-[7.6rem] items-center justify-around">
+            <Button.Primary className="flex h-10 w-[7.6rem] items-center justify-around bg-special-blue-light">
               Crear equipo
               <img
                 className=" h-5"
@@ -69,7 +69,7 @@ export default function AdminTeam() {
                 <div className=" flex justify-end ">
                   <Link to={`/admin/${user.id}`} key={user.id}>
                     <img
-                      className="mb-4 h-6"
+                      className="mb-4 h-6 transition duration-100 ease-in-out hover:scale-110 cursor-pointer"
                       src="/assets/icons/iconEdit.svg"
                       alt=""
                     />
@@ -81,7 +81,7 @@ export default function AdminTeam() {
                     }}
                   >
                     <img
-                      className="mb-4 ml-6 h-6"
+                      className="mb-4 ml-6 h-6 transition duration-100 ease-in-out hover:scale-110 cursor-pointer"
                       src="/assets/icons/iconDelete.svg"
                       alt=""
                     />

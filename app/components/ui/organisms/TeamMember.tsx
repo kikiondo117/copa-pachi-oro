@@ -2,7 +2,7 @@ import type { TeamMemberInterface } from "~/types/types.user";
 import { CardAddPlayer, CardPlayer } from "~/components/";
 
 interface TeamMemberProps {
-  onClick: () => void;
+  onClick?: () => void;
   label: string;
   member?: TeamMemberInterface | null;
 }
@@ -18,11 +18,5 @@ export function TeamMember(props: TeamMemberProps) {
     );
   }
 
-  return (
-    <CardPlayer
-      player={props.member}
-      onClick={props.onClick}
-      className="mb-4"
-    />
-  );
+  return <CardPlayer player={props.member} onClick={props.onClick} />;
 }

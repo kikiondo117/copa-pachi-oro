@@ -69,6 +69,8 @@ module.exports = {
         "yellow-one": "#FFD028",
 
         "red-error": "#D63231",
+
+        "green-admin": "#B7D019",
       },
       fontFamily: {
         "big-noodle": ["Big Noodle Titling"],
@@ -77,7 +79,7 @@ module.exports = {
       },
 
       fontSize:{
-        "team-name": "1.375rem"
+        "team-name": "32px",
       }
       // letterSpacing: {
       //   "five-percent" : "letter-spacing: 5%",
